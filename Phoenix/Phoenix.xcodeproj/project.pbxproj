@@ -21,6 +21,7 @@
 		00986E3F1CEAB85E00CEE446 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00986E3E1CEAB85E00CEE446 /* Wrap.framework */; };
 		00986E411CEAB93900CEE446 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E401CEAB93900CEE446 /* Channel.swift */; };
 		00986E431CEAB95800CEE446 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E421CEAB95800CEE446 /* Extensions.swift */; };
+		00986E451CEAB96400CEE446 /* QueryStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E441CEAB96400CEE446 /* QueryStringConvertible.swift */; };
 		00986E471CEAC79100CEE446 /* Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E461CEAC79100CEE446 /* Push.swift */; };
 		00986E491CEAEE4700CEE446 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E481CEAEE4700CEE446 /* Result.swift */; };
 /* End PBXBuildFile section */
@@ -114,6 +115,7 @@
 			children = (
 				002D5A3C1CDEF01C006FDA24 /* Phoenix.h */,
 				00986E421CEAB95800CEE446 /* Extensions.swift */,
+				00986E441CEAB96400CEE446 /* QueryStringConvertible.swift */,
 				002D5A801CDEF74E006FDA24 /* Socket.swift */,
 				00986E401CEAB93900CEE446 /* Channel.swift */,
 				00986E461CEAC79100CEE446 /* Push.swift */,
@@ -322,6 +324,7 @@
 				00986E491CEAEE4700CEE446 /* Result.swift in Sources */,
 				002D5A811CDEF74E006FDA24 /* Socket.swift in Sources */,
 				00986E471CEAC79100CEE446 /* Push.swift in Sources */,
+				00986E451CEAB96400CEE446 /* QueryStringConvertible.swift in Sources */,
 				00986E431CEAB95800CEE446 /* Extensions.swift in Sources */,
 				00986E411CEAB93900CEE446 /* Channel.swift in Sources */,
 			);
