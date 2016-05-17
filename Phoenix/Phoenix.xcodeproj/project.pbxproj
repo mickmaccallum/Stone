@@ -19,6 +19,7 @@
 		002D5A811CDEF74E006FDA24 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002D5A801CDEF74E006FDA24 /* Socket.swift */; };
 		002D5A831CDEF904006FDA24 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002D5A6E1CDEF3F6006FDA24 /* SwiftWebSocket.framework */; };
 		00986E3F1CEAB85E00CEE446 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00986E3E1CEAB85E00CEE446 /* Wrap.framework */; };
+		00986E411CEAB93900CEE446 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E401CEAB93900CEE446 /* Channel.swift */; };
 		00986E491CEAEE4700CEE446 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E481CEAEE4700CEE446 /* Result.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		002D5A6E1CDEF3F6006FDA24 /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/iOS/SwiftWebSocket.framework; sourceTree = "<group>"; };
 		002D5A801CDEF74E006FDA24 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		00986E3E1CEAB85E00CEE446 /* Wrap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wrap.framework; path = Carthage/Build/iOS/Wrap.framework; sourceTree = "<group>"; };
+		00986E401CEAB93900CEE446 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		00986E481CEAEE4700CEE446 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +110,7 @@
 			children = (
 				002D5A3C1CDEF01C006FDA24 /* Phoenix.h */,
 				002D5A801CDEF74E006FDA24 /* Socket.swift */,
+				00986E401CEAB93900CEE446 /* Channel.swift */,
 				00986E481CEAEE4700CEE446 /* Result.swift */,
 				002D5A3E1CDEF01C006FDA24 /* Info.plist */,
 			);
@@ -312,6 +315,7 @@
 			files = (
 				00986E491CEAEE4700CEE446 /* Result.swift in Sources */,
 				002D5A811CDEF74E006FDA24 /* Socket.swift in Sources */,
+				00986E411CEAB93900CEE446 /* Channel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
