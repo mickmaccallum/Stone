@@ -21,6 +21,7 @@
 		00986E3F1CEAB85E00CEE446 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00986E3E1CEAB85E00CEE446 /* Wrap.framework */; };
 		00986E411CEAB93900CEE446 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E401CEAB93900CEE446 /* Channel.swift */; };
 		00986E431CEAB95800CEE446 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E421CEAB95800CEE446 /* Extensions.swift */; };
+		00986E471CEAC79100CEE446 /* Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E461CEAC79100CEE446 /* Push.swift */; };
 		00986E491CEAEE4700CEE446 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E481CEAEE4700CEE446 /* Result.swift */; };
 /* End PBXBuildFile section */
 
