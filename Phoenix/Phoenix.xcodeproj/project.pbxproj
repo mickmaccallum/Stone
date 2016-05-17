@@ -18,6 +18,7 @@
 		002D5A6F1CDEF3F6006FDA24 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002D5A6E1CDEF3F6006FDA24 /* SwiftWebSocket.framework */; };
 		002D5A811CDEF74E006FDA24 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002D5A801CDEF74E006FDA24 /* Socket.swift */; };
 		002D5A831CDEF904006FDA24 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002D5A6E1CDEF3F6006FDA24 /* SwiftWebSocket.framework */; };
+		00986E3F1CEAB85E00CEE446 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00986E3E1CEAB85E00CEE446 /* Wrap.framework */; };
 		00986E491CEAEE4700CEE446 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E481CEAEE4700CEE446 /* Result.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		002D5A6A1CDEF247006FDA24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		002D5A6E1CDEF3F6006FDA24 /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/iOS/SwiftWebSocket.framework; sourceTree = "<group>"; };
 		002D5A801CDEF74E006FDA24 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		00986E3E1CEAB85E00CEE446 /* Wrap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wrap.framework; path = Carthage/Build/iOS/Wrap.framework; sourceTree = "<group>"; };
 		00986E481CEAEE4700CEE446 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				002D5A831CDEF904006FDA24 /* SwiftWebSocket.framework in Frameworks */,
+				00986E3F1CEAB85E00CEE446 /* Wrap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 		002D5A2F1CDEF01C006FDA24 = {
 			isa = PBXGroup;
 			children = (
+				00986E3E1CEAB85E00CEE446 /* Wrap.framework */,
 				002D5A6E1CDEF3F6006FDA24 /* SwiftWebSocket.framework */,
 				002D5A3B1CDEF01C006FDA24 /* Phoenix */,
 				002D5A471CDEF01C006FDA24 /* PhoenixTests */,
@@ -291,6 +295,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftWebSocket.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Wrap.framework",
 			);
 			outputPaths = (
 			);

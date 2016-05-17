@@ -1,1 +1,2 @@
 github "tidwall/SwiftWebSocket"
+github "johnsundell/wrap"
