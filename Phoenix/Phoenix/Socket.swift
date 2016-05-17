@@ -3,7 +3,7 @@
 //  Phoenix
 //
 //  Created by Michael MacCallum on 5/8/16.
-//  Copyright © 2016 Tethr. All rights reserved.
+//  Copyright © 2016 Tethr Technologies Inc. All rights reserved.
 //
 
 import Foundation
