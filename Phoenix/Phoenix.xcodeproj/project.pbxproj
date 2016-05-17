@@ -45,14 +45,6 @@
 		002D5A681CDEF247006FDA24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		002D5A6A1CDEF247006FDA24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		002D5A6E1CDEF3F6006FDA24 /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/iOS/SwiftWebSocket.framework; sourceTree = "<group>"; };
-		002D5A701CDEF448006FDA24 /* _Json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Json.swift; sourceTree = "<group>"; };
-		002D5A711CDEF448006FDA24 /* _Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Path.swift; sourceTree = "<group>"; };
-		002D5A721CDEF448006FDA24 /* _Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Serializable.swift; sourceTree = "<group>"; };
-		002D5A761CDEF49D006FDA24 /* _Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Message.swift; sourceTree = "<group>"; };
-		002D5A781CDEF4D1006FDA24 /* _Binding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Binding.swift; sourceTree = "<group>"; };
-		002D5A7A1CDEF50B006FDA24 /* _Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Channel.swift; sourceTree = "<group>"; };
-		002D5A7C1CDEF544006FDA24 /* _Payload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Payload.swift; sourceTree = "<group>"; };
-		002D5A7E1CDEF566006FDA24 /* _Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Socket.swift; sourceTree = "<group>"; };
 		002D5A801CDEF74E006FDA24 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,14 +102,6 @@
 			children = (
 				002D5A3C1CDEF01C006FDA24 /* Phoenix.h */,
 				002D5A801CDEF74E006FDA24 /* Socket.swift */,
-				002D5A7E1CDEF566006FDA24 /* _Socket.swift */,
-				002D5A761CDEF49D006FDA24 /* _Message.swift */,
-				002D5A7A1CDEF50B006FDA24 /* _Channel.swift */,
-				002D5A7C1CDEF544006FDA24 /* _Payload.swift */,
-				002D5A781CDEF4D1006FDA24 /* _Binding.swift */,
-				002D5A701CDEF448006FDA24 /* _Json.swift */,
-				002D5A711CDEF448006FDA24 /* _Path.swift */,
-				002D5A721CDEF448006FDA24 /* _Serializable.swift */,
 				002D5A3E1CDEF01C006FDA24 /* Info.plist */,
 			);
 			path = Phoenix;
