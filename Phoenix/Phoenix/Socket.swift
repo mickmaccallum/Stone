@@ -30,6 +30,10 @@ public final class Socket {
 	public var onSocketError: ((code: Int, reason: String, wasClean: Bool, error: NSError?) -> Void)?
 	public var onSocketClose: ((code: Int, reason: String, wasClean: Bool) -> Void)?
 
+	public var socketState: SocketState {
+		return socket?.readyState ?? .Closed
+	}
+
 	public var connected: Bool {
 		return socket?.readyState == .Some(.Open)
 	}
