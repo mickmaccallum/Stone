@@ -9,6 +9,7 @@
 import Foundation
 import SwiftWebSocket
 import Wrap
+import Unbox
 
 public typealias SocketState = SwiftWebSocket.WebSocketReadyState
 
@@ -128,7 +129,7 @@ public final class Socket {
 	@objc private func sendHeartBeat() {
 		let message = Message(
 			topic: "phoenix",
-			event: "heartbeat"
+			event: Event.Default(.Heartbeat)
 		)
 
 		try! push(message)
@@ -170,12 +171,24 @@ public final class Socket {
 		onSocketOpen?()
 	}
 
-	private func webSocketDidReceiveMessage(message: String?) {
-
-	}
-	
 	private func webSocketDidReceiveMessage(messageData: NSData) {
-		webSocketDidReceiveMessage(String(data: messageData, encoding: NSUTF8StringEncoding))
+		do {
+			let message: Message = try Unbox(messageData)
+
+			for channel in channels where channel.topic == message.topic {
+
+				channel.triggerEvent(
+					message.event,
+					ref: message.ref,
+					payload: message.payload
+				)
+			}
+
+			onSocketMessage?(result: .Success(message))
+		} catch let error as NSError {
+			webSocketDidError(error)
+			onSocketMessage?(result: .Failure(error))
+		}
 	}
 	
 	private func webSocketDidClose(code code: Int, reason: String, wasClean: Bool) {
@@ -210,10 +223,6 @@ extension Socket: WebSocketDelegate {
 
 	@objc public func webSocketError(error: NSError) {
 		webSocketDidError(error)
-	}
-
-	@objc public func webSocketMessageText(text: String) {
-		webSocketDidReceiveMessage(text)
 	}
 
 	@objc public func webSocketMessageData(data: NSData) {
