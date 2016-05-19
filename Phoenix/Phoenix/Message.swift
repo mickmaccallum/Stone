@@ -10,10 +10,22 @@ import Foundation
 
 public struct Message {
 	private static var reference: UInt = 0
+	private var _ref: String?
+
 	internal var ref: String {
-		let currentRef = String(format: "%zd", Message.reference)
-		Message.reference = Message.reference.successor()
-		return currentRef
+		get {
+			if let _ref = _ref {
+				return _ref
+			}
+
+			let currentRef = String(format: "%zd", Message.reference)
+			Message.reference = Message.reference.successor()
+			return currentRef
+		}
+
+		set {
+			_ref = newValue
+		}
 	}
 
 	public let topic: String
