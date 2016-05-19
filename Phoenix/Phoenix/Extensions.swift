@@ -9,12 +9,19 @@
 import Foundation
 
 extension String: QueryStringConvertible {
+	/// Attempts to convert the receiver into a valid query String using the URLQueryAllowedCharacterSet NSCharacterSet.
 	public var queryStringRepresentation: String? {
 		return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
 	}
 }
 
 public extension Dictionary where Key: QueryStringConvertible, Value: QueryStringConvertible {
+	/**
+	Converts the reciever's keys and values into and Array of NSURLQueryItems. If a key or value
+	for a given item in the dictionary can't successfully be converted into a query string 
+	(e.g. they contain invalid characters for a query string) the key value pair will be ommitted
+	from the resulting Array.
+	*/
 	public func toQueryItems() -> [NSURLQueryItem] {
 		return self.flatMap {
 			guard let name = $0.queryStringRepresentation,
