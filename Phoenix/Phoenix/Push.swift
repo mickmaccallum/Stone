@@ -28,7 +28,7 @@ public final class Push<T> {
 
 	- returns: <#return value description#>
 	*/
-	public convenience init<RawType: RawRepresentable where RawType.RawValue == String>(channel: Channel, event: RawType, payload: AnyObject) throws {
+	public convenience init(channel: Channel, event: Event, payload: AnyObject) throws {
 		try self.init(
 			channel: channel,
 			event: event.rawValue,
@@ -45,7 +45,7 @@ public final class Push<T> {
 
 	- returns: <#return value description#>
 	*/
-	public convenience init<RawType: RawRepresentable where RawType.RawValue == String>(channel: Channel, event: RawType, payload: [String: AnyObject]) throws {
+	public convenience init(channel: Channel, event: Event, payload: [String: AnyObject]) throws {
 		try self.init(
 			channel: channel,
 			event: event.rawValue,
@@ -65,7 +65,11 @@ public final class Push<T> {
 	- returns: <#return value description#>
 	*/
 	public convenience init(channel: Channel, event: String, payload: AnyObject) throws {
-		try self.init(channel: channel, event: event, payload: try Wrap(payload))
+		try self.init(
+			channel: channel,
+			event: event,
+			payload: try Wrap(payload)
+		)
 	}
 
 	/**
