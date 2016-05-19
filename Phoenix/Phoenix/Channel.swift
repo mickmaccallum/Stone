@@ -20,6 +20,10 @@ public final class Channel: Hashable, Equatable {
 	public private(set) var state: ChannelState = .Closed
 	private var bindings = [String: Callback]()
 
+	public var hashValue: Int {
+		return topic.hashValue
+	}
+
 	public convenience init<RawType: RawRepresentable where RawType.RawValue == String>(socket: Socket, topic: RawType) {
 		self.init(socket: socket, topic: topic.rawValue)
 	}
@@ -28,8 +32,8 @@ public final class Channel: Hashable, Equatable {
 		self.topic = topic
 	}
 
-	public var hashValue: Int {
-		return topic.hashValue
+	public func isMemberOfTopic(otherTopic: String) -> Bool {
+		return topic == otherTopic
 	}
 
 	internal func sendMessage(message: Message) {
