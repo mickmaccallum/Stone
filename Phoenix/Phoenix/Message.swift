@@ -30,10 +30,10 @@ public struct Message {
 	}
 
 	public let topic: String
-	public let event: String
+	public let event: Event
 	public let payload: [String: AnyObject]?
 
-	public init(topic: String, event: String, payload: [String: AnyObject]? = nil) {
+	public init(topic: String, event: Event, payload: [String: AnyObject]? = nil) {
 		self.topic		= topic
 		self.event		= event
 		self.payload	= payload
