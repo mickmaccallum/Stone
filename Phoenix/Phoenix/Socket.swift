@@ -21,7 +21,7 @@ public typealias SocketState = SwiftWebSocket.WebSocketReadyState
 */
 public final class Socket {
 	public private(set) var socket: WebSocket?
-	public let heartbeatInterval: NSTimeInterval
+	public let heartbeatInterval: NSTimeInterval?
 	public var reconnectInterval: NSTimeInterval
 	public let url: NSURL
 	public var reconnectOnError = true
@@ -44,7 +44,6 @@ public final class Socket {
 	private var lastParams: [NSURLQueryItem]?
 	private let queue = NSOperationQueue()
 
-	public init(url: NSURL, heartbeatInterval: NSTimeInterval = 0.0, reconnectInterval: NSTimeInterval = 5.0) {
 	/**
 	Instantiates a new Phoenix Socket with the given url and optional heartbeat and reconnect intervals.
 
@@ -53,6 +52,7 @@ public final class Socket {
 	- parameter heartbeatInterval:	Once connected, this is the interval at which we will tell the server that we're still listening. Default value is nil. If nil or <= 0.0, a heartbeat won't be used, and the socket will organically disconnect.
 	- parameter reconnectInterval:	The interval after which we should try to reconnect after a socket disconnects.
 	*/
+	public init(url: NSURL, heartbeatInterval: NSTimeInterval? = nil, reconnectInterval: NSTimeInterval = 5.0) {
 		self.url = url
 		self.heartbeatInterval = heartbeatInterval
 		self.reconnectInterval = reconnectInterval
@@ -100,11 +100,11 @@ public final class Socket {
 		return channels.remove(channel)
 	}
 
-	private func startHeatBeatTimer() {
+	private func startHeatBeatTimer(timeInterval timeInterval: NSTimeInterval) {
 		discardHeartBeatTimer()
 
 		heartBeatTimer = NSTimer.scheduledTimerWithTimeInterval(
-			heartbeatInterval,
+			timeInterval,
 			target: self,
 			selector: #selector(Socket.sendHeartBeat),
 			userInfo: nil,
@@ -151,8 +151,8 @@ extension Socket: WebSocketDelegate {
 	@objc public func webSocketOpen() {
 		queue.suspended = false
 
-		if heartbeatInterval > 0 {
-			startHeatBeatTimer()
+		if let timeInterval = heartbeatInterval where timeInterval > 0.0 {
+			startHeatBeatTimer(timeInterval: timeInterval)
 		}
 
 		onSocketOpen?()
