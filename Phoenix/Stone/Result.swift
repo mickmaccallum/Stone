@@ -1,6 +1,6 @@
 //
 //  Result.swift
-//  Phoenix
+//  Stone
 //
 //  Created by Michael MacCallum on 5/17/16.
 //  Copyright © 2016 Tethr Technologies Inc. All rights reserved.

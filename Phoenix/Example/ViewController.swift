@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Phoenix
+import Stone
 
 
 class ViewController: UIViewController {
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
 		let socket = Socket(
 			url: url,
 			heartbeatInterval: 15.0
-		)
+		)!
 
 		socket.onSocketOpen = {
 			print("socket open")

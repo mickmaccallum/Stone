@@ -1,15 +1,15 @@
 //
-//  PhoenixTests.swift
-//  PhoenixTests
+//  StoneTests.swift
+//  StoneTests
 //
 //  Created by Michael MacCallum on 5/7/16.
 //  Copyright © 2016 Tethr. All rights reserved.
 //
 
 import XCTest
-@testable import Phoenix
+@testable import Stone
 
-class PhoenixTests: XCTestCase {
+class StoneTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

@@ -1,6 +1,6 @@
 //
 //  Socket.swift
-//  Phoenix
+//  Stone
 //
 //  Created by Michael MacCallum on 5/8/16.
 //  Copyright © 2016 Tethr Technologies Inc. All rights reserved.
@@ -47,7 +47,7 @@ public final class Socket {
 	private let queue = NSOperationQueue()
 
 	/**
-	Instantiates a new Phoenix Socket with the given url and optional heartbeat and reconnect intervals.
+	Instantiates a new Stone Socket with the given url and optional heartbeat and reconnect intervals.
 
 
 	- parameter url:				The URL at which the socket should try to connect to.

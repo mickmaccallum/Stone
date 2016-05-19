@@ -1,6 +1,6 @@
 //
-//  PhoenixEvent.swift
-//  Phoenix
+//  StoneEvent.swift
+//  Stone
 //
 //  Created by Michael MacCallum on 5/19/16.
 //  Copyright © 2016 Tethr. All rights reserved.
@@ -11,7 +11,7 @@ import Unbox
 import Wrap
 
 public enum Event: RawRepresentable {
-	public enum PhoenixEvent: String {
+	public enum StoneEvent: String {
 		case Join		= "phx_join"
 		case Reply		= "phx_reply"
 		case Leave		= "phx_leave"
@@ -20,7 +20,7 @@ public enum Event: RawRepresentable {
 		case Heartbeat	= "heartbeat"
 	}
 
-	case Default(PhoenixEvent)
+	case Default(StoneEvent)
 	case Custom(String)
 
 	public var rawValue: String {
@@ -33,7 +33,7 @@ public enum Event: RawRepresentable {
 	}
 
 	public init?(rawValue: String) {
-		if let def = PhoenixEvent(rawValue: rawValue) {
+		if let def = StoneEvent(rawValue: rawValue) {
 			self = .Default(def)
 		} else {
 			self = .Custom(rawValue)
