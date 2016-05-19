@@ -9,6 +9,6 @@
 import Foundation
 
 public protocol QueryStringConvertible: Hashable {
-	var queryStringRepresentation: String { get }
+	var queryStringRepresentation: String? { get }
 }
 

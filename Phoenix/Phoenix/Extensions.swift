@@ -9,17 +9,22 @@
 import Foundation
 
 extension String: QueryStringConvertible {
-	public var queryStringRepresentation: String {
-		return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+	public var queryStringRepresentation: String? {
+		return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
 	}
 }
 
 public extension Dictionary where Key: QueryStringConvertible, Value: QueryStringConvertible {
 	public func toQueryItems() -> [NSURLQueryItem] {
-		return self.map {
-			NSURLQueryItem(
-				name: $0.queryStringRepresentation,
-				value: $1.queryStringRepresentation
+		return self.flatMap {
+			guard let name = $0.queryStringRepresentation,
+				value = $1.queryStringRepresentation else {
+					return nil
+			}
+
+			return NSURLQueryItem(
+				name: name,
+				value: value
 			)
 		}
 	}
