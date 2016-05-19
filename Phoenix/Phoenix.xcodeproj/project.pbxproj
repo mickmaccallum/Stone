@@ -24,6 +24,7 @@
 		00986E451CEAB96400CEE446 /* QueryStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E441CEAB96400CEE446 /* QueryStringConvertible.swift */; };
 		00986E471CEAC79100CEE446 /* Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E461CEAC79100CEE446 /* Push.swift */; };
 		00986E491CEAEE4700CEE446 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E481CEAEE4700CEE446 /* Result.swift */; };
+		00FF9D011CEE2D750040885A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D001CEE2D750040885A /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		00986E421CEAB95800CEE446 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		00986E461CEAC79100CEE446 /* Push.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Push.swift; sourceTree = "<group>"; };
 		00986E481CEAEE4700CEE446 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		00FF9D001CEE2D750040885A /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				002D5A801CDEF74E006FDA24 /* Socket.swift */,
 				00986E401CEAB93900CEE446 /* Channel.swift */,
 				00986E461CEAC79100CEE446 /* Push.swift */,
+				00FF9D001CEE2D750040885A /* Message.swift */,
 				00986E481CEAEE4700CEE446 /* Result.swift */,
 				002D5A3E1CDEF01C006FDA24 /* Info.plist */,
 			);
@@ -327,6 +330,7 @@
 				00986E451CEAB96400CEE446 /* QueryStringConvertible.swift in Sources */,
 				00986E431CEAB95800CEE446 /* Extensions.swift in Sources */,
 				00986E411CEAB93900CEE446 /* Channel.swift in Sources */,
+				00FF9D011CEE2D750040885A /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
