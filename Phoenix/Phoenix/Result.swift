@@ -9,18 +9,21 @@
 import Foundation
 
 public enum Result<T> {
-	case Success(T), Failure(ErrorType)
+	case Success(T)
+	case Failure(ErrorType)
 
 	public func value() throws -> T {
 		switch self {
-		case .Success(let value): return value
-		case .Failure(let error): throw error
+		case .Success(let value):
+			return value
+		case .Failure(let error):
+			throw error
 		}
 	}
 
-	public init(@noescape f: () throws -> T) {
+	public init(@noescape function: () throws -> T) {
 		do {
-			self = .Success(try f())
+			self = .Success(try function())
 		} catch {
 			self = .Failure(error)
 		}
