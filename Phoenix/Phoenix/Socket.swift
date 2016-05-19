@@ -27,8 +27,9 @@ public final class Socket {
 	public var reconnectOnError = true
 
 	public var onSocketOpen: (() -> Void)?
-	public var onSocketError: ((code: Int, reason: String, wasClean: Bool, error: NSError?) -> Void)?
+	public var onSocketError: ((error: NSError) -> Void)?
 	public var onSocketClose: ((code: Int, reason: String, wasClean: Bool) -> Void)?
+	public var onSocketMessage: ((result: Result<Message>) -> Void)?
 
 	public var socketState: SocketState {
 		return socket?.readyState ?? .Closed
@@ -71,7 +72,7 @@ public final class Socket {
 		socket?.open()
 	}
 
-	public func reconnect() {
+	@objc public func reconnect() {
 		disconnectSocket()
 		connect(lastParams)
 	}
