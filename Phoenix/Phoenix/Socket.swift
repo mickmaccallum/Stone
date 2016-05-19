@@ -10,13 +10,29 @@ import Foundation
 import SwiftWebSocket
 import Wrap
 
-public typealias SocketState = WebSocketReadyState
+public typealias SocketState = SwiftWebSocket.WebSocketReadyState
 
+/**
+*  @author Michael MacCallum, 16-05-16
+*
+*  <#Description#>
+*
+*  @since <#1.0#>
+*/
 public final class Socket {
 	public private(set) var socket: WebSocket?
 	public let heartbeatInterval: NSTimeInterval
+	public var reconnectInterval: NSTimeInterval
 	public let url: NSURL
 	public var reconnectOnError = true
+
+	public var onSocketOpen: (() -> Void)?
+	public var onSocketError: ((code: Int, reason: String, wasClean: Bool, error: NSError?) -> Void)?
+	public var onSocketClose: ((code: Int, reason: String, wasClean: Bool) -> Void)?
+
+	public var connected: Bool {
+		return socket?.readyState == .Some(.Open)
+	}
 
 	private var heartBeatTimer: NSTimer?
 	private var reconnectTimer: NSTimer?
@@ -24,13 +40,10 @@ public final class Socket {
 	private var lastParams: [NSURLQueryItem]?
 	private let queue = NSOperationQueue()
 
-	public var onSocketOpen: (() -> Void)?
-	public var onSocketError: ((code: Int, reason: String, wasClean: Bool, error: NSError?) -> Void)?
-	public var onSocketClose: ((code: Int, reason: String, wasClean: Bool) -> Void)?
-
-	public init(url: NSURL, heartbeatInterval: NSTimeInterval = 0.0) {
+	public init(url: NSURL, heartbeatInterval: NSTimeInterval = 0.0, reconnectInterval: NSTimeInterval = 5.0) {
 		self.url = url
 		self.heartbeatInterval = heartbeatInterval
+		self.reconnectInterval = reconnectInterval
 
 		queue.suspended = true
 	}
@@ -44,7 +57,6 @@ public final class Socket {
 		socket = WebSocket(url: url.urlByAppendingQueryItems(params) ?? url)
 		socket?.delegate = self
 		socket?.open()
-		socket?.readyState
 	}
 
 	public func reconnect() {
@@ -156,6 +168,6 @@ extension Socket: WebSocketDelegate {
 
 	@objc public func webSocketEnd(code: Int, reason: String, wasClean: Bool, error: NSError?) {
 		// close and error handled here.
-//		onSocketError?(code: code, reason: reason, wasClean: wasClean, error: error)
+		//		onSocketError?(code: code, reason: reason, wasClean: wasClean, error: error)
 	}
 }
