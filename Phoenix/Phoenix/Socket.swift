@@ -54,12 +54,33 @@ public final class Socket {
 	- parameter heartbeatInterval:	Once connected, this is the interval at which we will tell the server that we're still listening. Default value is nil. If nil or <= 0.0, a heartbeat won't be used, and the socket will organically disconnect.
 	- parameter reconnectInterval:	The interval after which we should try to reconnect after a socket disconnects.
 	*/
-	public init(url: NSURL, heartbeatInterval: NSTimeInterval? = nil, reconnectInterval: NSTimeInterval = 5.0) {
-		self.url = url
+	public init?(url: NSURL, heartbeatInterval: NSTimeInterval? = nil, reconnectInterval: NSTimeInterval = 5.0) {
 		self.heartbeatInterval = heartbeatInterval
 		self.reconnectInterval = reconnectInterval
 
 		queue.suspended = true
+
+		let components = NSURLComponents(
+			URL: url.URLByAppendingPathComponent("websocket"),
+			resolvingAgainstBaseURL: true
+		)
+
+		if url.scheme == "http" {
+			components?.scheme = "ws"
+		} else if url.scheme == "https" {
+			components?.scheme = "wss"
+		} else {
+			assert(
+				url.scheme == "ws" || url.scheme == "wss",
+				"Invalid URL scheme provided. Must be either HTTP, HTTPS, WS, or WSS."
+			)
+		}
+
+		guard let url = components?.URL else {
+			return nil
+		}
+
+		self.url = url
 	}
 
 	public func connect<T: QueryStringConvertible>(params: [T: T]) {
@@ -95,7 +116,9 @@ public final class Socket {
 	}
 
 	public func addChannel(channel: Channel) {
-		channels.insert(channel)
+		if !channels.contains(channel) {
+			channels.insert(channel)
+		}
 	}
 
 	public func removeChannel(channel: Channel) -> Channel? {
@@ -151,10 +174,17 @@ public final class Socket {
 		reconnectTimer = nil
 	}
 
+	/**
+	<#Description#>
+
+	- parameter message:	<#message description#>
+
+	- throws: If message couldn't successfully be converted to JSON.
+	*/
 	func push(message: Message) throws {
 		let dict: [String: AnyObject] = try Wrap(message)
 		let jsonData = try NSJSONSerialization.dataWithJSONObject(dict, options: [])
-
+		print(dict)
 		queue.addOperationWithBlock { [weak self] in
 			self?.socket?.send(jsonData)
 		}
@@ -175,7 +205,7 @@ public final class Socket {
 		do {
 			let message: Message = try Unbox(messageData)
 
-			for channel in channels where channel.topic == message.topic {
+			for channel in channels where channel.isMemberOfTopic(message.topic) {
 
 				channel.triggerEvent(
 					message.event,
