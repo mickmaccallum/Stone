@@ -45,6 +45,14 @@ public final class Socket {
 	private let queue = NSOperationQueue()
 
 	public init(url: NSURL, heartbeatInterval: NSTimeInterval = 0.0, reconnectInterval: NSTimeInterval = 5.0) {
+	/**
+	Instantiates a new Phoenix Socket with the given url and optional heartbeat and reconnect intervals.
+
+
+	- parameter url:				The URL at which the socket should try to connect to.
+	- parameter heartbeatInterval:	Once connected, this is the interval at which we will tell the server that we're still listening. Default value is nil. If nil or <= 0.0, a heartbeat won't be used, and the socket will organically disconnect.
+	- parameter reconnectInterval:	The interval after which we should try to reconnect after a socket disconnects.
+	*/
 		self.url = url
 		self.heartbeatInterval = heartbeatInterval
 		self.reconnectInterval = reconnectInterval
