@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Unbox
 
 public struct Message {
 	private static var reference: UInt = 0
@@ -36,5 +37,14 @@ public struct Message {
 		self.topic		= topic
 		self.event		= event
 		self.payload	= payload
+	}
+}
+
+extension Message: Unboxable {
+	public init(unboxer: Unboxer) {
+		topic = unboxer.unbox("topic")
+		event = unboxer.unbox("event")
+		payload = unboxer.unbox("payload")
+		ref = unboxer.unbox("ref")
 	}
 }
