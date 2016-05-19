@@ -25,6 +25,7 @@
 		00986E471CEAC79100CEE446 /* Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E461CEAC79100CEE446 /* Push.swift */; };
 		00986E491CEAEE4700CEE446 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00986E481CEAEE4700CEE446 /* Result.swift */; };
 		00FF9D011CEE2D750040885A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D001CEE2D750040885A /* Message.swift */; };
+		00FF9D031CEE4D370040885A /* Unbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00FF9D021CEE4D370040885A /* Unbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		00986E461CEAC79100CEE446 /* Push.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Push.swift; sourceTree = "<group>"; };
 		00986E481CEAEE4700CEE446 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		00FF9D001CEE2D750040885A /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		00FF9D021CEE4D370040885A /* Unbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Unbox.framework; path = Carthage/Build/iOS/Unbox.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				002D5A831CDEF904006FDA24 /* SwiftWebSocket.framework in Frameworks */,
+				00FF9D031CEE4D370040885A /* Unbox.framework in Frameworks */,
 				00986E3F1CEAB85E00CEE446 /* Wrap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +96,7 @@
 		002D5A2F1CDEF01C006FDA24 = {
 			isa = PBXGroup;
 			children = (
+				00FF9D021CEE4D370040885A /* Unbox.framework */,
 				00986E3E1CEAB85E00CEE446 /* Wrap.framework */,
 				002D5A6E1CDEF3F6006FDA24 /* SwiftWebSocket.framework */,
 				002D5A3B1CDEF01C006FDA24 /* Phoenix */,
@@ -310,6 +314,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftWebSocket.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Wrap.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Unbox.framework",
 			);
 			outputPaths = (
 			);
