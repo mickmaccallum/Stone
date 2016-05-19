@@ -112,6 +112,18 @@ public final class Socket {
 		)
 	}
 
+	private func startReconnectTimer() {
+		discardReconnectTimer()
+
+		reconnectTimer = NSTimer.scheduledTimerWithTimeInterval(
+			reconnectInterval,
+			target: self,
+			selector: #selector(Socket.reconnect),
+			userInfo: nil,
+			repeats: true
+		)
+	}
+
 	@objc private func sendHeartBeat() {
 		let message = Message(
 			topic: "phoenix",
