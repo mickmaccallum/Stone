@@ -10,7 +10,7 @@ import Foundation
 import Wrap
 
 /// <#Description#>
-public final class Push {
+public final class Push<T> {
 	private weak var channel: Channel!
 	private let event: String
 	private let payload: [String: AnyObject]
