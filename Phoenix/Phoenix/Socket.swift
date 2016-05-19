@@ -157,11 +157,10 @@ public final class Socket {
 			self?.socket?.send(jsonData)
 		}
 	}
-}
 
-extension Socket: WebSocketDelegate {
-	@objc public func webSocketOpen() {
+	private func webSocketDidOpen() {
 		queue.suspended = false
+		discardReconnectTimer()
 
 		if let timeInterval = heartbeatInterval where timeInterval > 0.0 {
 			startHeatBeatTimer(timeInterval: timeInterval)
@@ -170,28 +169,65 @@ extension Socket: WebSocketDelegate {
 		onSocketOpen?()
 	}
 
-	@objc public func webSocketPong() {
+	private func webSocketDidReceiveMessage(message: String?) {
 
 	}
-
-	@objc public func webSocketError(error: NSError) {
-
+	
+	private func webSocketDidReceiveMessage(messageData: NSData) {
+		webSocketDidReceiveMessage(String(data: messageData, encoding: NSUTF8StringEncoding))
 	}
+	
+	private func webSocketDidClose(code code: Int, reason: String, wasClean: Bool) {
+		queue.suspended = true
+		// trigger channel event here
 
-	@objc public func webSocketMessageText(text: String) {
+		if reconnectOnError {
 
-	}
+		}
 
-	@objc public func webSocketMessageData(data: NSData) {
-
-	}
-
-	@objc public func webSocketClose(code: Int, reason: String, wasClean: Bool) {
 		onSocketClose?(code: code, reason: reason, wasClean: wasClean)
 	}
 
+	private func webSocketDidError(error: NSError) {
+		queue.suspended = true
+		discardHeartBeatTimer()
+
+		onSocketError?(error: error)
+
+		webSocketDidClose(
+			code: error.code,
+			reason: error.localizedDescription,
+			wasClean: true
+		)
+	}
+}
+
+extension Socket: WebSocketDelegate {
+	@objc public func webSocketOpen() {
+		webSocketDidOpen()
+	}
+
+	@objc public func webSocketError(error: NSError) {
+		webSocketDidError(error)
+	}
+
+	@objc public func webSocketMessageText(text: String) {
+		webSocketDidReceiveMessage(text)
+	}
+
+	@objc public func webSocketMessageData(data: NSData) {
+		webSocketDidReceiveMessage(data)
+	}
+
+	@objc public func webSocketClose(code: Int, reason: String, wasClean: Bool) {
+		webSocketDidClose(code: code, reason: reason, wasClean: wasClean)
+	}
+
 	@objc public func webSocketEnd(code: Int, reason: String, wasClean: Bool, error: NSError?) {
-		// close and error handled here.
-		//		onSocketError?(code: code, reason: reason, wasClean: wasClean, error: error)
+		if let error = error {
+			webSocketDidError(error)
+		} else {
+			webSocketDidClose(code: code, reason: reason, wasClean: wasClean)
+		}
 	}
 }
