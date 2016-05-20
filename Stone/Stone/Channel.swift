@@ -121,7 +121,17 @@ public final class Channel: Hashable, Equatable {
 		}
 	}
 
-	public func join(completion: Callback) {
+	/**
+	<#Description#>
+
+	- parameter completion:	<#completion description#>
+	*/
+	public func join(completion: ResultCallback) {
+		guard state == .Closed else {
+			return
+		}
+		
+		state = .Joining
 		let joinMessage = Message(
 			topic: topic,
 			event: Event.Default(.Join),
