@@ -227,22 +227,32 @@ public final class Socket {
 			onMessage?(result: .Failure(error))
 		}
 	}
-	
+
+	private func relayMessage(message: Message) {
+		for channel in channels where channel.isMemberOfTopic(message.topic) {
+			channel.triggerEvent(
+				message.event,
+				payload: message.payload
+			)
+		}
+	}
+
 	private func webSocketDidClose(code code: Int, reason: String, wasClean: Bool) {
 		queue.suspended = true
-		// trigger channel event here
 
+		for channel in channels {
+			channel.triggerEvent(Event.Default(.Error), payload: [:])
+		}
+
+		discardHeartBeatTimer()
 		if reconnectOnError {
-
+			startReconnectTimer()
 		}
 
 		onClose?(code: code, reason: reason, wasClean: wasClean)
 	}
 
 	private func webSocketDidError(error: NSError) {
-		queue.suspended = true
-		discardHeartBeatTimer()
-
 		onError?(error: error)
 
 		webSocketDidClose(
