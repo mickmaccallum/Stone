@@ -8,6 +8,17 @@
 
 import Foundation
 
-public enum Error: ErrorType {
-	case LostSocket, InvalidJSON
+/**
+Represents various errors that can occur while interacting with Stone.
+
+- LostSocket:
+- InvalidJSON:
+- AlreadyJoined:
+*/
+public enum Error: ErrorType, CustomStringConvertible {
+	case LostSocket, InvalidJSON, AlreadyJoined
+
+	public var description: String {
+		return ""
+	}
 }
