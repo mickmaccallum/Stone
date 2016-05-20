@@ -133,6 +133,31 @@ public final class Channel: Hashable, Equatable {
 		
 		sendMessage(joinMessage, completion: completion)
 	}
+
+	/**
+	<#Description#>
+	*/
+	public func leave() {
+		let leaveMessage = Message(
+			topic: topic,
+			event: Event.Default(.Leave)
+		)
+
+		sendMessage(leaveMessage) { [weak self] result in
+			self?.state = .Closed
+			do {
+				let message = try result.value()
+
+				self?.triggerEvent(
+					leaveMessage.event,
+					ref: message.ref,
+					payload: message.payload
+				)
+			} catch {
+
+			}
+		}
+	}
 }
 
 public func == (lhs: Channel, rhs: Channel) -> Bool {
