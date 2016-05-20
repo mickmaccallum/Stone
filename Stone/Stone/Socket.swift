@@ -213,14 +213,7 @@ public final class Socket {
 		do {
 			let message: Message = try Unbox(messageData)
 
-			for channel in channels where channel.isMemberOfTopic(message.topic) {
-
-				channel.triggerEvent(
-					message.event,
-					payload: message.payload
-				)
-			}
-
+			relayMessage(message)
 			onMessage?(result: .Success(message))
 		} catch let error as NSError {
 			webSocketDidError(error)
