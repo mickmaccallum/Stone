@@ -150,12 +150,12 @@ public final class Socket {
 	}
 
 	@objc private func sendHeartBeat() {
-		let message = Message(
-			topic: "phoenix",
-			event: Event.Default(.Heartbeat)
+		try! push(
+			Message(
+				topic: "phoenix",
+				event: Event.Default(.Heartbeat)
+			)
 		)
-
-		try! push(message)
 	}
 
 	private func discardHeartBeatTimer() {
