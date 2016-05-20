@@ -35,6 +35,10 @@ public enum Event: RawRepresentable, Hashable, Equatable {
 	case Default(PhoenixEvent)
 	case Custom(String)
 
+	public var isDefault: Bool {
+		return PhoenixEvent(rawValue: rawValue) != nil
+	}
+
 	public var rawValue: String {
 		switch self {
 		case .Default(let known):
