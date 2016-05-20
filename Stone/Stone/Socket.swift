@@ -279,12 +279,4 @@ extension Socket: WebSocketDelegate {
 	@objc public func webSocketClose(code: Int, reason: String, wasClean: Bool) {
 		webSocketDidClose(code: code, reason: reason, wasClean: wasClean)
 	}
-
-	@objc public func webSocketEnd(code: Int, reason: String, wasClean: Bool, error: NSError?) {
-		if let error = error {
-			webSocketDidError(error)
-		} else {
-			webSocketDidClose(code: code, reason: reason, wasClean: wasClean)
-		}
-	}
 }
