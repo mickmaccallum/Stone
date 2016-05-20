@@ -9,10 +9,6 @@
 import Foundation
 import SwiftWebSocket
 
-public enum ChannelState {
-	case Closed, Errored, Joining, Joined
-}
-
 public final class Channel: Hashable, Equatable {
 	public let topic: String
 
