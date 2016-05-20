@@ -181,10 +181,10 @@ public final class Socket {
 
 	- throws: If message couldn't successfully be converted to JSON.
 	*/
-	func push(message: Message) throws {
+	public func push(message: Message) throws {
 		let dict: [String: AnyObject] = try Wrap(message)
 		let jsonData = try NSJSONSerialization.dataWithJSONObject(dict, options: [])
-		print(dict)
+
 		queue.addOperationWithBlock { [weak self] in
 			self?.socket?.send(jsonData)
 		}
@@ -201,7 +201,11 @@ public final class Socket {
 		onSocketOpen?()
 	}
 
-	private func webSocketDidReceiveMessage(messageData: NSData) {
+	private func webSocketDidReceiveMessage(messageStr: String) {
+		guard let messageData = messageStr.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) else {
+			return
+		}
+
 		do {
 			let message: Message = try Unbox(messageData)
 
@@ -209,7 +213,6 @@ public final class Socket {
 
 				channel.triggerEvent(
 					message.event,
-					ref: message.ref,
 					payload: message.payload
 				)
 			}
@@ -255,8 +258,8 @@ extension Socket: WebSocketDelegate {
 		webSocketDidError(error)
 	}
 
-	@objc public func webSocketMessageData(data: NSData) {
-		webSocketDidReceiveMessage(data)
+	@objc public func webSocketMessageText(text: String) {
+		webSocketDidReceiveMessage(text)
 	}
 
 	@objc public func webSocketClose(code: Int, reason: String, wasClean: Bool) {
