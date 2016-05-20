@@ -14,16 +14,15 @@
 		002D5A661CDEF247006FDA24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 002D5A651CDEF247006FDA24 /* Assets.xcassets */; };
 		002D5A691CDEF247006FDA24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 002D5A671CDEF247006FDA24 /* LaunchScreen.storyboard */; };
 		002D5A6F1CDEF3F6006FDA24 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002D5A6E1CDEF3F6006FDA24 /* SwiftWebSocket.framework */; };
-		002D5A831CDEF904006FDA24 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002D5A6E1CDEF3F6006FDA24 /* SwiftWebSocket.framework */; };
-		00986E3F1CEAB85E00CEE446 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00986E3E1CEAB85E00CEE446 /* Wrap.framework */; };
-		00FF9D031CEE4D370040885A /* Unbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00FF9D021CEE4D370040885A /* Unbox.framework */; };
+		004862F81CEE961300A42053 /* Unbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00FF9D021CEE4D370040885A /* Unbox.framework */; };
+		004862F91CEE961300A42053 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00986E3E1CEAB85E00CEE446 /* Wrap.framework */; };
+		004862FA1CEE962900A42053 /* Stone.h in Headers */ = {isa = PBXBuildFile; fileRef = 00FF9D0F1CEE7AE00040885A /* Stone.h */; };
 		00FF9D081CEE7A560040885A /* PhoenixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D071CEE7A560040885A /* PhoenixTests.swift */; };
 		00FF9D0A1CEE7A5E0040885A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00FF9D091CEE7A5E0040885A /* Info.plist */; };
 		00FF9D141CEE7AE00040885A /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D0B1CEE7AE00040885A /* Channel.swift */; };
 		00FF9D151CEE7AE00040885A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D0C1CEE7AE00040885A /* Event.swift */; };
 		00FF9D161CEE7AE00040885A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D0D1CEE7AE00040885A /* Extensions.swift */; };
 		00FF9D171CEE7AE00040885A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D0E1CEE7AE00040885A /* Message.swift */; };
-		00FF9D181CEE7AE00040885A /* Phoenix.h in Headers */ = {isa = PBXBuildFile; fileRef = 00FF9D0F1CEE7AE00040885A /* Phoenix.h */; };
 		00FF9D191CEE7AE00040885A /* Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D101CEE7AE00040885A /* Push.swift */; };
 		00FF9D1A1CEE7AE00040885A /* QueryStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D111CEE7AE00040885A /* QueryStringConvertible.swift */; };
 		00FF9D1B1CEE7AE00040885A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D121CEE7AE00040885A /* Result.swift */; };
@@ -59,7 +58,7 @@
 		00FF9D0C1CEE7AE00040885A /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Stone/Event.swift; sourceTree = SOURCE_ROOT; };
 		00FF9D0D1CEE7AE00040885A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Stone/Extensions.swift; sourceTree = SOURCE_ROOT; };
 		00FF9D0E1CEE7AE00040885A /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Stone/Message.swift; sourceTree = SOURCE_ROOT; };
-		00FF9D0F1CEE7AE00040885A /* Phoenix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Phoenix.h; path = Stone/Phoenix.h; sourceTree = SOURCE_ROOT; };
+		00FF9D0F1CEE7AE00040885A /* Stone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stone.h; path = Stone/Stone.h; sourceTree = SOURCE_ROOT; };
 		00FF9D101CEE7AE00040885A /* Push.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Push.swift; path = Stone/Push.swift; sourceTree = SOURCE_ROOT; };
 		00FF9D111CEE7AE00040885A /* QueryStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueryStringConvertible.swift; path = Stone/QueryStringConvertible.swift; sourceTree = SOURCE_ROOT; };
 		00FF9D121CEE7AE00040885A /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Stone/Result.swift; sourceTree = SOURCE_ROOT; };
@@ -72,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004862F81CEE961300A42053 /* Unbox.framework in Frameworks */,
+				004862F91CEE961300A42053 /* Wrap.framework in Frameworks */,
 				002D5A6F1CDEF3F6006FDA24 /* SwiftWebSocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,9 +89,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				002D5A831CDEF904006FDA24 /* SwiftWebSocket.framework in Frameworks */,
-				00FF9D031CEE4D370040885A /* Unbox.framework in Frameworks */,
-				00986E3F1CEAB85E00CEE446 /* Wrap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,7 +125,7 @@
 				00FF9D0C1CEE7AE00040885A /* Event.swift */,
 				00FF9D0D1CEE7AE00040885A /* Extensions.swift */,
 				00FF9D0E1CEE7AE00040885A /* Message.swift */,
-				00FF9D0F1CEE7AE00040885A /* Phoenix.h */,
+				00FF9D0F1CEE7AE00040885A /* Stone.h */,
 				00FF9D101CEE7AE00040885A /* Push.swift */,
 				00FF9D111CEE7AE00040885A /* QueryStringConvertible.swift */,
 				00FF9D121CEE7AE00040885A /* Result.swift */,
@@ -167,7 +165,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00FF9D181CEE7AE00040885A /* Phoenix.h in Headers */,
+				004862FA1CEE962900A42053 /* Stone.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,7 +216,6 @@
 				002D5A581CDEF247006FDA24 /* Sources */,
 				002D5A591CDEF247006FDA24 /* Frameworks */,
 				002D5A5A1CDEF247006FDA24 /* Resources */,
-				002D5A821CDEF8F0006FDA24 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -306,22 +303,8 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftWebSocket.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		002D5A821CDEF8F0006FDA24 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftWebSocket.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Wrap.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Unbox.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Wrap.framework",
 			);
 			outputPaths = (
 			);
@@ -499,11 +482,13 @@
 				);
 				INFOPLIST_FILE = Stone/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Tethr.Stone;
 				PRODUCT_NAME = Stone;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -521,10 +506,12 @@
 				);
 				INFOPLIST_FILE = Stone/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Tethr.Stone;
 				PRODUCT_NAME = Stone;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
