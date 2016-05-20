@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+public enum Error: ErrorType {
+	case LostSocket, InvalidJSON
+}
