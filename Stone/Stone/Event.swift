@@ -1,5 +1,5 @@
 //
-//  StoneEvent.swift
+//  PhoenixEvent.swift
 //  Stone
 //
 //  Created by Michael MacCallum on 5/19/16.
@@ -10,8 +10,20 @@ import Foundation
 import Unbox
 import Wrap
 
-public enum Event: RawRepresentable, Hashable {
-	public enum StoneEvent: String {
+public func == (lhs: Event, rhs: Event) -> Bool {
+	return lhs.rawValue == rhs.rawValue
+}
+
+public func == (lhs: Event, rhs: Event.PhoenixEvent) -> Bool {
+	return lhs.rawValue == rhs.rawValue
+}
+
+public func != (lhs: Event, rhs: Event.PhoenixEvent) -> Bool {
+	return !(lhs == rhs)
+}
+
+public enum Event: RawRepresentable, Hashable, Equatable {
+	public enum PhoenixEvent: String {
 		case Join		= "phx_join"
 		case Reply		= "phx_reply"
 		case Leave		= "phx_leave"
@@ -20,7 +32,7 @@ public enum Event: RawRepresentable, Hashable {
 		case Heartbeat	= "heartbeat"
 	}
 
-	case Default(StoneEvent)
+	case Default(PhoenixEvent)
 	case Custom(String)
 
 	public var rawValue: String {
@@ -37,7 +49,7 @@ public enum Event: RawRepresentable, Hashable {
 	}
 
 	public init?(rawValue: String) {
-		if let def = StoneEvent(rawValue: rawValue) {
+		if let def = PhoenixEvent(rawValue: rawValue) {
 			self = .Default(def)
 		} else {
 			self = .Custom(rawValue)
