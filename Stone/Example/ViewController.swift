@@ -10,7 +10,13 @@ import UIKit
 import Stone
 
 
+enum MyTopics: String {
+	case Lobby = "rooms:lobby"
+}
+
 class ViewController: UIViewController {
+	@IBOutlet private weak var tableView: UITableView!
+	private var messages = [Message]()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -25,7 +31,17 @@ class ViewController: UIViewController {
 		)!
 
 		socket.onSocketOpen = {
-			print("socket open")
+			let channel = Channel(socket: socket, topic: MyTopics.Lobby)
+
+			channel.join { result in
+				print("Result of joining lobby: \(result)")
+			}
+
+			channel.onEvent(Event.Custom("new:msg")) { result in
+				print(result)
+			}
+
+			socket.addChannel(channel)
 		}
 
 		socket.onSocketMessage = { result in
@@ -41,17 +57,6 @@ class ViewController: UIViewController {
 		}
 
 		socket.connect(params)
-
-		let channel = Channel(socket: socket, topic: "rooms:lobby")
-
-		channel.onEvent(Event.Default(.Join)) { (result) in
-			print("on channel join: \(result)")
-		}
-
-//		channel.onEvent(<#T##event: RawType##RawType#>, callback: <#T##Callback##Callback##Result<Void> -> Void#>)
-
-
-		// Do any additional setup after loading the view, typically from a nib.
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -59,6 +64,8 @@ class ViewController: UIViewController {
 		// Dispose of any resources that can be recreated.
 	}
 
+	@IBAction private func sendButtonTapped() {
 
+	}
 }
 
