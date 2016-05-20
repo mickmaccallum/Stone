@@ -10,7 +10,7 @@ import Foundation
 import Unbox
 import Wrap
 
-public enum Event: RawRepresentable {
+public enum Event: RawRepresentable, Hashable {
 	public enum StoneEvent: String {
 		case Join		= "phx_join"
 		case Reply		= "phx_reply"
@@ -30,6 +30,10 @@ public enum Event: RawRepresentable {
 		case .Custom(let str):
 			return str
 		}
+	}
+
+	public var hashValue: Int {
+		return rawValue.hashValue
 	}
 
 	public init?(rawValue: String) {
