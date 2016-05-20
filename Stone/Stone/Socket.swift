@@ -27,10 +27,14 @@ public final class Socket {
 	public let url: NSURL
 	public var reconnectOnError = true
 
-	public var onSocketOpen: (() -> Void)?
-	public var onSocketError: ((error: NSError) -> Void)?
-	public var onSocketClose: ((code: Int, reason: String, wasClean: Bool) -> Void)?
-	public var onSocketMessage: ((result: Result<Message>) -> Void)?
+	/// <#Description#>
+	public var onOpen: (() -> Void)?
+	/// <#Description#>
+	public var onError: ((error: NSError) -> Void)?
+	/// <#Description#>
+	public var onClose: ((code: Int, reason: String, wasClean: Bool) -> Void)?
+	/// <#Description#>
+	public var onMessage: ((result: Result<Message>) -> Void)?
 
 	public var socketState: SocketState {
 		return socket?.readyState ?? .Closed
@@ -198,7 +202,7 @@ public final class Socket {
 			startHeatBeatTimer(timeInterval: timeInterval)
 		}
 
-		onSocketOpen?()
+		onOpen?()
 	}
 
 	private func webSocketDidReceiveMessage(messageStr: String) {
@@ -217,10 +221,10 @@ public final class Socket {
 				)
 			}
 
-			onSocketMessage?(result: .Success(message))
+			onMessage?(result: .Success(message))
 		} catch let error as NSError {
 			webSocketDidError(error)
-			onSocketMessage?(result: .Failure(error))
+			onMessage?(result: .Failure(error))
 		}
 	}
 	
@@ -232,14 +236,14 @@ public final class Socket {
 
 		}
 
-		onSocketClose?(code: code, reason: reason, wasClean: wasClean)
+		onClose?(code: code, reason: reason, wasClean: wasClean)
 	}
 
 	private func webSocketDidError(error: NSError) {
 		queue.suspended = true
 		discardHeartBeatTimer()
 
-		onSocketError?(error: error)
+		onError?(error: error)
 
 		webSocketDidClose(
 			code: error.code,
