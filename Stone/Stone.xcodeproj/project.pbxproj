@@ -18,13 +18,13 @@
 		004862F91CEE961300A42053 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00986E3E1CEAB85E00CEE446 /* Wrap.framework */; };
 		004862FA1CEE962900A42053 /* Stone.h in Headers */ = {isa = PBXBuildFile; fileRef = 00FF9D0F1CEE7AE00040885A /* Stone.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0071E5F51CEEA3F800C1D41C /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071E5F41CEEA3F800C1D41C /* Error.swift */; };
+		0071E5F71CEEE6F100C1D41C /* ChannelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071E5F61CEEE6F100C1D41C /* ChannelState.swift */; };
 		00FF9D081CEE7A560040885A /* StoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D071CEE7A560040885A /* StoneTests.swift */; };
 		00FF9D0A1CEE7A5E0040885A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00FF9D091CEE7A5E0040885A /* Info.plist */; };
 		00FF9D141CEE7AE00040885A /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D0B1CEE7AE00040885A /* Channel.swift */; };
 		00FF9D151CEE7AE00040885A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D0C1CEE7AE00040885A /* Event.swift */; };
 		00FF9D161CEE7AE00040885A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D0D1CEE7AE00040885A /* Extensions.swift */; };
 		00FF9D171CEE7AE00040885A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D0E1CEE7AE00040885A /* Message.swift */; };
-		00FF9D191CEE7AE00040885A /* Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D101CEE7AE00040885A /* Push.swift */; };
 		00FF9D1A1CEE7AE00040885A /* QueryStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D111CEE7AE00040885A /* QueryStringConvertible.swift */; };
 		00FF9D1B1CEE7AE00040885A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D121CEE7AE00040885A /* Result.swift */; };
 		00FF9D1C1CEE7AE00040885A /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FF9D131CEE7AE00040885A /* Socket.swift */; };
@@ -52,6 +52,7 @@
 		002D5A6A1CDEF247006FDA24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		002D5A6E1CDEF3F6006FDA24 /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/iOS/SwiftWebSocket.framework; sourceTree = "<group>"; };
 		0071E5F41CEEA3F800C1D41C /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Stone/Error.swift; sourceTree = "<group>"; };
+		0071E5F61CEEE6F100C1D41C /* ChannelState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelState.swift; path = Stone/ChannelState.swift; sourceTree = "<group>"; };
 		00986E3E1CEAB85E00CEE446 /* Wrap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wrap.framework; path = Carthage/Build/iOS/Wrap.framework; sourceTree = "<group>"; };
 		00FF9D021CEE4D370040885A /* Unbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Unbox.framework; path = Carthage/Build/iOS/Unbox.framework; sourceTree = "<group>"; };
 		00FF9D071CEE7A560040885A /* StoneTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoneTests.swift; path = StoneTests/StoneTests.swift; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		00FF9D0D1CEE7AE00040885A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Stone/Extensions.swift; sourceTree = SOURCE_ROOT; };
 		00FF9D0E1CEE7AE00040885A /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Stone/Message.swift; sourceTree = SOURCE_ROOT; };
 		00FF9D0F1CEE7AE00040885A /* Stone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stone.h; path = Stone/Stone.h; sourceTree = SOURCE_ROOT; };
-		00FF9D101CEE7AE00040885A /* Push.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Push.swift; path = Stone/Push.swift; sourceTree = SOURCE_ROOT; };
 		00FF9D111CEE7AE00040885A /* QueryStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QueryStringConvertible.swift; path = Stone/QueryStringConvertible.swift; sourceTree = SOURCE_ROOT; };
 		00FF9D121CEE7AE00040885A /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Stone/Result.swift; sourceTree = SOURCE_ROOT; };
 		00FF9D131CEE7AE00040885A /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Socket.swift; path = Stone/Socket.swift; sourceTree = SOURCE_ROOT; };
@@ -139,11 +139,11 @@
 				00FF9D0F1CEE7AE00040885A /* Stone.h */,
 				00FF9D1D1CEE7AEC0040885A /* Info.plist */,
 				00FF9D0B1CEE7AE00040885A /* Channel.swift */,
+				0071E5F61CEEE6F100C1D41C /* ChannelState.swift */,
 				0071E5F41CEEA3F800C1D41C /* Error.swift */,
 				00FF9D0C1CEE7AE00040885A /* Event.swift */,
 				00FF9D0D1CEE7AE00040885A /* Extensions.swift */,
 				00FF9D0E1CEE7AE00040885A /* Message.swift */,
-				00FF9D101CEE7AE00040885A /* Push.swift */,
 				00FF9D111CEE7AE00040885A /* QueryStringConvertible.swift */,
 				00FF9D121CEE7AE00040885A /* Result.swift */,
 				00FF9D131CEE7AE00040885A /* Socket.swift */,
@@ -323,7 +323,7 @@
 			files = (
 				00FF9D1C1CEE7AE00040885A /* Socket.swift in Sources */,
 				00FF9D151CEE7AE00040885A /* Event.swift in Sources */,
-				00FF9D191CEE7AE00040885A /* Push.swift in Sources */,
+				0071E5F71CEEE6F100C1D41C /* ChannelState.swift in Sources */,
 				00FF9D171CEE7AE00040885A /* Message.swift in Sources */,
 				00FF9D161CEE7AE00040885A /* Extensions.swift in Sources */,
 				00FF9D1B1CEE7AE00040885A /* Result.swift in Sources */,
