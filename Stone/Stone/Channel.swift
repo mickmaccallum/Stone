@@ -15,8 +15,9 @@ public final class Channel: Hashable, Equatable {
 	public typealias Callback = (result: Result<Message>) -> Void
 	public private(set) var state: ChannelState = .Closed
 
-	private var eventBindings = [Event: Callback]()
-	private var callbackBindings = [Event: Callback]()
+	private var eventBindings = [Event: ResultCallback]()
+	private var internalEventBindings = [Event: ResultCallback]()
+	private var callbackBindings = [Event: ResultCallback]()
 
 	private weak var socket: Socket?
 
