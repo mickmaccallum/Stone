@@ -53,24 +53,55 @@ public final class Channel: Hashable, Equatable {
 			ref: ref
 		)
 
-		if event == Event.PhoenixEvent.Reply {
-			receivedReply(message)
-		} else {
-			callback(result: .Success(message))
-		}
-	}
-
-	private func receivedReply(message: Message) {
-		print("Received reply in channel for message: \(message)")
-
-		guard let callback = callbackBindings[message.event] else {
-			return
+		if let defaultEvent = Event.PhoenixEvent(rawValue: event.rawValue) {
+			triggerInternalEvent(
+				defaultEvent,
+				withMessage: message
+			)
 		}
 
 		callback(result: .Success(message))
 	}
 
-	public func onEvent(event: Event, callback: Callback) -> Callback? {
+	/// <#Description#>
+	public var onJoin: EventCallback?
+	/// <#Description#>
+	public var onReply: EventCallback?
+	/// <#Description#>
+	public var onHeartbeat: EventCallback?
+	/// <#Description#>
+	public var onError: EventCallback?
+	/// <#Description#>
+	public var onLeave: EventCallback?
+	/// <#Description#>
+	public var onClose: EventCallback?
+
+	private func triggerInternalEvent(event: Event.PhoenixEvent, withMessage message: Message) {
+		switch event {
+		case .Join:
+			onJoin?(message: message)
+		case .Reply:
+			onReply?(message: message)
+		case .Heartbeat:
+			onHeartbeat?(message: message)
+		case .Error:
+			onError?(message: message)
+		case .Leave:
+			onLeave?(message: message)
+		case .Close:
+			onClose?(message: message)
+		}
+	}
+
+	/**
+	<#Description#>
+
+	- parameter event:		<#event description#>
+	- parameter callback:	<#callback description#>
+
+	- returns: <#return value description#>
+	*/
+	public func onEvent(event: Event, callback: ResultCallback) -> ResultCallback? {
 		return eventBindings.updateValue(callback, forKey: event)
 	}
 
