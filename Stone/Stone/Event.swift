@@ -30,9 +30,15 @@ public enum Event: RawRepresentable, Hashable, Equatable {
 		case Close		= "phx_close"
 		case Error		= "phx_error"
 		case Heartbeat	= "heartbeat"
+
+		public enum PresenceEvent: String {
+			case State	= "presence_state"
+			case Diff	= "presence_diff"
+		}
 	}
 
-	case Default(PhoenixEvent)
+	case Phoenix(PhoenixEvent)
+	case Presence(PhoenixEvent.PresenceEvent)
 	case Custom(String)
 
 	public var isDefault: Bool {
@@ -41,8 +47,10 @@ public enum Event: RawRepresentable, Hashable, Equatable {
 
 	public var rawValue: String {
 		switch self {
-		case .Default(let known):
+		case .Phoenix(let known):
 			return known.rawValue
+		case .Presence(let presence):
+			return presence.rawValue
 		case .Custom(let str):
 			return str
 		}
@@ -54,7 +62,9 @@ public enum Event: RawRepresentable, Hashable, Equatable {
 
 	public init?(rawValue: String) {
 		if let def = PhoenixEvent(rawValue: rawValue) {
-			self = .Default(def)
+			self = .Phoenix(def)
+		} else if let presence = PhoenixEvent.PresenceEvent(rawValue: rawValue) {
+			self = .Presence(presence)
 		} else {
 			self = .Custom(rawValue)
 		}
