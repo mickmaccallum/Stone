@@ -18,7 +18,7 @@ public final class Channel: Hashable, Equatable {
 	private var eventBindings = [Event: ResultCallback]()
 	private var callbackBindings = [String: ResultCallback?]()
 
-	private weak var socket: Socket?
+	internal weak var socket: Socket?
 
 	public var hashValue: Int {
 		return topic.hashValue
