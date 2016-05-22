@@ -22,37 +22,40 @@ public final class Channel: Hashable, Equatable {
 
 	internal weak var socket: Socket?
 
+	/// Channels are unique by their topics.
 	public var hashValue: Int {
 		return topic.hashValue
 	}
 
 	/**
-	<#Description#>
-
-	- parameter topic:	<#topic description#>
-
-	- returns: <#return value description#>
+	Creates a new channel for the given topic. Topic can either be a String, or any enum you've defined whose
+	RawValue == String for convenience.
 	*/
 	public convenience init<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType) {
 		self.init(topic: topic.rawValue)
 	}
 
 	/**
-	<#Description#>
-
-	- parameter topic:	<#topic description#>
-
-	- returns: <#return value description#>
+	Creates a new channel for the given topic. Topic can either be a String, or any enum you've defined whose
+	RawValue == String for convenience.
 	*/
 	public init(topic: String) {
 		self.topic = topic
 	}
 
+	/**
+	Returns true iff the receiver is a member of the given topic, false otherwise. This method does not take connection
+	status into account.
+	*/
 	public func isMemberOfTopic(otherTopic: String) -> Bool {
 		return topic == otherTopic
 	}
 
 	internal func triggerEvent(event: Event, ref: String? = nil, payload: [String: AnyObject] = [:]) {
+		guard state != .Closed else {
+			return
+		}
+
 		let message = Message(
 			topic: topic,
 			event: event,
@@ -83,17 +86,11 @@ public final class Channel: Hashable, Equatable {
 		}
 	}
 
-	/// <#Description#>
 	public var onJoin: EventCallback?
-	/// <#Description#>
 	public var onReply: EventCallback?
-	/// <#Description#>
 	public var onHeartbeat: EventCallback?
-	/// <#Description#>
 	public var onError: EventCallback?
-	/// <#Description#>
 	public var onLeave: EventCallback?
-	/// <#Description#>
 	public var onClose: EventCallback?
 
 	private func triggerInternalEvent(event: Event.PhoenixEvent, withMessage message: Message) {
@@ -117,33 +114,42 @@ public final class Channel: Hashable, Equatable {
 	}
 
 	/**
-	<#Description#>
+	Registers a callback to occur when this Channel receives the given event.
 
-	- parameter event:		<#event description#>
-	- parameter callback:	<#callback description#>
-
-	- returns: <#return value description#>
+	- returns: The last function given as a callback for this Event on this Channel if one exists, nil otherwise.
 	*/
 	public func onEvent(event: Event, callback: ResultCallback) -> ResultCallback? {
 		return eventBindings.updateValue(callback, forKey: event)
 	}
 
-	public func offEvent(event: Event) -> Callback? {
+	/**
+	Unregisters a callback from occurring when this Channel receives the given event.
+
+	- returns: The function that used to be the callback for this Event if one exists, nil otherwise.
+	*/
+	public func offEvent(event: Event) -> ResultCallback? {
 		return eventBindings.removeValueForKey(event)
 	}
 
-	public func sendMessage(message: Message, completion: Callback) {
+	/**
+	Sends the given Message over the receiving Channel. When the server replies, the contents of the reply will be
+	given in the completion handler.
+	*/
+	public func sendMessage(message: Message, completion: ResultCallback? = nil) {
 		guard let socket = socket else {
-			completion(result: .Failure(Error.LostSocket))
+			completion?(result: .Failure(Error.LostSocket))
 			return
 		}
 
-		callbackBindings.updateValue(completion, forKey: message.event)
-
 		do {
 			try socket.push(message)
+
+			callbackBindings.updateValue(
+				completion,
+				forKey: message.ref!
+			)
 		} catch {
-			completion(result: .Failure(Error.InvalidJSON))
+			completion?(result: .Failure(Error.InvalidJSON))
 		}
 	}
 
@@ -168,7 +174,8 @@ public final class Channel: Hashable, Equatable {
 	}
 
 	/**
-	<#Description#>
+	Leaves the receiving Channel. If you leave a Channel, you won't continue to get callbacks for the messages that
+	it receives, even if the Channel object happens to still be alive.
 	*/
 	public func leave() {
 		let leaveMessage = Message(
