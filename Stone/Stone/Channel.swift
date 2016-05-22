@@ -15,6 +15,8 @@ public final class Channel: Hashable, Equatable {
 	public typealias Callback = (result: Result<Message>) -> Void
 	public private(set) var state: ChannelState = .Closed
 
+	public var shouldTrackPresence = false
+
 	private var eventBindings = [Event: ResultCallback]()
 	private var callbackBindings = [String: ResultCallback?]()
 
@@ -51,16 +53,21 @@ public final class Channel: Hashable, Equatable {
 	}
 
 	internal func triggerEvent(event: Event, ref: String? = nil, payload: [String: AnyObject] = [:]) {
-		guard let callback = eventBindings[event] else {
-			return
-		}
-
 		let message = Message(
 			topic: topic,
 			event: event,
 			payload: payload,
 			ref: ref
 		)
+
+		if let ref = ref, replyCallback = callbackBindings[ref] {
+			replyCallback?(result: .Success(message))
+			callbackBindings.removeValueForKey(ref)
+		}
+
+		if let callback = eventBindings[event] {
+			callback(result: .Success(message))
+		}
 
 		if let defaultEvent = Event.PhoenixEvent(rawValue: event.rawValue) {
 			triggerInternalEvent(
@@ -69,7 +76,11 @@ public final class Channel: Hashable, Equatable {
 			)
 		}
 
-		callback(result: .Success(message))
+		if let presenceEvent = Event.PhoenixEvent.PresenceEvent(rawValue: event.rawValue) where shouldTrackPresence {
+			print(presenceEvent)
+			print(ref)
+			print(payload)
+		}
 	}
 
 	/// <#Description#>
