@@ -16,8 +16,7 @@ public final class Channel: Hashable, Equatable {
 	public private(set) var state: ChannelState = .Closed
 
 	private var eventBindings = [Event: ResultCallback]()
-	private var internalEventBindings = [Event: ResultCallback]()
-	private var callbackBindings = [Event: ResultCallback]()
+	private var callbackBindings = [String: ResultCallback?]()
 
 	private weak var socket: Socket?
 
@@ -25,13 +24,26 @@ public final class Channel: Hashable, Equatable {
 		return topic.hashValue
 	}
 
-	public convenience init<RawType: RawRepresentable where RawType.RawValue == String>(socket: Socket, topic: RawType) {
-		self.init(socket: socket, topic: topic.rawValue)
+	/**
+	<#Description#>
+
+	- parameter topic:	<#topic description#>
+
+	- returns: <#return value description#>
+	*/
+	public convenience init<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType) {
+		self.init(topic: topic.rawValue)
 	}
 
-	public init(socket: Socket, topic: String) {
+	/**
+	<#Description#>
+
+	- parameter topic:	<#topic description#>
+
+	- returns: <#return value description#>
+	*/
+	public init(topic: String) {
 		self.topic = topic
-		self.socket = socket
 	}
 
 	public func isMemberOfTopic(otherTopic: String) -> Bool {
