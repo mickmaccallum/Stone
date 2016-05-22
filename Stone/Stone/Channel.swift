@@ -99,16 +99,19 @@ public final class Channel: Hashable, Equatable {
 	private func triggerInternalEvent(event: Event.PhoenixEvent, withMessage message: Message) {
 		switch event {
 		case .Join:
+			state = .Joined
 			onJoin?(message: message)
 		case .Reply:
 			onReply?(message: message)
 		case .Heartbeat:
 			onHeartbeat?(message: message)
 		case .Error:
+			state = .Errored
 			onError?(message: message)
 		case .Leave:
 			onLeave?(message: message)
 		case .Close:
+			state = .Closed
 			onClose?(message: message)
 		}
 	}
@@ -149,19 +152,19 @@ public final class Channel: Hashable, Equatable {
 
 	- parameter completion:	<#completion description#>
 	*/
-	public func join(completion: ResultCallback) {
-		guard state == .Closed else {
+	public func join() {
+		guard state == .Closed || state == ChannelState.Errored else {
 			return
 		}
 		
 		state = .Joining
 		let joinMessage = Message(
 			topic: topic,
-			event: Event.Default(.Join),
+			event: Event.Phoenix(.Join),
 			payload: [:]
 		)
 		
-		sendMessage(joinMessage, completion: completion)
+		sendMessage(joinMessage, completion: nil)
 	}
 
 	/**
@@ -170,11 +173,12 @@ public final class Channel: Hashable, Equatable {
 	public func leave() {
 		let leaveMessage = Message(
 			topic: topic,
-			event: Event.Default(.Leave)
+			event: Event.Phoenix(.Leave)
 		)
 
 		sendMessage(leaveMessage) { [weak self] result in
 			self?.state = .Closed
+			
 			do {
 				let message = try result.value()
 
