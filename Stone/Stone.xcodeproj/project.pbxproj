@@ -242,7 +242,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
-				ORGANIZATIONNAME = Tethr;
+				ORGANIZATIONNAME = "Tethr Technologies Inc";
 				TargetAttributes = {
 					002D5A381CDEF01C006FDA24 = {
 						CreatedOnToolsVersion = 7.3.1;
