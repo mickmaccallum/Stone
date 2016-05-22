@@ -237,6 +237,7 @@ public final class Socket {
 		for channel in channels where channel.isMemberOfTopic(message.topic) {
 			channel.triggerEvent(
 				message.event,
+				ref:  message.ref,
 				payload: message.payload
 			)
 		}
