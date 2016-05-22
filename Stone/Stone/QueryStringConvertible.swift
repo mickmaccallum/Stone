@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+	Should be used to represent any type that can be safely converted into a properly escaped URL query string.
+*/
 public protocol QueryStringConvertible: Hashable {
 	var queryStringRepresentation: String? { get }
 }
