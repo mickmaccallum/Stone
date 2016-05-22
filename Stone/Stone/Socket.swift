@@ -25,7 +25,9 @@ public final class Socket {
 	public let heartbeatInterval: NSTimeInterval?
 	public var reconnectInterval: NSTimeInterval
 	public let url: NSURL
-	public var reconnectOnError = true
+	public var shouldReconnectOnError = true
+
+	public var shouldAutoJoinChannels = true
 
 	/// <#Description#>
 	public var onOpen: (() -> Void)?
@@ -121,7 +123,12 @@ public final class Socket {
 
 	public func addChannel(channel: Channel) {
 		if !channels.contains(channel) {
+			channel.socket = self
 			channels.insert(channel)
+
+			if shouldAutoJoinChannels && socketState == .Open {
+				channel.join()
+			}
 		}
 	}
 
@@ -157,7 +164,7 @@ public final class Socket {
 		try! push(
 			Message(
 				topic: "phoenix",
-				event: Event.Default(.Heartbeat)
+				event: Event.Phoenix(.Heartbeat)
 			)
 		)
 	}
@@ -202,6 +209,12 @@ public final class Socket {
 			startHeatBeatTimer(timeInterval: timeInterval)
 		}
 
+		if shouldAutoJoinChannels {
+			for channel in channels {
+				channel.join()
+			}
+		}
+
 		onOpen?()
 	}
 
@@ -212,7 +225,6 @@ public final class Socket {
 
 		do {
 			let message: Message = try Unbox(messageData)
-
 			relayMessage(message)
 			onMessage?(result: .Success(message))
 		} catch let error as NSError {
@@ -232,13 +244,13 @@ public final class Socket {
 
 	private func webSocketDidClose(code code: Int, reason: String, wasClean: Bool) {
 		queue.suspended = true
-
+		
 		for channel in channels {
-			channel.triggerEvent(Event.Default(.Error), payload: [:])
+			channel.triggerEvent(Event.Phoenix(.Error), payload: [:])
 		}
 
 		discardHeartBeatTimer()
-		if reconnectOnError {
+		if shouldReconnectOnError {
 			startReconnectTimer()
 		}
 
