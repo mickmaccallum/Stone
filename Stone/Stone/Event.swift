@@ -22,6 +22,24 @@ public func != (lhs: Event, rhs: Event.PhoenixEvent) -> Bool {
 	return !(lhs == rhs)
 }
 
+/**
+Used to represent any event received from a Phoenix server. Covers default events that the server may send
+such as "phx_join" or "phx_reply", as well as presence related events, and the ability to specify custom events.
+
+The full list of built in events is as follows.
+
+- Join
+- Reply
+- Leave
+- Close
+- Error
+- Heartbeat
+- State
+- Diff
+- Default
+- Presence
+- Custom
+*/
 public enum Event: RawRepresentable, Hashable, Equatable {
 	public enum PhoenixEvent: String {
 		case Join		= "phx_join"
