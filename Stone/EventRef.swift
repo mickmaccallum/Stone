@@ -14,7 +14,7 @@ internal struct EventRef: Hashable {
 
 	internal var hashValue: Int {
 		if let ref = ref {
-			return event.hashValue ^ ref.hashValue
+			return "\(event.hashValue)\(ref.hashValue)".hashValue
 		}
 
 		return event.hashValue
@@ -22,5 +22,5 @@ internal struct EventRef: Hashable {
 }
 
 internal func == (lhs: EventRef, rhs: EventRef) -> Bool {
-	return lhs.hashValue == rhs.hashValue
+	return lhs.event == rhs.event && lhs.ref == rhs.ref
 }
