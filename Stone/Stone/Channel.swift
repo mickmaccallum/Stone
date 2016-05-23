@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftWebSocket
-
+import Unbox
 public final class Channel: Hashable, Equatable {
 	public let topic: String
 
