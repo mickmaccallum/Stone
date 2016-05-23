@@ -80,23 +80,19 @@ public final class Channel: Hashable, Equatable {
 		}
 
 		if let presenceEvent = Event.PhoenixEvent.PresenceEvent(rawValue: event.rawValue) where shouldTrackPresence {
-			switch presenceEvent {
-			case .State:
-				presenceStateCallback?(
-					result: Result.Success(
-						message.payload.map {
-							PresenceChange(
-								name: $0.0,
-								metas: ($0.1 as? [String: AnyObject]) ?? [String: AnyObject]()
-							)
-						}
-					)
-				)
-			case .Diff:
-				do {
-					presenceDiffCallback?(
-						result: .Success(
-							try Unbox(message.payload)
+			handlePresenceEvent(presenceEvent, withPayload: message.payload)
+		}
+	}
+
+	private func handlePresenceEvent(event: Event.PhoenixEvent.PresenceEvent, withPayload payload: [String: AnyObject]) {
+		switch event {
+		case .State:
+			presenceStateCallback?(
+				result: Result.Success(
+					payload.map {
+						PresenceChange(
+							name: $0.0,
+							metas: ($0.1 as? [String: AnyObject]) ?? [String: AnyObject]()
 						)
 					)
 				} catch {
