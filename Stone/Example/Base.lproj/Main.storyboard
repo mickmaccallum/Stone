@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jrg-KW-Cn0">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jrg-KW-Cn0">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -97,6 +97,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="GAv-UK-6NE"/>
                     <connections>
+                        <outlet property="bottomPin" destination="Cym-pU-aAd" id="kcr-zY-sjb"/>
                         <outlet property="tableView" destination="Jrg-KW-Cn0" id="3D2-nn-2U3"/>
                         <outlet property="textField" destination="Zy7-hY-PJQ" id="nWm-Kb-Q7p"/>
                     </connections>

@@ -17,6 +17,7 @@ enum MyTopics: String {
 class ViewController: UIViewController {
 	@IBOutlet private weak var tableView: UITableView!
 	@IBOutlet private weak var textField: UITextField!
+	@IBOutlet private weak var bottomPin: NSLayoutConstraint!
 
 	private var messages = [Message]()
 
@@ -25,17 +26,18 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		let socket = Socket(
-			url: NSURL(string: "ws://localhost:4000/socket")!,
-			heartbeatInterval: 15.0
-		)!
+		guard let url = NSURL(string: "ws://localhost:4000/socket"),
+			socket = Socket(url: url, heartbeatInterval: 15.0) else {
+				return
+		}
 
 		socket.onOpen = {
 			print("socket open")
 		}
 
 		socket.onMessage = { result in
-//			print("received message: \(result)")
+			// Will print every single event that comes over the socket.
+			// print("received message: \(result)")
 		}
 
 		socket.onError = { error in
@@ -67,13 +69,14 @@ class ViewController: UIViewController {
 			do {
 				self.messages.append(try result.value())
 				self.tableView.reloadData()
+				let indexPath = NSIndexPath(forRow: self.messages.count.predecessor(), inSection: 0)
+				self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
 			} catch {
 				print(error)
 			}
 		}
 
 		channel.onPresenceDiff { [unowned self] result in
-			print(result)
 			do {
 				let diff = try result.value()
 
@@ -96,10 +99,42 @@ class ViewController: UIViewController {
 		}
 	}
 
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
+		NSNotificationCenter.defaultCenter().addObserverForName(
+			UIKeyboardWillChangeFrameNotification,
+			object: nil,
+			queue: NSOperationQueue.mainQueue(),
+			usingBlock: keyboardFrameWillChange
+		)
+	}
+
+	override func viewDidDisappear(animated: Bool) {
+		super.viewDidDisappear(animated)
+
+		NSNotificationCenter.defaultCenter().removeObserver(self)
+	}
+
+	private func keyboardFrameWillChange(notification: NSNotification) {
+		guard let userInfo = notification.userInfo,
+			animationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UInt,
+			animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSTimeInterval,
+			keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() else {
+				return
+		}
+
+		bottomPin.constant = keyboardFrame.origin.y == view.bounds.height ? 0.0 : keyboardFrame.height
+
+		UIView.animateWithDuration(
+			animationDuration,
+			delay: 0.0,
+			options: UIViewAnimationOptions.BeginFromCurrentState.union(UIViewAnimationOptions(rawValue: animationCurve)),
+			animations: {
+				self.view.layoutIfNeeded()
+			},
+			completion: nil
+		)
 	}
 
 	@IBAction private func sendButtonTapped(button: UIButton) {
