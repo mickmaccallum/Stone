@@ -17,9 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jrg-KW-Cn0">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="437"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jrg-KW-Cn0">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y38-NI-l0O" id="lx7-s1-RDH"/>
+                                    <outlet property="delegate" destination="Y38-NI-l0O" id="WPb-Ln-FP1"/>
+                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zd-G4-Lsh">
                                 <rect key="frame" x="0.0" y="554" width="600" height="46"/>
@@ -36,6 +40,9 @@
                                             <constraint firstAttribute="height" constant="30" id="kTh-f6-C5H"/>
                                         </constraints>
                                         <state key="normal" title="Send"/>
+                                        <connections>
+                                            <action selector="sendButtonTapped:" destination="Y38-NI-l0O" eventType="touchUpInside" id="tgO-lX-R92"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,10 +61,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="c7X-AU-IZz" firstAttribute="top" secondItem="9zd-G4-Lsh" secondAttribute="bottom" id="Cym-pU-aAd"/>
+                            <constraint firstItem="Jrg-KW-Cn0" firstAttribute="leading" secondItem="B44-Db-9L1" secondAttribute="leading" id="SFw-dq-zxE"/>
+                            <constraint firstAttribute="trailing" secondItem="Jrg-KW-Cn0" secondAttribute="trailing" id="TrN-7p-7dR"/>
                             <constraint firstItem="9zd-G4-Lsh" firstAttribute="leading" secondItem="B44-Db-9L1" secondAttribute="leading" id="b6j-X5-4sc"/>
+                            <constraint firstItem="9zd-G4-Lsh" firstAttribute="top" secondItem="Jrg-KW-Cn0" secondAttribute="bottom" id="iNg-f4-LmC"/>
                             <constraint firstAttribute="trailing" secondItem="9zd-G4-Lsh" secondAttribute="trailing" id="kaL-ZL-AWd"/>
+                            <constraint firstItem="Jrg-KW-Cn0" firstAttribute="top" secondItem="B44-Db-9L1" secondAttribute="top" id="wFl-yu-05t"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="Jrg-KW-Cn0" id="3D2-nn-2U3"/>
+                        <outlet property="textField" destination="Zy7-hY-PJQ" id="nWm-Kb-Q7p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHo-LQ-JEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
