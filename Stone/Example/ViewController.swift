@@ -30,9 +30,6 @@ class ViewController: UIViewController {
 			heartbeatInterval: 15.0
 		)!
 
-		channel.shouldTrackPresence = true
-		let params = [NSURLQueryItem(name: "user_id", value: "iPhone")]
-
 		socket.onOpen = {
 			print("socket open")
 		}
@@ -50,26 +47,52 @@ class ViewController: UIViewController {
 		}
 
 		socket.addChannel(channel)
+
+		let params = [NSURLQueryItem(name: "user_id", value: "iPhone")]
 		socket.connect(params)
+	}
+
+	private var connections = [PresenceChange]() {
+		didSet {
+			title = "\(connections.count) user(s) connected"
+		}
 	}
 
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 
+		channel.shouldTrackPresence = true
+
 		channel.onEvent(Event.Custom("new:msg")) { [unowned self] result in
 			do {
 				self.messages.append(try result.value())
+				self.tableView.reloadData()
 			} catch {
 				print(error)
 			}
 		}
 
-		channel.onPresenceDiff { (result) in
+		channel.onPresenceDiff { [unowned self] result in
 			print(result)
+			do {
+				let diff = try result.value()
+
+				self.connections = self.connections.filter {
+					!diff.leaves.contains($0)
+				}
+
+				self.connections.appendContentsOf(diff.joins)
+			} catch {
+				print(error)
+			}
 		}
 
-		channel.onPresenceState { (result) in
-			print(result)
+		channel.onPresenceState { [unowned self] result in
+			do {
+				self.connections = try result.value()
+			} catch {
+				print(error)
+			}
 		}
 	}
 
@@ -82,7 +105,7 @@ class ViewController: UIViewController {
 	@IBAction private func sendButtonTapped(button: UIButton) {
 		let payload = [
 			"body": textField.text ?? "",
-			"user": "iPhone"
+			"user": UIDevice.currentDevice().name
 		]
 
 		let message = Message(
