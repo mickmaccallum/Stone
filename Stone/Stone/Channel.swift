@@ -9,10 +9,17 @@
 import Foundation
 import SwiftWebSocket
 import Unbox
+
+/**
+Defines a Channel for communicating with a given topic on your Phoenix server.
+*/
 public final class Channel: Hashable, Equatable {
 	public let topic: String
 
-	public typealias Callback = (result: Result<Message>) -> Void
+	public typealias ResultCallback = (result: Result<Message>) -> Void
+	public typealias EventCallback = (message: Message) -> Void
+
+	/// The state of the connection to this Channel.
 	public private(set) var state: ChannelState = .Closed
 
 	public var shouldTrackPresence = false
@@ -94,10 +101,18 @@ public final class Channel: Hashable, Equatable {
 							name: $0.0,
 							metas: ($0.1 as? [String: AnyObject]) ?? [String: AnyObject]()
 						)
+					}
+				)
+			)
+		case .Diff:
+			do {
+				presenceDiffCallback?(
+					result: .Success(
+						try Unbox(payload)
 					)
-				} catch {
-					presenceDiffCallback?(result: .Failure(Error.InvalidJSON))
-				}
+				)
+			} catch {
+				presenceDiffCallback?(result: .Failure(Error.InvalidJSON))
 			}
 		}
 	}
@@ -149,12 +164,18 @@ public final class Channel: Hashable, Equatable {
 
 	private var presenceDiffCallback: ((result: Result<PresenceDiff>) -> Void)?
 
+	/**
+	Registers a callback to be received whenever a presence diff update occurs.
+	*/
 	public func onPresenceDiff(callback: (result: Result<PresenceDiff>) -> Void) {
 		presenceDiffCallback = callback
 	}
 
 	private var presenceStateCallback: ((result: Result<Array<PresenceChange>>) -> Void)?
 
+	/**
+	Registers a callback to be received whenever a presence state update occurs.
+	*/
 	public func onPresenceState(callback: (result: Result<Array<PresenceChange>>) -> Void) {
 		presenceStateCallback = callback
 	}
@@ -182,9 +203,7 @@ public final class Channel: Hashable, Equatable {
 	}
 
 	/**
-	<#Description#>
-
-	- parameter completion:	<#completion description#>
+	Sends a join message to the Channel's topic.
 	*/
 	public func join() {
 		guard state == .Closed || state == ChannelState.Errored else {
