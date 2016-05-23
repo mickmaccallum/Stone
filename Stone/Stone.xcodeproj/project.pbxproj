@@ -17,7 +17,7 @@
 		004862F81CEE961300A42053 /* Unbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00FF9D021CEE4D370040885A /* Unbox.framework */; };
 		004862F91CEE961300A42053 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00986E3E1CEAB85E00CEE446 /* Wrap.framework */; };
 		004862FA1CEE962900A42053 /* Stone.h in Headers */ = {isa = PBXBuildFile; fileRef = 00FF9D0F1CEE7AE00040885A /* Stone.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0063A60E1CF0F28E0080196D /* Presence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063A60D1CF0F28E0080196D /* Presence.swift */; };
+		0063A60E1CF0F28E0080196D /* PresenceDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063A60D1CF0F28E0080196D /* PresenceDiff.swift */; };
 		0063A6101CF16DF60080196D /* EventRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063A60F1CF16DF60080196D /* EventRef.swift */; };
 		0071E5F51CEEA3F800C1D41C /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071E5F41CEEA3F800C1D41C /* Error.swift */; };
 		0071E5F71CEEE6F100C1D41C /* ChannelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0071E5F61CEEE6F100C1D41C /* ChannelState.swift */; };
@@ -53,7 +53,7 @@
 		002D5A681CDEF247006FDA24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		002D5A6A1CDEF247006FDA24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		002D5A6E1CDEF3F6006FDA24 /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/iOS/SwiftWebSocket.framework; sourceTree = "<group>"; };
-		0063A60D1CF0F28E0080196D /* Presence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presence.swift; sourceTree = "<group>"; };
+		0063A60D1CF0F28E0080196D /* PresenceDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceDiff.swift; sourceTree = "<group>"; };
 		0063A60F1CF16DF60080196D /* EventRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRef.swift; sourceTree = "<group>"; };
 		0071E5F41CEEA3F800C1D41C /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Stone/Error.swift; sourceTree = "<group>"; };
 		0071E5F61CEEE6F100C1D41C /* ChannelState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelState.swift; path = Stone/ChannelState.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 				0063A60F1CF16DF60080196D /* EventRef.swift */,
 				00FF9D0D1CEE7AE00040885A /* Extensions.swift */,
 				00FF9D0E1CEE7AE00040885A /* Message.swift */,
-				0063A60D1CF0F28E0080196D /* Presence.swift */,
+				0063A60D1CF0F28E0080196D /* PresenceDiff.swift */,
 				00FF9D111CEE7AE00040885A /* QueryStringConvertible.swift */,
 				00FF9D121CEE7AE00040885A /* Result.swift */,
 				00FF9D131CEE7AE00040885A /* Socket.swift */,
@@ -329,7 +329,7 @@
 			files = (
 				00FF9D1C1CEE7AE00040885A /* Socket.swift in Sources */,
 				00FF9D151CEE7AE00040885A /* Event.swift in Sources */,
-				0063A60E1CF0F28E0080196D /* Presence.swift in Sources */,
+				0063A60E1CF0F28E0080196D /* PresenceDiff.swift in Sources */,
 				0071E5F71CEEE6F100C1D41C /* ChannelState.swift in Sources */,
 				00FF9D171CEE7AE00040885A /* Message.swift in Sources */,
 				00FF9D161CEE7AE00040885A /* Extensions.swift in Sources */,
