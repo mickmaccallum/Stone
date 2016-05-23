@@ -15,9 +15,32 @@ public struct Message {
 	public let event: Event
 	public let payload: [String: AnyObject]
 
-	private static var reference: UInt = 0
+	private static var _reference = UInt.max
+	private static var reference: UInt {
+		get {
+			let (new, overflowed) = UInt.addWithOverflow(Message._reference, 1)
 
-	public init<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType, event: Event, payload: [String: AnyObject] = [:], ref: String? = nil) {
+			if overflowed {
+				_reference = 0
+			} else {
+				_reference = new
+			}
+
+			return _reference
+		}
+	}
+
+	/**
+	<#Description#>
+
+	- parameter topic:		<#topic description#>
+	- parameter event:		<#event description#>
+	- parameter payload:	<#payload description#>
+	- parameter ref:			<#ref description#>
+
+	- returns: <#return value description#>
+	*/
+	public init<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType, event: Event, payload: [String: AnyObject] = [:], ref: String? = Message.reference.description) {
 		self.init(topic: topic.rawValue, event: event, payload: payload, ref: ref)
 	}
 
@@ -25,14 +48,7 @@ public struct Message {
 		self.topic		= topic
 		self.event		= event
 		self.payload	= payload
-
-		if let ref = ref {
-			self.ref = ref
-		} else {
-			let currentRef = String(format: "%zd", Message.reference)
-			Message.reference = Message.reference.successor()
-			self.ref = currentRef
-		}
+		self.ref		= ref ?? String(format: "%lu", Message.reference)
 	}
 }
 
