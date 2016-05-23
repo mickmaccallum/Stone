@@ -80,9 +80,29 @@ public final class Channel: Hashable, Equatable {
 		}
 
 		if let presenceEvent = Event.PhoenixEvent.PresenceEvent(rawValue: event.rawValue) where shouldTrackPresence {
-			print(presenceEvent)
-			print(ref)
-			print(payload)
+			switch presenceEvent {
+			case .State:
+				presenceStateCallback?(
+					result: Result.Success(
+						message.payload.map {
+							PresenceChange(
+								name: $0.0,
+								metas: ($0.1 as? [String: AnyObject]) ?? [String: AnyObject]()
+							)
+						}
+					)
+				)
+			case .Diff:
+				do {
+					presenceDiffCallback?(
+						result: .Success(
+							try Unbox(message.payload)
+						)
+					)
+				} catch {
+					presenceDiffCallback?(result: .Failure(Error.InvalidJSON))
+				}
+			}
 		}
 	}
 
@@ -129,6 +149,18 @@ public final class Channel: Hashable, Equatable {
 	*/
 	public func offEvent(event: Event) -> ResultCallback? {
 		return eventBindings.removeValueForKey(event)
+	}
+
+	private var presenceDiffCallback: ((result: Result<PresenceDiff>) -> Void)?
+
+	public func onPresenceDiff(callback: (result: Result<PresenceDiff>) -> Void) {
+		presenceDiffCallback = callback
+	}
+
+	private var presenceStateCallback: ((result: Result<Array<PresenceChange>>) -> Void)?
+
+	public func onPresenceState(callback: (result: Result<Array<PresenceChange>>) -> Void) {
+		presenceStateCallback = callback
 	}
 
 	/**
