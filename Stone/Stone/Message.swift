@@ -44,7 +44,17 @@ public struct Message {
 		self.init(topic: topic.rawValue, event: event, payload: payload, ref: ref)
 	}
 
-	public init(topic: String, event: Event, payload: [String: AnyObject] = [:], ref: String? = nil) {
+	/**
+	<#Description#>
+
+	- parameter topic:		<#topic description#>
+	- parameter event:		<#event description#>
+	- parameter payload:	<#payload description#>
+	- parameter ref:			<#ref description#>
+
+	- returns: <#return value description#>
+	*/
+	public init(topic: String, event: Event, payload: [String: AnyObject] = [:], ref: String? = Message.reference.description) {
 		self.topic		= topic
 		self.event		= event
 		self.payload	= payload
