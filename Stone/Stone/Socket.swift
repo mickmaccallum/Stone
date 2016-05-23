@@ -95,20 +95,10 @@ public final class Socket {
 		self.url = url
 	}
 
-	/**
-	<#Description#>
-
-	- parameter params:	<#params description#>
-	*/
 	public func connect<T: QueryStringConvertible>(params: [T: T]) {
 		connect(params.toQueryItems())
 	}
 
-	/**
-	<#Description#>
-
-	- parameter params:	<#params description#>
-	*/
 	public func connect(params: [NSURLQueryItem]? = nil) {
 		lastParams = params
 		socket = WebSocket(url: url.urlByAppendingQueryItems(params) ?? url)

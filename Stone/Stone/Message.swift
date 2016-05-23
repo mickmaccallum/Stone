@@ -9,8 +9,11 @@
 import Foundation
 import Unbox
 
+/**
+Represents a message to be sent over a Channel. Includes fields for reference, topic, event, and a payload object.
+*/
 public struct Message {
-	public let ref: String
+	public let ref: String?
 	public let topic: String
 	public let event: Event
 	public let payload: [String: AnyObject]
@@ -30,30 +33,10 @@ public struct Message {
 		}
 	}
 
-	/**
-	<#Description#>
-
-	- parameter topic:		<#topic description#>
-	- parameter event:		<#event description#>
-	- parameter payload:	<#payload description#>
-	- parameter ref:			<#ref description#>
-
-	- returns: <#return value description#>
-	*/
 	public init<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType, event: Event, payload: [String: AnyObject] = [:], ref: String? = Message.reference.description) {
 		self.init(topic: topic.rawValue, event: event, payload: payload, ref: ref)
 	}
 
-	/**
-	<#Description#>
-
-	- parameter topic:		<#topic description#>
-	- parameter event:		<#event description#>
-	- parameter payload:	<#payload description#>
-	- parameter ref:			<#ref description#>
-
-	- returns: <#return value description#>
-	*/
 	public init(topic: String, event: Event, payload: [String: AnyObject] = [:], ref: String? = Message.reference.description) {
 		self.topic		= topic
 		self.event		= event
