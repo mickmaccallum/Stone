@@ -40,7 +40,7 @@ The full list of built in events is as follows.
 - Presence
 - Custom
 */
-public enum Event: RawRepresentable, Hashable, Equatable {
+public enum Event: RawRepresentable, Hashable, Equatable, CustomStringConvertible {
 	public enum PhoenixEvent: String {
 		case Join		= "phx_join"
 		case Reply		= "phx_reply"
@@ -58,6 +58,10 @@ public enum Event: RawRepresentable, Hashable, Equatable {
 	case Phoenix(PhoenixEvent)
 	case Presence(PhoenixEvent.PresenceEvent)
 	case Custom(String)
+
+	public var description: String {
+		return rawValue
+	}
 
 	public var isDefault: Bool {
 		return PhoenixEvent(rawValue: rawValue) != nil
