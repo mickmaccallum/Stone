@@ -8,7 +8,13 @@
 
 import Foundation
 
-public struct PresenceChange {
-	let name: String
-	let metas: [String: AnyObject]
+public struct PresenceChange: Equatable {
+	public let name: String
+	public let metas: [String: AnyObject]
+}
+
+public func == (lhs: PresenceChange, rhs: PresenceChange) -> Bool {
+	return lhs.name == rhs.name && NSDictionary(
+		dictionary: lhs.metas
+	).isEqualToDictionary(rhs.metas)
 }
