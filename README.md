@@ -81,27 +81,33 @@ channel.onEvent(Event.Custom("new:msg")) { (result: Result<Message>) in
 }
 ```
 
-channel.onPresenceDiff { [unowned self] result in
+If desired, Stone is capable of tracking Presence information in Channels. By default, this is disabled, but can be enabled as easily as setting the `shouldTrackPresence` instance variable.
+
+```{swift}
+channel.shouldTrackPresence = true
+```
+
+Tracking Presence changes can be done by setting the Presence related callbacks on your Channel.
+
+```{swift}
+channel.onPresenceDiff { (result: Result<PresenceDiff> in
   do {
-    let diff = try result.value()
-
-    self.connections = self.connections.filter {
-      !diff.leaves.contains($0)
-    }
-
-    self.connections.appendContentsOf(diff.joins)
+    let diff: PresenceDiff = try result.value()
+    let leaves: [PresenceChange] = diff.leaves
+    let joins: [PresenceChange] = diff.joins
   } catch {
     print(error)
   }
 }
 
-channel.onPresenceState { [unowned self] result in
+channel.onPresenceState { (result: Result<Array<PresenceChange>>) in
   do {
-    self.connections = try result.value()
+    let connections: [PresenceChange] = try result.value()
   } catch {
     print(error)
   }
 }
+```
 
 socket.addChannel(channel)
 ```
