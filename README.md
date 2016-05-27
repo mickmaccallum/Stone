@@ -170,3 +170,7 @@ let presenceEvent = Event.Presence(.Diff)
 #### Contributing
 
 As I stated earlier, I made this framework to support my own use, but would love for it to support yours as well. In the spirit of this, if I borked something, or you can think of a cool feature that Stone is missing, please raise an issue and I'll try to incorporate it. If you'd like to help out, pull requests are more than welcome. All I ask is that you try to keep your code style the same as is used in the rest of Stone.
+
+#### License
+
+The MIT License (MIT). See [LICENSE.md](https://github.com/Tethr-Technologies-Inc/Stone/blob/master/LICENSE.md) for more information.
