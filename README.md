@@ -50,7 +50,9 @@ socket.onClose = { (code: Int, reason: String, clean: Bool) in
 }
 ```
 
-After your Socket is set up, you can optionally provide its connect method with parameters to be included in the URL's query when a connection is made. The below example uses `Array<NSURLQueryItem>`, but there is another overload available that takes `Dictionary<QueryStringConvertible, QueryStringConvertible>` to force all parameters to provide an implementation of `QueryStringConvertible` to escape themselves for a query string.
+After your Socket is set up, you can optionally provide its connect method with parameters to be included in the URL's query when a connection is made. The below example uses `Array<NSURLQueryItem>`, but there is another overload available that takes `Dictionary<QueryStringConvertible, QueryStringConvertible>` to force all parameters to provide an implementation of [QueryStringConvertible](https://github.com/Tethr-Technologies-Inc/Stone/blob/master/Stone/Stone/QueryStringConvertible.swift) to escape themselves for a query string.
+
+Since stone provides a default implementation of this protocol for `String`, you can make use of the [toQueryItems()](https://github.com/Tethr-Technologies-Inc/Stone/blob/master/Stone/Stone/Extensions.swift#L25) instance method attached to all `Dictionary<String, String>`s to convert them into `Array<NSURLQueryItem>`.
 
 ```{swift}
 let params = [NSURLQueryItem(name: "user_id", value: "iPhone")]
