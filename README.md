@@ -1,6 +1,6 @@
 # Stone
 
-A Swift framework for using Phoenix server channels via Web Sockets.
+A Swift framework for connecting to [Phoenix](https://www.phoenixframework.org) Channels in your iOS/OS X app.
 
 You know, two birds, one Stone?...
 
