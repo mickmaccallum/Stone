@@ -115,6 +115,31 @@ When you're done configuring your Channel, just add it to your Socket. If you've
 socket.addChannel(channel)
 ```
 
+#### Sending Messages
+
+Once your Socket is connected, and you've joined a Channel, creating and sending Messages is quite simple. Here's an example.
+
+```{swift}
+let payload = [
+  "body": someTextField.text ?? "",
+  "user": UIDevice.currentDevice().name
+]
+
+let message = Message(
+  topic: MyTopics.Lobby,
+  event: Event.Custom("new:msg"),
+  payload: payload
+)
+
+channel.sendMessage(message) { (result: Result<Message>) in
+  do {
+    let callbackMessage = try result.value()
+  } catch {
+    print(error)
+  }
+}
+```
+
 #### Working With Events
 
 In an attempt to keep all event handling as type safe as possible, Stone provides an [Event](https://github.com/Tethr-Technologies-Inc/Stone/blob/master/Stone/Stone/Event.swift#L43) enum to try to wrap both default and custom events. Some examples of the difference Event types that can be created are as follows.
