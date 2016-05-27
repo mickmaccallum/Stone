@@ -71,18 +71,15 @@ Channels are defined on a Socket by Socket basis, and are considered to be uniqu
 let channel = Channel(topic: MyTopics.Lobby)
 ```
 
-channel.shouldTrackPresence = true
-
-channel.onEvent(Event.Custom("new:msg")) { [unowned self] result in
+```{swift}
+channel.onEvent(Event.Custom("new:msg")) { (result: Result<Message>) in
   do {
-    self.messages.append(try result.value())
-    self.tableView.reloadData()
-    let indexPath = NSIndexPath(forRow: self.messages.count.predecessor(), inSection: 0)
-    self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+    let message: Message = try result.value()
   } catch {
     print(error)
   }
 }
+```
 
 channel.onPresenceDiff { [unowned self] result in
   do {
