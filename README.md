@@ -76,6 +76,8 @@ Channels are defined on a Socket by Socket basis, and are considered to be uniqu
 let channel = Channel(topic: MyTopics.Lobby)
 ```
 
+Once you've created a channel, you can use its `onEvent` method to get callbacks when different events occur on the given Channel.
+
 ```{swift}
 channel.onEvent(Event.Custom("new:msg")) { (result: Result<Message>) in
   do {
@@ -84,6 +86,12 @@ channel.onEvent(Event.Custom("new:msg")) { (result: Result<Message>) in
     print(error)
   }
 }
+```
+
+To stop receiving callbacks for a given Event, use `offEvent()`.
+
+```{swift}
+channel.offEvent(Event.Custom("new:msg"))
 ```
 
 If desired, Stone is capable of tracking Presence information in Channels. By default, this is disabled, but can be enabled as easily as setting the `shouldTrackPresence` instance variable.
