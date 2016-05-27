@@ -2,10 +2,6 @@
 
 A Swift framework for connecting to [Phoenix](https://www.phoenixframework.org) Channels in your iOS/OS X app.
 
-You know, two birds, one Stone?...
-
-This will be built within the next couple weeks. Check back soon!
-
 #### Why Build This?
 
 There are already a few options available for working with Phoenix Channels, such as [ObjCPhoenixClient](https://github.com/livehelpnow/ObjCPhoenixClient) and [SwiftPhoenixClient](https://github.com/davidstump/SwiftPhoenixClient). Both of these are great, and in fact, Stone took a lot of inspiration from the design of [ObjCPhoenixClient](https://github.com/livehelpnow/ObjCPhoenixClient). But I felt both of these could be made to take advantage of the additional type safety that Swift provides. Because of this, Stone attempts to provide overloads for using custom enums in place of Strings for things like Channel topics and event handlers. It also makes use of `Result<T>` enums for things like callbacks for events.
