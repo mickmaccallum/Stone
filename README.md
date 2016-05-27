@@ -65,10 +65,11 @@ If you want to reconnect, using the parameters supplied during the first connect
 
 #### Working With Channels
 
-
+Channels are defined on a Socket by Socket basis, and are considered to be unique by their topic. To create a Channel, all you have to do is initialize one, passing the topic as input. This topic can either be a String, or an Enum whose RawType is String.
 
 ```{swift}
 let channel = Channel(topic: MyTopics.Lobby)
+```
 
 channel.shouldTrackPresence = true
 
