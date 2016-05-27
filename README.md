@@ -21,6 +21,14 @@ guard let url = NSURL(string: "ws://localhost:4000/socket"),
 }
 ```
 
+Sockets were build to require minimal customization, but you can change the following settings if desired.
+
+```{swift}
+socket.shouldReconnectOnError = false // Default is true
+socket.shouldAutoJoinChannels = false // Default is true
+socket.reconnectInterval = 10.0 // Default is 5.0 (units are seconds)
+```
+
 To receive callbacks for any Socket level events, you can utilize the following hooks.
 
 ```{swift}
