@@ -120,6 +120,10 @@ When you're done configuring your Channel, just add it to your Socket. If you've
 socket.addChannel(channel)
 ```
 
+#### PresenceChange
+
+PresenceChange objects are a simple implementation detail of Stone. They're nothing more than structs containing the `name` of the change, and its associated `metas` Dictionary. When a Presence state change occurs, you'll be given an Array of these, and when a diff occurs, you'll get a PresenceDiff object, which contains two Arrays of PresenceChanges representing the `joins`, and `leaves` that happened during this diff.
+
 #### Sending Messages
 
 Once your Socket is connected, and you've joined a Channel, creating and sending Messages is quite simple. Here's an example.
