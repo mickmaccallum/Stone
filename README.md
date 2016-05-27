@@ -36,16 +36,16 @@ socket.onOpen = {
   print("socket open")
 }
 
-socket.onMessage = { result in
-  // Will print every single event that comes over the socket.
+socket.onMessage = { (result: Result<Message>) in
+  // Will print every single message event that comes over the socket.
   // print("received message: \(result)")
 }
 
-socket.onError = { error in
+socket.onError = { (error: NSError) in
   print("error received: \(error)")
 }
 
-socket.onClose = { code, reason, clean in
+socket.onClose = { (code: Int, reason: String, clean: Bool) in
   print("socket closed - code: \(code), reason: \(reason), clean: \(clean)")
 }
 ```
