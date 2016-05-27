@@ -109,6 +109,9 @@ channel.onPresenceState { (result: Result<Array<PresenceChange>>) in
 }
 ```
 
+When you're done configuring your Channel, just add it to your Socket. If you've left `socket.shouldAutoJoinChannels` enabled, then you've done. If you've disabled it, you'll need to explicitly call `channel.join()` when you've ready to join the Channel's topic.
+
+```{swift}
 socket.addChannel(channel)
 ```
 
