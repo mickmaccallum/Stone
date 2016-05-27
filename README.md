@@ -50,7 +50,7 @@ socket.onClose = { (code: Int, reason: String, clean: Bool) in
 }
 ```
 
-After your Socket is set up, you can optionally provide its connect method with parameters to be included in the URL's query when a connection is made.
+After your Socket is set up, you can optionally provide its connect method with parameters to be included in the URL's query when a connection is made. The below example uses `Array<NSURLQueryItem>`, but there is another overload available that takes `Dictionary<QueryStringConvertible, QueryStringConvertible>` to force all parameters to provide an implementation of `QueryStringConvertible` to escape themselves for a query string.
 
 ```{swift}
 let params = [NSURLQueryItem(name: "user_id", value: "iPhone")]
