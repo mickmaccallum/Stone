@@ -1,6 +1,6 @@
 # Stone
 
-A Swift framework for connecting to [Phoenix](https://www.phoenixframework.org) Channels in your iOS/OS X app.
+A Swift framework for connecting to [Phoenix](https://www.phoenixframework.org) Channels in your iOS app.
 
 #### Why Build This?
 
