@@ -177,7 +177,7 @@ Add the following line to your Cartfile:
 github "Tethr-Technologies-Inc/Stone" ~> 0.1.8
 ```
 
-Check [Carthage's README](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application)
+Check [Carthage's README](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos)
 for up to date installation instructions.
 
 #### Contributing
