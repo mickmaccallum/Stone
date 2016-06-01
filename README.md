@@ -167,6 +167,19 @@ let customEvent = Event.Custom("new:msg")
 let presenceEvent = Event.Presence(.Diff)
 ```
 
+#### Installation (currently iOS only)
+
+##### [Carthage](https://github.com/Carthage/Carthage)
+
+Add the following line to your Cartfile:
+
+```
+github "Tethr-Technologies-Inc/Stone" ~> 0.1.8
+```
+
+Check [Carthage's README](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application)
+for up to date installation instructions.
+
 #### Contributing
 
 As I stated earlier, I made this framework to support my own use, but would love for it to support yours as well. In the spirit of this, if I borked something, or you can think of a cool feature that Stone is missing, please raise an issue and I'll try to incorporate it. If you'd like to help out, pull requests are more than welcome. All I ask is that you try to keep your code style the same as is used in the rest of Stone.
