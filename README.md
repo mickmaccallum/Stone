@@ -4,7 +4,7 @@ A Swift framework for connecting to [Phoenix](https://www.phoenixframework.org) 
 
 #### Why Build This?
 
-There are already a few options available for working with Phoenix Channels, such as [ObjCPhoenixClient](https://github.com/livehelpnow/ObjCPhoenixClient) and [SwiftPhoenixClient](https://github.com/davidstump/SwiftPhoenixClient). Both of these are great, and in fact, Stone took a lot of inspiration from the design of [ObjCPhoenixClient](https://github.com/livehelpnow/ObjCPhoenixClient). But I felt both of these could be made to take advantage of the additional type safety that Swift provides. Because of this, Stone attempts to provide overloads for using custom enums in place of Strings for things like Channel topics and event handlers. It also makes use of `Result<T>` enums for things like callbacks for events. Additionally, Stone has built in support for Presence tracking (added in Phoenix 1.2).
+There are already a few options available for working with Phoenix Channels, such as [ObjCPhoenixClient](https://github.com/livehelpnow/ObjCPhoenixClient) and [SwiftPhoenixClient](https://github.com/davidstump/SwiftPhoenixClient). Both of these are great, and in fact, Stone took a lot of inspiration from the design of [ObjCPhoenixClient](https://github.com/livehelpnow/ObjCPhoenixClient). But I felt both of these could be made to take advantage of the additional type safety that Swift provides. Because of this, Stone attempts to provide overloads for using custom enums in place of Strings for things like Channel topics and event handlers. It also makes use of `Result<T>` enums for things like callbacks for events. Additionally, Stone has built in support for Presence tracking (added in [Phoenix 1.2](https://github.com/phoenixframework/phoenix/releases/tag/v1.2.0-rc.0)).
 
 #### Why Call it Stone?
 
@@ -55,9 +55,9 @@ socket.onClose = { (code: Int, reason: String, clean: Bool) in
 }
 ```
 
-After your Socket is set up, you can optionally provide its connect method with parameters to be included in the URL's query when a connection is made. The below example uses `Array<NSURLQueryItem>`, but there is another overload available that takes `Dictionary<QueryStringConvertible, QueryStringConvertible>` to force all parameters to provide an implementation of [QueryStringConvertible](https://github.com/Tethr-Technologies-Inc/Stone/blob/master/Stone/Stone/QueryStringConvertible.swift) to escape themselves for a query string.
+After your Socket is set up, you can optionally provide its connect method with parameters to be included in the URL's query when a connection is made. The below example uses `Array<NSURLQueryItem>`, but there is another overload available that takes `Dictionary<QueryStringConvertible, QueryStringConvertible>` to force all parameters to provide an implementation of [QueryStringConvertible](https://github.com/Tethr-Technologies-Inc/Stone/blob/master/Sources/QueryStringConvertible.swift) to escape themselves for a query string.
 
-Since stone provides a default implementation of this protocol for `String`, you can make use of the [toQueryItems()](https://github.com/Tethr-Technologies-Inc/Stone/blob/master/Stone/Stone/Extensions.swift#L25) instance method attached to all `Dictionary<String, String>`s to convert them into `Array<NSURLQueryItem>`.
+Since stone provides a default implementation of this protocol for `String`, you can make use of the [toQueryItems()](https://github.com/Tethr-Technologies-Inc/Stone/blob/master/Sources/Extensions.swift#L25) instance method attached to all `Dictionary<String, String>`s to convert them into `Array<NSURLQueryItem>`.
 
 ```{swift}
 let params = [NSURLQueryItem(name: "user_id", value: "iPhone")]
@@ -159,7 +159,7 @@ channel.sendMessage(message) { (result: Result<Message>) in
 
 #### Working With Events
 
-In an attempt to keep all event handling as type safe as possible, Stone provides an [Event](https://github.com/Tethr-Technologies-Inc/Stone/blob/master/Stone/Stone/Event.swift#L43) enum to try to wrap both default and custom events. Some examples of the difference Event types that can be created are as follows.
+In an attempt to keep all event handling as type safe as possible, Stone provides an [Event](https://github.com/Tethr-Technologies-Inc/Stone/blob/master/Sources/Event.swift#L43) enum to try to wrap both default and custom events. Some examples of the difference Event types that can be created are as follows.
 
 ```{swift}
 let phoenixEvent = Event.Phoenix(.Join)
