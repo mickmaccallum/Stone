@@ -19,10 +19,18 @@
 		0081A7331CFBBC6F00F33FB0 /* QueryStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7271CFBBC6F00F33FB0 /* QueryStringConvertible.swift */; };
 		0081A7341CFBBC6F00F33FB0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7281CFBBC6F00F33FB0 /* Result.swift */; };
 		0081A7351CFBBC6F00F33FB0 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7291CFBBC6F00F33FB0 /* Socket.swift */; };
-		0081A7381CFBBD1200F33FB0 /* Info-iOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0081A7371CFBBD1200F33FB0 /* Info-iOS.plist */; };
 		0081A73D1CFBBDCF00F33FB0 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0081A73A1CFBBDCF00F33FB0 /* SwiftWebSocket.framework */; };
 		0081A73E1CFBBDCF00F33FB0 /* Unbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0081A73B1CFBBDCF00F33FB0 /* Unbox.framework */; };
 		0081A73F1CFBBDCF00F33FB0 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0081A73C1CFBBDCF00F33FB0 /* Wrap.framework */; };
+		0081A7601CFBC36B00F33FB0 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0081A75D1CFBC36B00F33FB0 /* SwiftWebSocket.framework */; };
+		0081A7611CFBC36B00F33FB0 /* Unbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0081A75E1CFBC36B00F33FB0 /* Unbox.framework */; };
+		0081A7621CFBC36B00F33FB0 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0081A75F1CFBC36B00F33FB0 /* Wrap.framework */; };
+		0081A7671CFBC3DA00F33FB0 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0081A7641CFBC3DA00F33FB0 /* SwiftWebSocket.framework */; };
+		0081A7681CFBC3DA00F33FB0 /* Unbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0081A7651CFBC3DA00F33FB0 /* Unbox.framework */; };
+		0081A7691CFBC3DA00F33FB0 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0081A7661CFBC3DA00F33FB0 /* Wrap.framework */; };
+		0081A7931CFBC8F400F33FB0 /* Stone iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 0081A7901CFBC8F400F33FB0 /* Stone iOS.h */; };
+		0081A7981CFBC8F400F33FB0 /* Stone OS X.h in Headers */ = {isa = PBXBuildFile; fileRef = 0081A7911CFBC8F400F33FB0 /* Stone OS X.h */; };
+		0081A79A1CFBC8F400F33FB0 /* Stone tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 0081A7921CFBC8F400F33FB0 /* Stone tvOS.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +51,17 @@
 		0081A73A1CFBBDCF00F33FB0 /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/iOS/SwiftWebSocket.framework; sourceTree = "<group>"; };
 		0081A73B1CFBBDCF00F33FB0 /* Unbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Unbox.framework; path = Carthage/Build/iOS/Unbox.framework; sourceTree = "<group>"; };
 		0081A73C1CFBBDCF00F33FB0 /* Wrap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wrap.framework; path = Carthage/Build/iOS/Wrap.framework; sourceTree = "<group>"; };
+		0081A7471CFBC29F00F33FB0 /* Stone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Stone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0081A7541CFBC2EC00F33FB0 /* Stone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Stone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0081A75D1CFBC36B00F33FB0 /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/tvOS/SwiftWebSocket.framework; sourceTree = "<group>"; };
+		0081A75E1CFBC36B00F33FB0 /* Unbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Unbox.framework; path = Carthage/Build/tvOS/Unbox.framework; sourceTree = "<group>"; };
+		0081A75F1CFBC36B00F33FB0 /* Wrap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wrap.framework; path = Carthage/Build/tvOS/Wrap.framework; sourceTree = "<group>"; };
+		0081A7641CFBC3DA00F33FB0 /* SwiftWebSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftWebSocket.framework; path = Carthage/Build/Mac/SwiftWebSocket.framework; sourceTree = "<group>"; };
+		0081A7651CFBC3DA00F33FB0 /* Unbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Unbox.framework; path = Carthage/Build/Mac/Unbox.framework; sourceTree = "<group>"; };
+		0081A7661CFBC3DA00F33FB0 /* Wrap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wrap.framework; path = Carthage/Build/Mac/Wrap.framework; sourceTree = "<group>"; };
+		0081A7901CFBC8F400F33FB0 /* Stone iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Stone iOS.h"; sourceTree = "<group>"; };
+		0081A7911CFBC8F400F33FB0 /* Stone OS X.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Stone OS X.h"; sourceTree = "<group>"; };
+		0081A7921CFBC8F400F33FB0 /* Stone tvOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Stone tvOS.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,16 +75,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0081A7431CFBC29F00F33FB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0081A7601CFBC36B00F33FB0 /* SwiftWebSocket.framework in Frameworks */,
+				0081A7611CFBC36B00F33FB0 /* Unbox.framework in Frameworks */,
+				0081A7621CFBC36B00F33FB0 /* Wrap.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0081A7501CFBC2EC00F33FB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0081A7671CFBC3DA00F33FB0 /* SwiftWebSocket.framework in Frameworks */,
+				0081A7681CFBC3DA00F33FB0 /* Unbox.framework in Frameworks */,
+				0081A7691CFBC3DA00F33FB0 /* Wrap.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		0081A7081CFBBB6900F33FB0 = {
 			isa = PBXGroup;
 			children = (
+				0081A7641CFBC3DA00F33FB0 /* SwiftWebSocket.framework */,
+				0081A7651CFBC3DA00F33FB0 /* Unbox.framework */,
+				0081A7661CFBC3DA00F33FB0 /* Wrap.framework */,
+				0081A75D1CFBC36B00F33FB0 /* SwiftWebSocket.framework */,
+				0081A75E1CFBC36B00F33FB0 /* Unbox.framework */,
+				0081A75F1CFBC36B00F33FB0 /* Wrap.framework */,
 				0081A73A1CFBBDCF00F33FB0 /* SwiftWebSocket.framework */,
 				0081A73B1CFBBDCF00F33FB0 /* Unbox.framework */,
 				0081A73C1CFBBDCF00F33FB0 /* Wrap.framework */,
 				0081A7361CFBBC9C00F33FB0 /* Configuration */,
+				0081A7901CFBC8F400F33FB0 /* Stone iOS.h */,
+				0081A7911CFBC8F400F33FB0 /* Stone OS X.h */,
+				0081A7921CFBC8F400F33FB0 /* Stone tvOS.h */,
 				0081A71D1CFBBC5E00F33FB0 /* Sources */,
 				0081A7151CFBBC4700F33FB0 /* Products */,
 			);
@@ -75,6 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				0081A7141CFBBC4700F33FB0 /* Stone.framework */,
+				0081A7471CFBC29F00F33FB0 /* Stone.framework */,
+				0081A7541CFBC2EC00F33FB0 /* Stone.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,6 +163,23 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0081A7931CFBC8F400F33FB0 /* Stone iOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0081A7441CFBC29F00F33FB0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0081A79A1CFBC8F400F33FB0 /* Stone tvOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0081A7511CFBC2EC00F33FB0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0081A7981CFBC8F400F33FB0 /* Stone OS X.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +205,44 @@
 			productReference = 0081A7141CFBBC4700F33FB0 /* Stone.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		0081A7461CFBC29F00F33FB0 /* Stone tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0081A74C1CFBC29F00F33FB0 /* Build configuration list for PBXNativeTarget "Stone tvOS" */;
+			buildPhases = (
+				0081A7421CFBC29F00F33FB0 /* Sources */,
+				0081A7431CFBC29F00F33FB0 /* Frameworks */,
+				0081A7441CFBC29F00F33FB0 /* Headers */,
+				0081A7451CFBC29F00F33FB0 /* Resources */,
+				0081A75C1CFBC31A00F33FB0 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Stone tvOS";
+			productName = "Stone tvOS";
+			productReference = 0081A7471CFBC29F00F33FB0 /* Stone.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		0081A7531CFBC2EC00F33FB0 /* Stone OS X */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0081A7591CFBC2EC00F33FB0 /* Build configuration list for PBXNativeTarget "Stone OS X" */;
+			buildPhases = (
+				0081A74F1CFBC2EC00F33FB0 /* Sources */,
+				0081A7501CFBC2EC00F33FB0 /* Frameworks */,
+				0081A7511CFBC2EC00F33FB0 /* Headers */,
+				0081A7521CFBC2EC00F33FB0 /* Resources */,
+				0081A7631CFBC3C600F33FB0 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Stone OS X";
+			productName = "Stone OS X";
+			productReference = 0081A7541CFBC2EC00F33FB0 /* Stone.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -147,6 +252,12 @@
 				LastUpgradeCheck = 0730;
 				TargetAttributes = {
 					0081A7131CFBBC4700F33FB0 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					0081A7461CFBC29F00F33FB0 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					0081A7531CFBC2EC00F33FB0 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
@@ -164,6 +275,8 @@
 			projectRoot = "";
 			targets = (
 				0081A7131CFBBC4700F33FB0 /* Stone iOS */,
+				0081A7461CFBC29F00F33FB0 /* Stone tvOS */,
+				0081A7531CFBC2EC00F33FB0 /* Stone OS X */,
 			);
 		};
 /* End PBXProject section */
@@ -173,7 +286,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0081A7381CFBBD1200F33FB0 /* Info-iOS.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0081A7451CFBC29F00F33FB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0081A7521CFBC2EC00F33FB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +315,38 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftWebSocket.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Unbox.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Wrap.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		0081A75C1CFBC31A00F33FB0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/SwiftWebSocket.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/Unbox.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/Wrap.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		0081A7631CFBC3C600F33FB0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/SwiftWebSocket.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Unbox.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Wrap.framework",
 			);
 			outputPaths = (
 			);
@@ -218,6 +376,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0081A7421CFBC29F00F33FB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0081A74F1CFBC2EC00F33FB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -237,6 +409,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -283,6 +456,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Tethr.Stone-iOS";
@@ -300,6 +474,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -340,6 +515,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Tethr.Stone-iOS";
 				PRODUCT_NAME = Stone;
@@ -347,6 +523,243 @@
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0081A74D1CFBC29F00F33FB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Configuration/Info-tvOS.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Tethr.Stone-tvOS";
+				PRODUCT_NAME = Stone;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0081A74E1CFBC29F00F33FB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Configuration/Info-tvOS.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Tethr.Stone-tvOS";
+				PRODUCT_NAME = Stone;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0081A75A1CFBC2EC00F33FB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Configuration/Info-OS-X.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Tethr.Stone-OS-X";
+				PRODUCT_NAME = Stone;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0081A75B1CFBC2EC00F33FB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Configuration/Info-OS-X.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Tethr.Stone-OS-X";
+				PRODUCT_NAME = Stone;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -371,6 +784,25 @@
 				0081A71B1CFBBC4700F33FB0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0081A74C1CFBC29F00F33FB0 /* Build configuration list for PBXNativeTarget "Stone tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0081A74D1CFBC29F00F33FB0 /* Debug */,
+				0081A74E1CFBC29F00F33FB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0081A7591CFBC2EC00F33FB0 /* Build configuration list for PBXNativeTarget "Stone OS X" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0081A75A1CFBC2EC00F33FB0 /* Debug */,
+				0081A75B1CFBC2EC00F33FB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

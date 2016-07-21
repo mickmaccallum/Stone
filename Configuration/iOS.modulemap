@@ -1,0 +1,7 @@
+framework module Stone {
+   umbrella header "Stone-iOS.h"
+
+   export *
+   module * { export * }
+}
+

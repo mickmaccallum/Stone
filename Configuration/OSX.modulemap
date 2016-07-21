@@ -1,0 +1,7 @@
+framework module Stone {
+   umbrella header "Stone-OS-X.h"
+
+   export *
+   module * { export * }
+}
+

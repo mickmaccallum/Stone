@@ -1,0 +1,7 @@
+framework module Stone {
+   umbrella header "Stone-tvOS.h"
+
+   export *
+   module * { export * }
+}
+
