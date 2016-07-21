@@ -73,7 +73,7 @@ public final class Socket {
 		queue.suspended = true
 
 		let components = NSURLComponents(
-			URL: url.URLByAppendingPathComponent("websocket"),
+			URL: url,
 			resolvingAgainstBaseURL: true
 		)
 
