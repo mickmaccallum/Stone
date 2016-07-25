@@ -13,7 +13,7 @@ Well, as we all know, [Swift](https://swift.org) and [Phoenix](https://www.phoen
 
 #### Why Should I Use Stone?
 
-You should use Stone if you've looking to connect to Channels on your Phoenix server, and are okay with using a fairly opinionated framework that itself has a few dependencies. Stone depends on [SwiftWebSocket](https://github.com/tidwall/SwiftWebSocket) for Web Socket communication, as well as [Wrap](https://github.com/JohnSundell/Wrap/tree/master/Sources) and [Unbox](https://github.com/JohnSundell/Unbox/tree/master/Sources) for JSON serialization/deserialization. I built this framework for a project I'm working on myself, but if you find it helpful then by all means use it!
+You should use Stone if you've looking to connect to Channels on your Phoenix server, and are okay with using a fairly opinionated framework that itself has a few dependencies. Stone depends on [SwiftWebSocket](https://github.com/tidwall/SwiftWebSocket) for Web Socket communication, as well as [Wrap](https://github.com/JohnSundell/Wrap) and [Unbox](https://github.com/JohnSundell/Unbox) for JSON serialization/deserialization. I built this framework for a project I'm working on myself, but if you find it helpful then by all means use it!
 
 #### Working With Sockets
 
