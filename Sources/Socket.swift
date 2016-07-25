@@ -144,6 +144,35 @@ public final class Socket {
 	}
 
 	/**
+	Sends a leave message for every currently connected Channel.
+
+	- parameter completion:	Called after every Channel has been left. Clean parameter will be true if 
+							every Channel was left without incident, false otherwise.
+	*/
+	func leaveAllChannels(completion: ((clean: Bool) -> Void)? = nil) {
+		var disconnected = [Int: Bool]()
+		let disconnectQueue = dispatch_queue_create("com.Stone.channel.disconnect", DISPATCH_QUEUE_SERIAL)
+
+		func attemptDisconnect(channel: Channel, clean: Bool) {
+			disconnected[channel.hashValue] = clean
+
+			if disconnected.count == channels.count {
+				completion?(
+					clean: !disconnected.values.contains(false)
+				)
+			}
+		}
+
+		for channel in channels where [.Joining, .Joined].contains(channel.state) {
+			channel.leave { success in
+				dispatch_async(disconnectQueue) {
+					attemptDisconnect(channel, clean: success)
+				}
+			}
+		}
+	}
+
+	/**
 	Adds the supplied Channel to the socket, and connects to it if the socket is open and shouldAutoJoinChannels is enabled.
 	Since Channel uniqueness is determined by its topic, adding a new Channel that has the same topic as any other Channel
 	on this topic will cause the old one to be removed.
