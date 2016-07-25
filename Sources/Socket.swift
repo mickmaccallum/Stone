@@ -51,7 +51,7 @@ public final class Socket {
 
 	private var heartBeatTimer: NSTimer?
 	private var reconnectTimer: NSTimer?
-	private var channels = Set<Channel>()
+	public private(set) var channels = Set<Channel>()
 	private var lastParams: [NSURLQueryItem]?
 	private let queue = NSOperationQueue()
 
