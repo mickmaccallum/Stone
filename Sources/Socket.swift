@@ -125,12 +125,15 @@ public final class Socket {
 	}
 
 	/**
-	Disconnects the socket connection.
+	Disconnects the socket connection after sending a leave message over all currently connected Channels.
 	*/
-	public func disconnect() {
+	public func disconnect(completion: ((clean: Bool) -> Void)? = nil) {
 		discardHeartBeatTimer()
 		discardReconnectTimer()
-		disconnectSocket()
+
+		leaveAllChannels { _ in
+			self.disconnectSocket()
+		}
 	}
 
 	private func disconnectSocket() {
