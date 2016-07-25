@@ -223,7 +223,7 @@ public final class Channel: Hashable, Equatable {
 	Leaves the receiving Channel. If you leave a Channel, you won't continue to get callbacks for the messages that
 	it receives, even if the Channel object happens to still be alive.
 	*/
-	public func leave() {
+	public func leave(completion: ((success: Bool) -> Void)? = nil) {
 		let leaveMessage = Message(
 			topic: topic,
 			event: Event.Phoenix(.Leave)
@@ -240,8 +240,10 @@ public final class Channel: Hashable, Equatable {
 					ref: message.ref,
 					payload: message.payload
 				)
-			} catch {
 
+				completion?(success: true)
+			} catch {
+				completion?(success: false)
 			}
 		}
 	}
