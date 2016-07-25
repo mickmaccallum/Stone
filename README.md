@@ -174,7 +174,7 @@ let presenceEvent = Event.Presence(.Diff)
 Add the following line to your Cartfile:
 
 ```
-github "Tethr-Technologies-Inc/Stone" ~> 0.1.8
+github "Tethr-Technologies-Inc/Stone" ~> 0.2.2
 ```
 
 Check [Carthage's README](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos)
