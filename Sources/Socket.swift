@@ -72,8 +72,15 @@ public final class Socket {
 
 		queue.suspended = true
 
+		let webSocketPathComponent: String
+		if let lastPathComponent = url.lastPathComponent where lastPathComponent == "websocket" {
+			webSocketPathComponent = ""
+		} else {
+			webSocketPathComponent = "websocket"
+		}
+
 		let components = NSURLComponents(
-			URL: url,
+			URL: url.URLByAppendingPathComponent(webSocketPathComponent),
 			resolvingAgainstBaseURL: true
 		)
 
