@@ -186,4 +186,4 @@ As I stated earlier, I made this framework to support my own use, but would love
 
 #### License
 
-The MIT License (MIT). See [LICENSE.md](https://github.com/Tethr-Technologies-Inc/Stone/blob/master/LICENSE.md) for more information.
+The MIT License (MIT). See [LICENSE.md](https://github.com/Tethr-Technologies-Inc/Stone/blob/master/LICENSE.md) for more information. [SwiftWebSocket](https://github.com/tidwall/SwiftWebSocket/blob/master/LICENSE), [Wrap](https://github.com/JohnSundell/Wrap/blob/master/LICENSE) and [Unbox](https://github.com/JohnSundell/Unbox/blob/master/LICENSE) are all MIT licensed as well.
