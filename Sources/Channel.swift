@@ -16,10 +16,10 @@ Defines a Channel for communicating with a given topic on your Phoenix server.
 public final class Channel: Hashable, Equatable {
 	public let topic: String
 
-	public typealias ResultCallback = (result: Result<Message>) -> Void
-	public typealias EventCallback = (message: Message) -> Void
+	public typealias ResultCallback = (result: Stone.Result<Stone.Message>) -> Void
+	public typealias EventCallback = (message: Stone.Message) -> Void
 	/// The state of the connection to this Channel.
-	public private(set) var state: ChannelState = .Closed
+	public private(set) var state: Stone.ChannelState = .Closed
 
 	public var shouldTrackPresence = false
 
@@ -57,12 +57,12 @@ public final class Channel: Hashable, Equatable {
 		return topic == otherTopic
 	}
 
-	internal func triggerEvent(event: Event, ref: String? = nil, payload: [String: AnyObject] = [:]) {
+	internal func triggerEvent(event: Stone.Event, ref: String? = nil, payload: [String: AnyObject] = [:]) {
 		guard state != .Closed else {
 			return
 		}
 
-		let message = Message(
+		let message = Stone.Message(
 			topic: topic,
 			event: event,
 			payload: payload,
@@ -78,25 +78,25 @@ public final class Channel: Hashable, Equatable {
 			callback(result: .Success(message))
 		}
 
-		if let defaultEvent = Event.PhoenixEvent(rawValue: event.rawValue) {
+		if let defaultEvent = Stone.Event.PhoenixEvent(rawValue: event.rawValue) {
 			triggerInternalEvent(
 				defaultEvent,
 				withMessage: message
 			)
 		}
 
-		if let presenceEvent = Event.PhoenixEvent.PresenceEvent(rawValue: event.rawValue) where shouldTrackPresence {
+		if let presenceEvent = Stone.Event.PhoenixEvent.PresenceEvent(rawValue: event.rawValue) where shouldTrackPresence {
 			handlePresenceEvent(presenceEvent, withPayload: message.payload)
 		}
 	}
 
-	private func handlePresenceEvent(event: Event.PhoenixEvent.PresenceEvent, withPayload payload: [String: AnyObject]) {
+	private func handlePresenceEvent(event: Stone.Event.PhoenixEvent.PresenceEvent, withPayload payload: [String: AnyObject]) {
 		switch event {
 		case .State:
 			presenceStateCallback?(
-				result: Result.Success(
+				result: Stone.Result.Success(
 					payload.map {
-						PresenceChange(
+						Stone.PresenceChange(
 							name: $0.0,
 							metas: ($0.1 as? [String: AnyObject]) ?? [String: AnyObject]()
 						)
@@ -111,7 +111,7 @@ public final class Channel: Hashable, Equatable {
 					)
 				)
 			} catch {
-				presenceDiffCallback?(result: .Failure(Error.InvalidJSON))
+				presenceDiffCallback?(result: .Failure(Stone.Error.InvalidJSON))
 			}
 		}
 	}
@@ -123,7 +123,7 @@ public final class Channel: Hashable, Equatable {
 	public var onLeave: EventCallback?
 	public var onClose: EventCallback?
 
-	private func triggerInternalEvent(event: Event.PhoenixEvent, withMessage message: Message) {
+	private func triggerInternalEvent(event: Stone.Event.PhoenixEvent, withMessage message: Stone.Message) {
 		switch event {
 		case .Join:
 			state = .Joined
@@ -148,7 +148,7 @@ public final class Channel: Hashable, Equatable {
 
 	- returns: The last function given as a callback for this Event on this Channel if one exists, nil otherwise.
 	*/
-	public func onEvent(event: Event, callback: ResultCallback) -> ResultCallback? {
+	public func onEvent(event: Stone.Event, callback: ResultCallback) -> ResultCallback? {
 		return eventBindings.updateValue(callback, forKey: event)
 	}
 
@@ -157,25 +157,25 @@ public final class Channel: Hashable, Equatable {
 
 	- returns: The function that used to be the callback for this Event if one exists, nil otherwise.
 	*/
-	public func offEvent(event: Event) -> ResultCallback? {
+	public func offEvent(event: Stone.Event) -> ResultCallback? {
 		return eventBindings.removeValueForKey(event)
 	}
 
-	private var presenceDiffCallback: ((result: Result<PresenceDiff>) -> Void)?
+	private var presenceDiffCallback: ((result: Stone.Result<Stone.PresenceDiff>) -> Void)?
 
 	/**
 	Registers a callback to be received whenever a presence diff update occurs.
 	*/
-	public func onPresenceDiff(callback: (result: Result<PresenceDiff>) -> Void) {
+	public func onPresenceDiff(callback: (result: Stone.Result<Stone.PresenceDiff>) -> Void) {
 		presenceDiffCallback = callback
 	}
 
-	private var presenceStateCallback: ((result: Result<Array<PresenceChange>>) -> Void)?
+	private var presenceStateCallback: ((result: Stone.Result<Array<Stone.PresenceChange>>) -> Void)?
 
 	/**
 	Registers a callback to be received whenever a presence state update occurs.
 	*/
-	public func onPresenceState(callback: (result: Result<Array<PresenceChange>>) -> Void) {
+	public func onPresenceState(callback: (result: Stone.Result<Array<Stone.PresenceChange>>) -> Void) {
 		presenceStateCallback = callback
 	}
 
@@ -183,9 +183,9 @@ public final class Channel: Hashable, Equatable {
 	Sends the given Message over the receiving Channel. When the server replies, the contents of the reply will be
 	given in the completion handler.
 	*/
-	public func sendMessage(message: Message, completion: ResultCallback? = nil) {
+	public func sendMessage(message: Stone.Message, completion: ResultCallback? = nil) {
 		guard let socket = socket else {
-			completion?(result: .Failure(Error.LostSocket))
+			completion?(result: .Failure(Stone.Error.LostSocket))
 			return
 		}
 
@@ -197,7 +197,7 @@ public final class Channel: Hashable, Equatable {
 				forKey: message.ref!
 			)
 		} catch {
-			completion?(result: .Failure(Error.InvalidJSON))
+			completion?(result: .Failure(Stone.Error.InvalidJSON))
 		}
 	}
 
@@ -205,14 +205,14 @@ public final class Channel: Hashable, Equatable {
 	Sends a join message to the Channel's topic.
 	*/
 	public func join() {
-		guard state == .Closed || state == ChannelState.Errored else {
+		guard state == .Closed || state == Stone.ChannelState.Errored else {
 			return
 		}
 		
 		state = .Joining
-		let joinMessage = Message(
+		let joinMessage = Stone.Message(
 			topic: topic,
-			event: Event.Phoenix(.Join),
+			event: Stone.Event.Phoenix(.Join),
 			payload: [:]
 		)
 		
@@ -224,9 +224,9 @@ public final class Channel: Hashable, Equatable {
 	it receives, even if the Channel object happens to still be alive.
 	*/
 	public func leave(completion: ((success: Bool) -> Void)? = nil) {
-		let leaveMessage = Message(
+		let leaveMessage = Stone.Message(
 			topic: topic,
-			event: Event.Phoenix(.Leave)
+			event: Stone.Event.Phoenix(.Leave)
 		)
 
 		sendMessage(leaveMessage) { [weak self] result in
@@ -249,6 +249,6 @@ public final class Channel: Hashable, Equatable {
 	}
 }
 
-public func == (lhs: Channel, rhs: Channel) -> Bool {
+public func == (lhs: Stone.Channel, rhs: Stone.Channel) -> Bool {
 	return lhs.hashValue == rhs.hashValue
 }

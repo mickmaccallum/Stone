@@ -15,7 +15,7 @@ extension String: QueryStringConvertible {
 	}
 }
 
-public extension Dictionary where Key: QueryStringConvertible, Value: QueryStringConvertible {
+public extension Dictionary where Key: Stone.QueryStringConvertible, Value: Stone.QueryStringConvertible {
 	/**
 	Converts the reciever's keys and values into and Array of NSURLQueryItems. If a key or value
 	for a given item in the dictionary can't successfully be converted into a query string 

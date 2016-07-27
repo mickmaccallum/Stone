@@ -37,7 +37,7 @@ public final class Socket {
 	/// Called whenever the web socket connection is closed.
 	public var onClose: ((code: Int, reason: String, wasClean: Bool) -> Void)?
 	/// Called for every message that is received over the socket (called a lot).
-	public var onMessage: ((result: Result<Message>) -> Void)?
+	public var onMessage: ((result: Stone.Result<Stone.Message>) -> Void)?
 
 	/// The connection state of the underlying socket.
 	public var socketState: SocketState {
@@ -156,7 +156,7 @@ public final class Socket {
 		var disconnected = [Int: Bool]()
 		let disconnectQueue = dispatch_queue_create("com.Stone.channel.disconnect", DISPATCH_QUEUE_SERIAL)
 
-		func attemptDisconnect(channel: Channel, clean: Bool) {
+		func attemptDisconnect(channel: Stone.Channel, clean: Bool) {
 			disconnected[channel.hashValue] = clean
 
 			if disconnected.count == channels.count {
@@ -183,7 +183,7 @@ public final class Socket {
 	A single instance of Channel shouldn't be used on multiple Sockets at the same time. The Channel will only be connected
 	to the most recent Socket which it was added to.
 	*/
-	public func addChannel(channel: Channel) {
+	public func addChannel(channel: Stone.Channel) {
 		if !channels.contains(channel) {
 			channel.socket = self
 			channels.insert(channel)
@@ -197,7 +197,7 @@ public final class Socket {
 	/**
 	Removes the supplied Channel from the receiver, and returns it if it was being tracked. Otherwise, this returns nil.
 	*/
-	public func removeChannel(channel: Channel) -> Channel? {
+	public func removeChannel(channel: Stone.Channel) -> Stone.Channel? {
 		return channels.remove(channel)
 	}
 
@@ -207,7 +207,7 @@ public final class Socket {
 		heartBeatTimer = NSTimer.scheduledTimerWithTimeInterval(
 			timeInterval,
 			target: self,
-			selector: #selector(Socket.sendHeartBeat),
+			selector: #selector(Stone.Socket.sendHeartBeat),
 			userInfo: nil,
 			repeats: true
 		)
@@ -254,7 +254,7 @@ public final class Socket {
 	Pushes the given Message over the Socket. This has been exposed publicly in case you need it, but it only facilitates
 	channel communication, so you should probably use Channels and let this be handled for you.
 	*/
-	public func push(message: Message) throws {
+	public func push(message: Stone.Message) throws {
 		let dict: [String: AnyObject] = try Wrap(message)
 		let jsonData = try NSJSONSerialization.dataWithJSONObject(dict, options: [])
 
@@ -286,7 +286,7 @@ public final class Socket {
 		}
 
 		do {
-			let message: Message = try Unbox(messageData)
+			let message: Stone.Message = try Unbox(messageData)
 			relayMessage(message)
 			onMessage?(result: .Success(message))
 		} catch let error as NSError {
@@ -295,7 +295,7 @@ public final class Socket {
 		}
 	}
 
-	private func relayMessage(message: Message) {
+	private func relayMessage(message: Stone.Message) {
 		triggerEvent(
 			message.event,
 			withRef: message.ref,
@@ -304,7 +304,7 @@ public final class Socket {
 		)
 	}
 
-	private func triggerEvent<T: SequenceType where T.Generator.Element == Channel>(event: Event, withRef ref: String? = nil, andPayload payload: [String: AnyObject] = [:], inChannels channels: T) {
+	private func triggerEvent<T: SequenceType where T.Generator.Element == Stone.Channel>(event: Stone.Event, withRef ref: String? = nil, andPayload payload: [String: AnyObject] = [:], inChannels channels: T) {
 		for channel in channels {
 			channel.triggerEvent(event, ref: ref, payload: payload)
 		}

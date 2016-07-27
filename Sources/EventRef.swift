@@ -21,6 +21,6 @@ internal struct EventRef: Hashable {
 	}
 }
 
-internal func == (lhs: EventRef, rhs: EventRef) -> Bool {
+internal func == (lhs: Stone.EventRef, rhs: Stone.EventRef) -> Bool {
 	return lhs.event == rhs.event && lhs.ref == rhs.ref
 }

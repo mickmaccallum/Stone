@@ -94,16 +94,16 @@ public enum Event: RawRepresentable, Hashable, Equatable, CustomStringConvertibl
 }
 
 extension Event: UnboxableRawType {
-	public static func unboxFallbackValue() -> Event {
+	public static func unboxFallbackValue() -> Stone.Event {
 		return .Custom("")
 	}
 
-	public static func transformUnboxedString(unboxedString: String) -> Event? {
-		return Event(rawValue: unboxedString)
+	public static func transformUnboxedString(unboxedString: String) -> Stone.Event? {
+		return Stone.Event(rawValue: unboxedString)
 	}
 }
 
-extension Event: WrappableEnum {
+extension Stone.Event: WrappableEnum {
 	public func wrap() -> AnyObject? {
 		return rawValue
 	}

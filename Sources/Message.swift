@@ -15,7 +15,7 @@ Represents a message to be sent over a Channel. Includes fields for reference, t
 public struct Message {
 	public let ref: String?
 	public let topic: String
-	public let event: Event
+	public let event: Stone.Event
 	public let payload: [String: AnyObject]
 
 	private static var _reference = UInt.max
@@ -33,15 +33,15 @@ public struct Message {
 		}
 	}
 
-	public init<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType, event: Event, payload: [String: AnyObject] = [:], ref: String? = Message.reference.description) {
+	public init<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType, event: Event, payload: [String: AnyObject] = [:], ref: String? = Stone.Message.reference.description) {
 		self.init(topic: topic.rawValue, event: event, payload: payload, ref: ref)
 	}
 
-	public init(topic: String, event: Event, payload: [String: AnyObject] = [:], ref: String? = Message.reference.description) {
+	public init(topic: String, event: Stone.Event, payload: [String: AnyObject] = [:], ref: String? = Stone.Message.reference.description) {
 		self.topic		= topic
 		self.event		= event
 		self.payload	= payload
-		self.ref		= ref ?? String(format: "%lu", Message.reference)
+		self.ref		= ref ?? String(format: "%lu", Stone.Message.reference)
 	}
 }
 
@@ -52,6 +52,6 @@ extension Message: Unboxable {
 		ref			= unboxer.unbox("ref")
 
 		let eventString: String = unboxer.unbox("event")
-		event = Event(rawValue: eventString) ?? Event.Custom("")
+		event = Stone.Event(rawValue: eventString) ?? Stone.Event.Custom("")
 	}
 }
