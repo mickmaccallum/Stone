@@ -98,6 +98,10 @@ extension Event: UnboxableRawType {
 		return .Custom("")
 	}
 
+	public static func transformUnboxedInt(unboxedInt: Int) -> Stone.Event? {
+		return nil
+	}
+
 	public static func transformUnboxedString(unboxedString: String) -> Stone.Event? {
 		return Stone.Event(rawValue: unboxedString)
 	}
