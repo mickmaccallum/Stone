@@ -57,6 +57,10 @@ public final class Channel: Hashable, Equatable {
 		return topic == otherTopic
 	}
 
+	public func isMemberOfTopic<RawType: RawRepresentable where RawType.RawValue == String>(otherTopic: RawType) -> Bool {
+		return isMemberOfTopic(otherTopic.rawValue)
+	}
+
 	internal func triggerEvent(event: Stone.Event, ref: String? = nil, payload: [String: AnyObject] = [:]) {
 		guard state != .Closed else {
 			return
