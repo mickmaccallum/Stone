@@ -201,6 +201,16 @@ public final class Socket {
 		return channels.remove(channel)
 	}
 
+	public func channelForTopic<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType) -> Stone.Channel? {
+		return channelForTopic(topic.rawValue)
+	}
+
+	public func channelForTopic(topic: String) -> Stone.Channel? {
+		return channels.filter {
+			$0.isMemberOfTopic(topic)
+		}.first
+	}
+
 	private func startHeatBeatTimer(timeInterval timeInterval: NSTimeInterval) {
 		discardHeartBeatTimer()
 
