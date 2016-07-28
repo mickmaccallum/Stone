@@ -154,24 +154,20 @@ public final class Socket {
 	*/
 	func leaveAllChannels(completion: ((clean: Bool) -> Void)? = nil) {
 		var disconnected = [Int: Bool]()
-		let disconnectQueue = dispatch_queue_create("com.Stone.channel.disconnect", DISPATCH_QUEUE_SERIAL)
+		let group = dispatch_group_create()
 
-		func attemptDisconnect(channel: Stone.Channel, clean: Bool) {
-			disconnected[channel.hashValue] = clean
-
-			if disconnected.count == channels.count {
-				completion?(
-					clean: !disconnected.values.contains(false)
-				)
+		for channel in channels where [.Joining, .Joined].contains(channel.state) {
+			dispatch_group_enter(group)
+			channel.leave { success in
+				disconnected[channel.hashValue] = success
+				dispatch_group_leave(group)
 			}
 		}
 
-		for channel in channels where [.Joining, .Joined].contains(channel.state) {
-			channel.leave { success in
-				dispatch_async(disconnectQueue) {
-					attemptDisconnect(channel, clean: success)
-				}
-			}
+		dispatch_group_notify(group, dispatch_get_main_queue()) {
+			completion?(
+				clean: !disconnected.values.contains(false)
+			)
 		}
 	}
 
