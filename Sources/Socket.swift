@@ -193,8 +193,20 @@ public final class Socket {
 	/**
 	Removes the supplied Channel from the receiver, and returns it if it was being tracked. Otherwise, this returns nil.
 	*/
-	public func removeChannel(channel: Stone.Channel) -> Stone.Channel? {
-		return channels.remove(channel)
+	public func removeChannel(channel: Stone.Channel, completion: ((clean: Bool?, channel: Stone.Channel?) -> Void)?) {
+		guard channels.contains(channel) else {
+			completion?(clean: nil, channel: nil)
+			return
+		}
+
+		channel.leave { [weak channel, weak self] success in
+			if let channel = channel {
+				self?.channels.remove(channel)
+			}
+
+			channel?.socket = nil
+			completion?(clean: success, channel: channel)
+		}
 	}
 
 	public func channelForTopic<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType) -> Stone.Channel? {
