@@ -330,9 +330,13 @@ public final class Socket {
 		)
 	}
 
+	private func triggerEvent(event: Stone.Event, withRef ref: String? = nil, andPayload payload: [String: AnyObject] = [:], inChannel channel: Stone.Channel) {
+		channel.triggerEvent(event, ref: ref, payload: payload)
+	}
+
 	private func triggerEvent<T: SequenceType where T.Generator.Element == Stone.Channel>(event: Stone.Event, withRef ref: String? = nil, andPayload payload: [String: AnyObject] = [:], inChannels channels: T) {
 		for channel in channels {
-			channel.triggerEvent(event, ref: ref, payload: payload)
+			triggerEvent(event, withRef: ref, andPayload: payload, inChannel: channel)
 		}
 	}
 
