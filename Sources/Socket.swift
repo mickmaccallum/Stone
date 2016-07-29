@@ -361,12 +361,6 @@ public final class Socket {
 		onError?(error: error)
 
 		triggerEvent(Event.Phoenix(.Error), inChannels: channels)
-
-		webSocketDidClose(
-			code: error.code,
-			reason: error.localizedDescription,
-			wasClean: true
-		)
 	}
 }
 
