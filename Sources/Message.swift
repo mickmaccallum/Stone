@@ -18,21 +18,6 @@ public struct Message {
 	public let event: Stone.Event
 	public let payload: [String: AnyObject]
 
-	private static var _reference = UInt.max
-	private static var reference: UInt {
-		get {
-			let (new, overflowed) = UInt.addWithOverflow(Message._reference, 1)
-
-			if overflowed {
-				_reference = 0
-			} else {
-				_reference = new
-			}
-
-			return _reference
-		}
-	}
-
 	public init<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType, event: Event, payload: [String: AnyObject] = [:], ref: String? = NSUUID().UUIDString) {
 		self.init(topic: topic.rawValue, event: event, payload: payload, ref: ref)
 	}
