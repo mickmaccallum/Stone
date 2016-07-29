@@ -33,15 +33,15 @@ public struct Message {
 		}
 	}
 
-	public init<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType, event: Event, payload: [String: AnyObject] = [:], ref: String? = Stone.Message.reference.description) {
+	public init<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType, event: Event, payload: [String: AnyObject] = [:], ref: String? = NSUUID().UUIDString) {
 		self.init(topic: topic.rawValue, event: event, payload: payload, ref: ref)
 	}
 
-	public init(topic: String, event: Stone.Event, payload: [String: AnyObject] = [:], ref: String? = Stone.Message.reference.description) {
+	public init(topic: String, event: Stone.Event, payload: [String: AnyObject] = [:], ref: String? = NSUUID().UUIDString) {
 		self.topic		= topic
 		self.event		= event
 		self.payload	= payload
-		self.ref		= ref ?? String(format: "%lu", Stone.Message.reference)
+		self.ref		= ref
 	}
 }
 
