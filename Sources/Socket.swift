@@ -322,11 +322,15 @@ public final class Socket {
 	}
 
 	private func relayMessage(message: Stone.Message) {
+		guard let channel = channelForTopic(message.topic) else {
+			return
+		}
+
 		triggerEvent(
 			message.event,
 			withRef: message.ref,
 			andPayload: message.payload,
-			inChannels: channels.filter { $0.isMemberOfTopic(message.topic) }
+			inChannel: channel
 		)
 	}
 
