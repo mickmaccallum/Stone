@@ -51,16 +51,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "00D93BFB1D498C5600FC0ECE"
-            BuildableName = "Stone Demo iOS.app"
-            BlueprintName = "Stone Demo iOS"
-            ReferencedContainer = "container:Stone.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
