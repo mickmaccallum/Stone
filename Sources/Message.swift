@@ -48,7 +48,7 @@ public struct Message {
 extension Message: Unboxable {
 	public init(unboxer: Unboxer) {
 		topic		= unboxer.unbox("topic")
-		payload		= unboxer.unbox("payload")
+		payload		= unboxer.unbox("payload.response")
 		ref			= unboxer.unbox("ref")
 
 		let eventString: String = unboxer.unbox("event")
