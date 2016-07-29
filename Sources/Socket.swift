@@ -38,6 +38,8 @@ public final class Socket {
 	public var onClose: ((code: Int, reason: String, wasClean: Bool) -> Void)?
 	/// Called for every message that is received over the socket (called a lot).
 	public var onMessage: ((result: Stone.Result<Stone.Message>) -> Void)?
+	/// Called every time a heartbeat message is received
+	public var onHeartbeat: ((result: Stone.Result<Stone.Message>) -> Void)?
 
 	/// The connection state of the underlying socket.
 	public var socketState: SocketState {
@@ -247,7 +249,8 @@ public final class Socket {
 		try! push(
 			Message(
 				topic: "phoenix",
-				event: Event.Phoenix(.Heartbeat)
+				event: Event.Phoenix(.Heartbeat),
+				ref: "heartbeat"
 			)
 		)
 	}
@@ -305,8 +308,13 @@ public final class Socket {
 
 		do {
 			let message: Stone.Message = try Unbox(messageData)
-			relayMessage(message)
-			onMessage?(result: .Success(message))
+
+			if let ref = message.ref where ref == Event.PhoenixEvent.Heartbeat.rawValue {
+				onHeartbeat?(result: Result.Success(message))
+			} else {
+				onMessage?(result: .Success(message))
+				relayMessage(message)
+			}
 		} catch let error as NSError {
 			webSocketDidError(error)
 			onMessage?(result: .Failure(error))

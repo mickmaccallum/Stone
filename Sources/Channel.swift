@@ -122,7 +122,6 @@ public final class Channel: Hashable, Equatable {
 
 	public var onJoin: EventCallback?
 	public var onReply: EventCallback?
-	public var onHeartbeat: EventCallback?
 	public var onError: EventCallback?
 	public var onLeave: EventCallback?
 	public var onClose: EventCallback?
@@ -133,9 +132,13 @@ public final class Channel: Hashable, Equatable {
 			state = .Joined
 			onJoin?(message: message)
 		case .Reply:
-			onReply?(message: message)
-		case .Heartbeat:
-			onHeartbeat?(message: message)
+			switch message.topic {
+			case topic:
+				state = .Joined
+				onJoin?(message: message)
+			default:
+				onReply?(message: message)
+			}
 		case .Error:
 			state = .Errored
 			onError?(message: message)
@@ -144,6 +147,8 @@ public final class Channel: Hashable, Equatable {
 		case .Close:
 			state = .Closed
 			onClose?(message: message)
+		default:
+			break
 		}
 	}
 
