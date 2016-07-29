@@ -19,7 +19,7 @@ public final class Channel: Hashable, Equatable {
 	public typealias ResultCallback = (result: Stone.Result<Stone.Message>) -> Void
 	public typealias EventCallback = (message: Stone.Message) -> Void
 	/// The state of the connection to this Channel.
-	public private(set) var state: Stone.ChannelState = .Closed
+	public internal(set) var state: Stone.ChannelState = .Closed
 
 	public var shouldTrackPresence = false
 
