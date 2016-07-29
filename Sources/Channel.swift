@@ -23,7 +23,7 @@ public final class Channel: Hashable, Equatable {
 
 	public var shouldTrackPresence = false
 
-	private var eventBindings = [Event: ResultCallback]()
+	private var eventBindings = [String: ResultCallback]()
 	private var callbackBindings = [String: ResultCallback?]()
 
 	internal weak var socket: Socket?
@@ -73,24 +73,42 @@ public final class Channel: Hashable, Equatable {
 			ref: ref
 		)
 
-		if let ref = ref, replyCallback = callbackBindings[ref] {
-			replyCallback?(result: .Success(message))
-			callbackBindings.removeValueForKey(ref)
-		}
+		if event == .Reply {
+			if let ref = ref {
+				if let defaultEvent = Event.PhoenixEvent(rawValue: ref) {
+					handleDefaultEvent(defaultEvent, message: message)
+				}
 
-		if let callback = eventBindings[event] {
-			callback(result: .Success(message))
-		}
+				if let replyCallback = callbackBindings.removeValueForKey(ref) {
+					replyCallback?(result: .Success(message))
+				}
+			}
+		} else {
+			
+			if let eventBinding = eventBindings[event.rawValue] {
+				eventBinding(result: .Success(message))
+			}
 
-		if let defaultEvent = Stone.Event.PhoenixEvent(rawValue: event.rawValue) {
-			triggerInternalEvent(
-				defaultEvent,
-				withMessage: message
-			)
+			if let presenceEvent = Stone.Event.PhoenixEvent.PresenceEvent(rawValue: event.rawValue) where shouldTrackPresence {
+				handlePresenceEvent(presenceEvent, withPayload: message.payload)
+			}
 		}
+	}
 
-		if let presenceEvent = Stone.Event.PhoenixEvent.PresenceEvent(rawValue: event.rawValue) where shouldTrackPresence {
-			handlePresenceEvent(presenceEvent, withPayload: message.payload)
+	private func handleDefaultEvent(event: Event.PhoenixEvent, message: Message) {
+		switch event {
+		case .Join:
+			onJoin?(message: message)
+		case .Reply:
+			onReply?(message: message)
+		case .Leave:
+			onLeave?(message: message)
+		case .Close:
+			onClose?(message: message)
+		case .Error:
+			onError?(message: message)
+		default:
+			break
 		}
 	}
 
@@ -127,28 +145,12 @@ public final class Channel: Hashable, Equatable {
 	public var onClose: EventCallback?
 
 	private func triggerInternalEvent(event: Stone.Event.PhoenixEvent, withMessage message: Stone.Message) {
-		switch event {
-		case .Join:
+		switch message.topic {
+		case topic:
 			state = .Joined
 			onJoin?(message: message)
-		case .Reply:
-			switch message.topic {
-			case topic:
-				state = .Joined
-				onJoin?(message: message)
-			default:
-				onReply?(message: message)
-			}
-		case .Error:
-			state = .Errored
-			onError?(message: message)
-		case .Leave:
-			onLeave?(message: message)
-		case .Close:
-			state = .Closed
-			onClose?(message: message)
 		default:
-			break
+			onReply?(message: message)
 		}
 	}
 
@@ -158,7 +160,7 @@ public final class Channel: Hashable, Equatable {
 	- returns: The last function given as a callback for this Event on this Channel if one exists, nil otherwise.
 	*/
 	public func onEvent(event: Stone.Event, callback: ResultCallback) -> ResultCallback? {
-		return eventBindings.updateValue(callback, forKey: event)
+		return eventBindings.updateValue(callback, forKey: event.rawValue)
 	}
 
 	/**
@@ -167,7 +169,7 @@ public final class Channel: Hashable, Equatable {
 	- returns: The function that used to be the callback for this Event if one exists, nil otherwise.
 	*/
 	public func offEvent(event: Stone.Event) -> ResultCallback? {
-		return eventBindings.removeValueForKey(event)
+		return eventBindings.removeValueForKey(event.rawValue)
 	}
 
 	private var presenceDiffCallback: ((result: Stone.Result<Stone.PresenceDiff>) -> Void)?
@@ -213,7 +215,7 @@ public final class Channel: Hashable, Equatable {
 	/**
 	Sends a join message to the Channel's topic.
 	*/
-	public func join() {
+	public func join(completion: ResultCallback? = nil) {
 		guard state == .Closed || state == Stone.ChannelState.Errored else {
 			return
 		}
@@ -222,9 +224,11 @@ public final class Channel: Hashable, Equatable {
 		let joinMessage = Stone.Message(
 			topic: topic,
 			event: Stone.Event.Phoenix(.Join),
+			ref: Stone.Event.Phoenix(.Join).description,
 			payload: [:]
 		)
-		
+
+		callbackBindings[joinMessage.ref!] = completion
 		sendMessage(joinMessage, completion: nil)
 	}
 
