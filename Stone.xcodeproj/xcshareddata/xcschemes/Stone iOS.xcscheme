@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "00D93BFB1D498C5600FC0ECE"
+            BuildableName = "Stone Demo iOS.app"
+            BlueprintName = "Stone Demo iOS"
+            ReferencedContainer = "container:Stone.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0081A7131CFBBC4700F33FB0"
-            BuildableName = "Stone.framework"
-            BlueprintName = "Stone iOS"
+            BlueprintIdentifier = "00D93BFB1D498C5600FC0ECE"
+            BuildableName = "Stone Demo iOS.app"
+            BlueprintName = "Stone Demo iOS"
             ReferencedContainer = "container:Stone.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

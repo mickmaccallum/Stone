@@ -18,8 +18,10 @@ class ViewController: UIViewController {
 	private var messages = [Message]()
 	@IBOutlet private weak var tableView: UITableView!
 
+	static let userId = Int(arc4random_uniform(25) + 1)
+
 	let socket = Socket(
-		url: NSURL(string: "http://localhost:4000/socket/websocket")!,
+		url: NSURL(string: "http://localhost:4000/socket/websocket?user_id=\(ViewController.userId)")!,
 		heartbeatInterval: 15.0,
 		reconnectInterval: 15.0
 	)!
@@ -28,35 +30,53 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 
 		let channel = Channel(topic: "chat:lobby")
+		channel.shouldTrackPresence = true
 
-		channel.onJoin = { [unowned channel] result in
-			print("joined: \(result)")
-//			let catchUpMessage = SMessage(
-//				topic: chatChannel.topic,
+//		channel.onJoin = { [unowned channel] result in
+//			print("joined")
+//
+//			let catchUpMessage = Stone.Message(
+//				topic: channel.topic,
 //				event: Event.Custom("chat:catchup"),
 //				payload: [
-//					"last_update_date": lastUpdateDate.toISO8601
+//					"last_update_date": "yesterday"
 //				]
 //			)
 //
-//			chatChannel.sendMessage(catchUpMessage) { result in
+//			channel.sendMessage(catchUpMessage) { result in
 //				do {
-//					print(try result.value())
+////					print(try result.value())
 //				} catch {
 //					print(error)
 //				}
 //			}
-		}
-
-		channel.onHeartbeat = { _ in
-			print("heartbeat")
-		}
+//		}
 
 		channel.onEvent(Event.Custom("chat:new:message")) { result in
 			do {
 				print(try result.value())
 			} catch {
 				print(error)
+			}
+		}
+
+		channel.onPresenceState { (result) in
+			do {
+				_ = try result.value()
+				print("presense changed")
+			} catch {
+				print("presence state failed")
+			}
+			print("presence updated state")
+		}
+
+		channel.onPresenceDiff { (result) in
+			do {
+				let diff = try result.value()
+				print("users joined: \(diff.joins)")
+				print("users left: \(diff.leaves)")
+			} catch {
+				print("presence diff failed")
 			}
 		}
 
@@ -67,6 +87,14 @@ class ViewController: UIViewController {
 
 		socket.onOpen = {
 			print("socket open")
+		}
+
+		socket.onMessage = { message in
+//			print("Socket message: \(message)")
+		}
+
+		socket.onHeartbeat = { result in
+			print("Heartbeat")
 		}
 
 		socket.onError = { (error: NSError) in
