@@ -354,6 +354,10 @@ public final class Socket {
 			startReconnectTimer()
 		}
 
+		for channel in channels {
+			channel.state = .Closed
+		}
+
 		onClose?(code: code, reason: reason, wasClean: wasClean)
 	}
 
