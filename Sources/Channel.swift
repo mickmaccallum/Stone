@@ -13,7 +13,7 @@ import Unbox
 /**
 Defines a Channel for communicating with a given topic on your Phoenix server.
 */
-public final class Channel: Hashable, Equatable {
+public final class Channel: Hashable, Equatable, CustomStringConvertible {
 	public let topic: String
 
 	public typealias ResultCallback = (result: Stone.Result<Stone.Message>) -> Void
@@ -31,6 +31,10 @@ public final class Channel: Hashable, Equatable {
 	/// Channels are unique by their topics.
 	public var hashValue: Int {
 		return topic.hashValue
+	}
+
+	public var description: String {
+		return "Channel(topic: \(topic), tracks presence: \(shouldTrackPresence), state: \(state))"
 	}
 
 	/**
