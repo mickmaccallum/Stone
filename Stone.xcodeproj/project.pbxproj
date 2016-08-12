@@ -11,7 +11,6 @@
 		0081A72B1CFBBC6F00F33FB0 /* ChannelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A71F1CFBBC6F00F33FB0 /* ChannelState.swift */; };
 		0081A72C1CFBBC6F00F33FB0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7201CFBBC6F00F33FB0 /* Error.swift */; };
 		0081A72D1CFBBC6F00F33FB0 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7211CFBBC6F00F33FB0 /* Event.swift */; };
-		0081A72E1CFBBC6F00F33FB0 /* EventRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7221CFBBC6F00F33FB0 /* EventRef.swift */; };
 		0081A72F1CFBBC6F00F33FB0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7231CFBBC6F00F33FB0 /* Extensions.swift */; };
 		0081A7301CFBBC6F00F33FB0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7241CFBBC6F00F33FB0 /* Message.swift */; };
 		0081A7311CFBBC6F00F33FB0 /* PresenceChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7251CFBBC6F00F33FB0 /* PresenceChange.swift */; };
@@ -35,7 +34,6 @@
 		00B5AA261D42516E005819B2 /* ChannelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A71F1CFBBC6F00F33FB0 /* ChannelState.swift */; };
 		00B5AA271D42516E005819B2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7201CFBBC6F00F33FB0 /* Error.swift */; };
 		00B5AA281D42516E005819B2 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7211CFBBC6F00F33FB0 /* Event.swift */; };
-		00B5AA291D42516E005819B2 /* EventRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7221CFBBC6F00F33FB0 /* EventRef.swift */; };
 		00B5AA2A1D42516E005819B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7231CFBBC6F00F33FB0 /* Extensions.swift */; };
 		00B5AA2B1D42516E005819B2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7241CFBBC6F00F33FB0 /* Message.swift */; };
 		00B5AA2C1D42516E005819B2 /* PresenceChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7251CFBBC6F00F33FB0 /* PresenceChange.swift */; };
@@ -47,7 +45,6 @@
 		00B5AA321D42516E005819B2 /* ChannelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A71F1CFBBC6F00F33FB0 /* ChannelState.swift */; };
 		00B5AA331D42516E005819B2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7201CFBBC6F00F33FB0 /* Error.swift */; };
 		00B5AA341D42516E005819B2 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7211CFBBC6F00F33FB0 /* Event.swift */; };
-		00B5AA351D42516E005819B2 /* EventRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7221CFBBC6F00F33FB0 /* EventRef.swift */; };
 		00B5AA361D42516E005819B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7231CFBBC6F00F33FB0 /* Extensions.swift */; };
 		00B5AA371D42516E005819B2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7241CFBBC6F00F33FB0 /* Message.swift */; };
 		00B5AA381D42516E005819B2 /* PresenceChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7251CFBBC6F00F33FB0 /* PresenceChange.swift */; };
@@ -68,7 +65,6 @@
 		0081A71F1CFBBC6F00F33FB0 /* ChannelState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelState.swift; sourceTree = "<group>"; };
 		0081A7201CFBBC6F00F33FB0 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		0081A7211CFBBC6F00F33FB0 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		0081A7221CFBBC6F00F33FB0 /* EventRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRef.swift; sourceTree = "<group>"; };
 		0081A7231CFBBC6F00F33FB0 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0081A7241CFBBC6F00F33FB0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		0081A7251CFBBC6F00F33FB0 /* PresenceChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceChange.swift; sourceTree = "<group>"; };
@@ -181,7 +177,6 @@
 				0081A71F1CFBBC6F00F33FB0 /* ChannelState.swift */,
 				0081A7201CFBBC6F00F33FB0 /* Error.swift */,
 				0081A7211CFBBC6F00F33FB0 /* Event.swift */,
-				0081A7221CFBBC6F00F33FB0 /* EventRef.swift */,
 				0081A7231CFBBC6F00F33FB0 /* Extensions.swift */,
 				0081A7241CFBBC6F00F33FB0 /* Message.swift */,
 				0081A7251CFBBC6F00F33FB0 /* PresenceChange.swift */,
@@ -457,7 +452,6 @@
 				0081A72F1CFBBC6F00F33FB0 /* Extensions.swift in Sources */,
 				0081A7311CFBBC6F00F33FB0 /* PresenceChange.swift in Sources */,
 				0081A72A1CFBBC6F00F33FB0 /* Channel.swift in Sources */,
-				0081A72E1CFBBC6F00F33FB0 /* EventRef.swift in Sources */,
 				0081A7321CFBBC6F00F33FB0 /* PresenceDiff.swift in Sources */,
 				0081A72C1CFBBC6F00F33FB0 /* Error.swift in Sources */,
 				0081A7351CFBBC6F00F33FB0 /* Socket.swift in Sources */,
@@ -476,7 +470,6 @@
 				00B5AA2A1D42516E005819B2 /* Extensions.swift in Sources */,
 				00B5AA2C1D42516E005819B2 /* PresenceChange.swift in Sources */,
 				00B5AA251D42516E005819B2 /* Channel.swift in Sources */,
-				00B5AA291D42516E005819B2 /* EventRef.swift in Sources */,
 				00B5AA2D1D42516E005819B2 /* PresenceDiff.swift in Sources */,
 				00B5AA271D42516E005819B2 /* Error.swift in Sources */,
 				00B5AA301D42516E005819B2 /* Socket.swift in Sources */,
@@ -495,7 +488,6 @@
 				00B5AA361D42516E005819B2 /* Extensions.swift in Sources */,
 				00B5AA381D42516E005819B2 /* PresenceChange.swift in Sources */,
 				00B5AA311D42516E005819B2 /* Channel.swift in Sources */,
-				00B5AA351D42516E005819B2 /* EventRef.swift in Sources */,
 				00B5AA391D42516E005819B2 /* PresenceDiff.swift in Sources */,
 				00B5AA331D42516E005819B2 /* Error.swift in Sources */,
 				00B5AA3C1D42516E005819B2 /* Socket.swift in Sources */,
