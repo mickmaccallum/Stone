@@ -6,8 +6,6 @@
 //  Copyright © 2016 Tethr. All rights reserved.
 //
 
-import Foundation
-
 /**
 Represents various errors that can occur while interacting with Stone.
 

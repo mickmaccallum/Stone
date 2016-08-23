@@ -6,8 +6,6 @@
 //  Copyright © 2016 Tethr. All rights reserved.
 //
 
-import Foundation
-
 /**
 Indicates the current connection status of a Channel.
 

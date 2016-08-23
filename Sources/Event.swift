@@ -6,7 +6,6 @@
 //  Copyright © 2016 Tethr. All rights reserved.
 //
 
-import Foundation
 import Unbox
 import Wrap
 

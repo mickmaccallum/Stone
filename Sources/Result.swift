@@ -6,8 +6,6 @@
 //  Copyright © 2016 Tethr Technologies Inc. All rights reserved.
 //
 
-import Foundation
-
 public enum Result<T> {
 	case Success(T)
 	case Failure(ErrorType)

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Tethr Technologies Inc. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSDictionary
 
 public struct PresenceChange: Equatable {
 	public let name: String

@@ -6,7 +6,6 @@
 //  Copyright © 2016 Tethr Technologies Inc. All rights reserved.
 //
 
-import Foundation
 import Unbox
 
 public struct PresenceDiff: Unboxable {
