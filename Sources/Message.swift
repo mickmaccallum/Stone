@@ -18,11 +18,11 @@ public struct Message {
 	public let event: Stone.Event
 	public let payload: [String: AnyObject]
 
-	public init<RawType: RawRepresentable where RawType.RawValue == String>(topic: RawType, event: Event, payload: [String: AnyObject] = [:], ref: String? = NSUUID().UUIDString) {
+	public init<RawType: RawRepresentable>(topic: RawType, event: Event, payload: [String: AnyObject] = [:], ref: String? = UUID().uuidString) where RawType.RawValue == String {
 		self.init(topic: topic.rawValue, event: event, payload: payload, ref: ref)
 	}
 
-	public init(topic: String, event: Stone.Event, payload: [String: AnyObject] = [:], ref: String? = NSUUID().UUIDString) {
+	public init(topic: String, event: Stone.Event, payload: [String: AnyObject] = [:], ref: String? = UUID().uuidString) {
 		self.topic		= topic
 		self.event		= event
 		self.payload	= payload
@@ -31,12 +31,17 @@ public struct Message {
 }
 
 extension Message: Unboxable {
-	public init(unboxer: Unboxer) {
-		topic		= unboxer.unbox("topic")
-		payload		= unboxer.unbox("payload.response") ?? unboxer.unbox("payload")
-		ref			= unboxer.unbox("ref")
+	public init(unboxer: Unboxer) throws {
+		topic		= try unboxer.unbox(key: "topic")
+		do {
+			payload = try unboxer.unbox(key: "payload.response")
+		} catch {
+			payload = try unboxer.unbox(key: "payload")
+		}
 
-		let eventString: String = unboxer.unbox("event")
-		event = Stone.Event(rawValue: eventString) ?? Stone.Event.Custom("")
+		ref			= unboxer.unbox(key: "ref")
+
+		let eventString: String = try unboxer.unbox(key: "event")
+		event = Stone.Event(rawValue: eventString) ?? Stone.Event.custom("")
 	}
 }

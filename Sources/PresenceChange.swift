@@ -16,5 +16,5 @@ public struct PresenceChange: Equatable {
 public func == (lhs: Stone.PresenceChange, rhs: Stone.PresenceChange) -> Bool {
 	return lhs.name == rhs.name && NSDictionary(
 		dictionary: lhs.metas
-	).isEqualToDictionary(rhs.metas)
+	).isEqual(to: rhs.metas)
 }

@@ -12,9 +12,8 @@ public struct PresenceDiff: Unboxable {
 	public let joins:  [Stone.PresenceChange]
 	public let leaves: [Stone.PresenceChange]
 
-	public init(unboxer: Unboxer) {
-		let tmpJoins: [String: AnyObject] = unboxer.unbox("joins")
-
+	public init(unboxer: Unboxer) throws {
+		let tmpJoins: [String: AnyObject] = try unboxer.unbox(key: "joins")
 		joins = tmpJoins.map {
 			Stone.PresenceChange(
 				name: $0.0,
@@ -22,7 +21,7 @@ public struct PresenceDiff: Unboxable {
 			)
 		}
 
-		let tmpLeaves: [String: AnyObject] = unboxer.unbox("leaves")
+		let tmpLeaves: [String: AnyObject] = try unboxer.unbox(key: "leaves")
 
 		leaves = tmpLeaves.map {
 			Stone.PresenceChange(

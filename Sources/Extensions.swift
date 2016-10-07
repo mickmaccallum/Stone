@@ -11,7 +11,7 @@ import Foundation
 extension String: QueryStringConvertible {
 	/// Attempts to convert the receiver into a valid query String using the URLQueryAllowedCharacterSet NSCharacterSet.
 	public var queryStringRepresentation: String? {
-		return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+		return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
 	}
 }
 
@@ -22,14 +22,14 @@ public extension Dictionary where Key: Stone.QueryStringConvertible, Value: Ston
 	(e.g. they contain invalid characters for a query string) the key value pair will be ommitted
 	from the resulting Array.
 	*/
-	public func toQueryItems() -> [NSURLQueryItem] {
+	public func toQueryItems() -> [URLQueryItem] {
 		return self.flatMap {
 			guard let name = $0.queryStringRepresentation,
-				value = $1.queryStringRepresentation else {
+				let value = $1.queryStringRepresentation else {
 					return nil
 			}
 
-			return NSURLQueryItem(
+			return URLQueryItem(
 				name: name,
 				value: value
 			)
@@ -37,20 +37,20 @@ public extension Dictionary where Key: Stone.QueryStringConvertible, Value: Ston
 	}
 }
 
-extension NSURL {
+extension URL {
 	/**
 	Creates a new NSURL by appending queryItems to the receiver.
 	*/
-	func urlByAppendingQueryItems(queryItems: [NSURLQueryItem]?) -> NSURL? {
-		let components = NSURLComponents(URL: self, resolvingAgainstBaseURL: true)
+	func urlByAppendingQueryItems(_ queryItems: [URLQueryItem]?) -> URL? {
+		var components = URLComponents(url: self, resolvingAgainstBaseURL: true)
 
-		if var currentItems = components?.queryItems where !currentItems.isEmpty {
-			currentItems.appendContentsOf(queryItems ?? [])
+		if var currentItems = components?.queryItems , !currentItems.isEmpty {
+			currentItems.append(contentsOf: queryItems ?? [])
 			components?.queryItems = currentItems
 		} else {
 			components?.queryItems = queryItems
 		}
 
-		return components?.URL
+		return components?.url
 	}
 }

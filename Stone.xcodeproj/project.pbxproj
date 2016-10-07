@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		005E55AA1D5E0276007CC944 /* ChatMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005E55A91D5E0276007CC944 /* ChatMessageTableViewCell.swift */; };
+		005E55AB1D5E08CD007CC944 /* Unbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0081A73B1CFBBDCF00F33FB0 /* Unbox.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		007715B51D5F562300D01A16 /* Presence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007715B41D5F562300D01A16 /* Presence.swift */; };
 		0081A72A1CFBBC6F00F33FB0 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A71E1CFBBC6F00F33FB0 /* Channel.swift */; };
 		0081A72B1CFBBC6F00F33FB0 /* ChannelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A71F1CFBBC6F00F33FB0 /* ChannelState.swift */; };
 		0081A72C1CFBBC6F00F33FB0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7201CFBBC6F00F33FB0 /* Error.swift */; };
@@ -30,6 +33,10 @@
 		0081A7931CFBC8F400F33FB0 /* Stone iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 0081A7901CFBC8F400F33FB0 /* Stone iOS.h */; };
 		0081A7981CFBC8F400F33FB0 /* Stone OS X.h in Headers */ = {isa = PBXBuildFile; fileRef = 0081A7911CFBC8F400F33FB0 /* Stone OS X.h */; };
 		0081A79A1CFBC8F400F33FB0 /* Stone tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 0081A7921CFBC8F400F33FB0 /* Stone tvOS.h */; };
+		009569451D5E13CE00E96976 /* Stone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009569441D5E13CE00E96976 /* Stone.framework */; };
+		009569461D5E169400E96976 /* SwiftWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0081A73A1CFBBDCF00F33FB0 /* SwiftWebSocket.framework */; };
+		009569471D5E169400E96976 /* Wrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0081A73C1CFBBDCF00F33FB0 /* Wrap.framework */; };
+		009569491D5E2EF700E96976 /* UserListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009569481D5E2EF700E96976 /* UserListTableViewController.swift */; };
 		00B5AA251D42516E005819B2 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A71E1CFBBC6F00F33FB0 /* Channel.swift */; };
 		00B5AA261D42516E005819B2 /* ChannelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A71F1CFBBC6F00F33FB0 /* ChannelState.swift */; };
 		00B5AA271D42516E005819B2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7201CFBBC6F00F33FB0 /* Error.swift */; };
@@ -60,6 +67,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		005E55A91D5E0276007CC944 /* ChatMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTableViewCell.swift; sourceTree = "<group>"; };
+		007715B41D5F562300D01A16 /* Presence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presence.swift; sourceTree = "<group>"; };
 		0081A7141CFBBC4700F33FB0 /* Stone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Stone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0081A71E1CFBBC6F00F33FB0 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		0081A71F1CFBBC6F00F33FB0 /* ChannelState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelState.swift; sourceTree = "<group>"; };
@@ -87,6 +96,8 @@
 		0081A7901CFBC8F400F33FB0 /* Stone iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Stone iOS.h"; sourceTree = "<group>"; };
 		0081A7911CFBC8F400F33FB0 /* Stone OS X.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Stone OS X.h"; sourceTree = "<group>"; };
 		0081A7921CFBC8F400F33FB0 /* Stone tvOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Stone tvOS.h"; sourceTree = "<group>"; };
+		009569441D5E13CE00E96976 /* Stone.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stone.framework; path = Carthage/Build/iOS/Stone.framework; sourceTree = "<group>"; };
+		009569481D5E2EF700E96976 /* UserListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListTableViewController.swift; sourceTree = "<group>"; };
 		00D93BFC1D498C5600FC0ECE /* Stone Demo iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stone Demo iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00D93BFE1D498C5600FC0ECE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00D93C001D498C5600FC0ECE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +142,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				005E55AB1D5E08CD007CC944 /* Unbox.framework in Frameworks */,
+				009569451D5E13CE00E96976 /* Stone.framework in Frameworks */,
+				009569461D5E169400E96976 /* SwiftWebSocket.framework in Frameworks */,
+				009569471D5E169400E96976 /* Wrap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +155,7 @@
 		0081A7081CFBBB6900F33FB0 = {
 			isa = PBXGroup;
 			children = (
+				009569441D5E13CE00E96976 /* Stone.framework */,
 				0081A7641CFBC3DA00F33FB0 /* SwiftWebSocket.framework */,
 				0081A7651CFBC3DA00F33FB0 /* Unbox.framework */,
 				0081A7661CFBC3DA00F33FB0 /* Wrap.framework */,
@@ -179,6 +195,7 @@
 				0081A7211CFBBC6F00F33FB0 /* Event.swift */,
 				0081A7231CFBBC6F00F33FB0 /* Extensions.swift */,
 				0081A7241CFBBC6F00F33FB0 /* Message.swift */,
+				007715B41D5F562300D01A16 /* Presence.swift */,
 				0081A7251CFBBC6F00F33FB0 /* PresenceChange.swift */,
 				0081A7261CFBBC6F00F33FB0 /* PresenceDiff.swift */,
 				0081A7271CFBBC6F00F33FB0 /* QueryStringConvertible.swift */,
@@ -201,6 +218,8 @@
 			children = (
 				00D93BFE1D498C5600FC0ECE /* AppDelegate.swift */,
 				00D93C001D498C5600FC0ECE /* ViewController.swift */,
+				009569481D5E2EF700E96976 /* UserListTableViewController.swift */,
+				005E55A91D5E0276007CC944 /* ChatMessageTableViewCell.swift */,
 				00D93C021D498C5600FC0ECE /* Main.storyboard */,
 				00D93C051D498C5600FC0ECE /* Assets.xcassets */,
 				00D93C071D498C5600FC0ECE /* LaunchScreen.storyboard */,
@@ -303,6 +322,7 @@
 				00D93BF81D498C5600FC0ECE /* Sources */,
 				00D93BF91D498C5600FC0ECE /* Frameworks */,
 				00D93BFA1D498C5600FC0ECE /* Resources */,
+				005E55AC1D5E08F5007CC944 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -320,10 +340,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				TargetAttributes = {
 					0081A7131CFBBC4700F33FB0 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					0081A7461CFBC29F00F33FB0 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -333,6 +354,7 @@
 					};
 					00D93BFB1D498C5600FC0ECE = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -392,6 +414,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		005E55AC1D5E08F5007CC944 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Unbox.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Stone.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Wrap.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftWebSocket.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		0081A7391CFBBDA300F33FB0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -457,6 +496,7 @@
 				0081A7351CFBBC6F00F33FB0 /* Socket.swift in Sources */,
 				0081A72B1CFBBC6F00F33FB0 /* ChannelState.swift in Sources */,
 				0081A7301CFBBC6F00F33FB0 /* Message.swift in Sources */,
+				007715B51D5F562300D01A16 /* Presence.swift in Sources */,
 				0081A7341CFBBC6F00F33FB0 /* Result.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,7 +541,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				005E55AA1D5E0276007CC944 /* ChatMessageTableViewCell.swift in Sources */,
 				00D93C011D498C5600FC0ECE /* ViewController.swift in Sources */,
+				009569491D5E2EF700E96976 /* UserListTableViewController.swift in Sources */,
 				00D93BFF1D498C5600FC0ECE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -531,12 +573,49 @@
 		0081A70D1CFBBB6900F33FB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
 		0081A70E1CFBBB6900F33FB0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -559,7 +638,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -599,6 +678,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -624,7 +704,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -656,6 +736,7 @@
 				PRODUCT_NAME = Stone;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -681,6 +762,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -743,6 +825,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -798,7 +881,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -862,7 +945,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -924,6 +1007,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -947,6 +1034,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -974,6 +1062,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -989,6 +1081,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Tethr.Stone-Demo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1039,6 +1132,7 @@
 				00D93C0C1D498C5600FC0ECE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

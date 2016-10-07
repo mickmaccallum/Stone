@@ -1,5 +1,5 @@
 //
-//  Error.swift
+//  StoneError.swift
 //  Stone
 //
 //  Created by Michael MacCallum on 5/19/16.
@@ -13,16 +13,16 @@ Represents various errors that can occur while interacting with Stone.
 - InvalidJSON:
 - AlreadyJoined:
 */
-public enum Error: ErrorType, CustomStringConvertible {
-	case LostSocket, InvalidJSON, AlreadyJoined
+public enum StoneError: Error, CustomStringConvertible {
+	case lostSocket, invalidJSON, alreadyJoined
 
 	public var description: String {
 		switch self {
-		case .LostSocket:
+		case .lostSocket:
 			return "The connection to the Web Socket was lost"
-		case .InvalidJSON:
+		case .invalidJSON:
 			return "The given payload couldn't be represented as JSON."
-		case .AlreadyJoined:
+		case .alreadyJoined:
 			return "Attempted to join a channel that you had already joined."
 		}
 	}

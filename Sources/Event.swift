@@ -54,9 +54,9 @@ public enum Event: RawRepresentable, Hashable, Equatable, CustomStringConvertibl
 		}
 	}
 
-	case Phoenix(PhoenixEvent)
-	case Presence(PhoenixEvent.PresenceEvent)
-	case Custom(String)
+	case phoenix(PhoenixEvent)
+	case presence(PhoenixEvent.PresenceEvent)
+	case custom(String)
 
 	public var description: String {
 		return rawValue
@@ -68,11 +68,11 @@ public enum Event: RawRepresentable, Hashable, Equatable, CustomStringConvertibl
 
 	public var rawValue: String {
 		switch self {
-		case .Phoenix(let known):
+		case .phoenix(let known):
 			return known.rawValue
-		case .Presence(let presence):
+		case .presence(let presence):
 			return presence.rawValue
-		case .Custom(let str):
+		case .custom(let str):
 			return str
 		}
 	}
@@ -83,31 +83,31 @@ public enum Event: RawRepresentable, Hashable, Equatable, CustomStringConvertibl
 
 	public init?(rawValue: String) {
 		if let def = PhoenixEvent(rawValue: rawValue) {
-			self = .Phoenix(def)
+			self = .phoenix(def)
 		} else if let presence = PhoenixEvent.PresenceEvent(rawValue: rawValue) {
-			self = .Presence(presence)
+			self = .presence(presence)
 		} else {
-			self = .Custom(rawValue)
+			self = .custom(rawValue)
 		}
 	}
 }
 
 extension Event: UnboxableRawType {
 	public static func unboxFallbackValue() -> Stone.Event {
-		return .Custom("")
+		return .custom("")
 	}
 
-	public static func transformUnboxedInt(unboxedInt: Int) -> Stone.Event? {
+	public static func transform(unboxedInt: Int) -> Event? {
 		return nil
 	}
 
-	public static func transformUnboxedString(unboxedString: String) -> Stone.Event? {
+	public static func transform(unboxedString: String) -> Event? {
 		return Stone.Event(rawValue: unboxedString)
 	}
 }
 
 extension Stone.Event: WrappableEnum {
 	public func wrap() -> AnyObject? {
-		return rawValue
+		return rawValue as AnyObject?
 	}
 }

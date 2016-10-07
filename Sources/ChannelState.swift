@@ -15,5 +15,5 @@ Indicates the current connection status of a Channel.
 - Joined:	Indicates that the Channel is joined and active.
 */
 public enum ChannelState {
-	case Closed, Errored, Joining, Joined
+	case closed, errored, joining, joined
 }

@@ -7,23 +7,23 @@
 //
 
 public enum Result<T> {
-	case Success(T)
-	case Failure(ErrorType)
+	case success(T)
+	case failure(Error)
 
 	public func value() throws -> T {
 		switch self {
-		case .Success(let value):
+		case .success(let value):
 			return value
-		case .Failure(let error):
+		case .failure(let error):
 			throw error
 		}
 	}
 
-	public init(@noescape function: () throws -> T) {
+	public init(function: () throws -> T) {
 		do {
-			self = .Success(try function())
+			self = .success(try function())
 		} catch {
-			self = .Failure(error)
+			self = .failure(error as! Error)
 		}
 	}
 }
