@@ -204,7 +204,7 @@ public final class Socket {
 
 		channel.leave { [weak channel, weak self] success in
 			if let channel = channel {
-				self?.channels.remove(channel)
+				_ = self?.channels.remove(channel)
 			}
 
 			channel?.socket = nil

@@ -18,7 +18,7 @@ public struct Presence {
 	}
 
 	public func list<T: Unboxable>() throws -> [String: [T]] {
-		var ret = [String: [T]](minimumCapacity: presences.count)
+		let ret = [String: [T]](minimumCapacity: presences.count)
 
 		
 

@@ -8,6 +8,7 @@
 
 import Unbox
 import Wrap
+import Foundation
 
 public func == (lhs: Event, rhs: Event) -> Bool {
 	return lhs.rawValue == rhs.rawValue
@@ -95,6 +96,10 @@ public enum Event: RawRepresentable, Hashable, Equatable, CustomStringConvertibl
 extension Event: UnboxableRawType {
 	public static func unboxFallbackValue() -> Stone.Event {
 		return .custom("")
+	}
+
+	public static func transform(unboxedNumber: NSNumber) -> Event? {
+		return nil
 	}
 
 	public static func transform(unboxedInt: Int) -> Event? {
