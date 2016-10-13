@@ -8,6 +8,7 @@
 
 import SwiftWebSocket
 import Unbox
+import Wrap
 
 struct TestType: Unboxable, Hashable {
 	init(unboxer: Unboxer) {
@@ -78,7 +79,7 @@ public final class Channel: Hashable, Equatable, CustomStringConvertible {
 		return isMemberOfTopic(otherTopic.rawValue)
 	}
 
-	internal func triggerEvent(_ event: Stone.Event, ref: String? = nil, payload: [String: AnyObject] = [:]) {
+	internal func triggerEvent(_ event: Stone.Event, ref: String? = nil, payload: WrappedDictionary = [:]) {
 		guard state != .closed else {
 			return
 		}
@@ -130,7 +131,7 @@ public final class Channel: Hashable, Equatable, CustomStringConvertible {
 		}
 	}
 
-	fileprivate func handlePresenceEvent(_ event: Stone.Event.PhoenixEvent.PresenceEvent, withPayload payload: [String: AnyObject]) {
+	fileprivate func handlePresenceEvent(_ event: Stone.Event.PhoenixEvent.PresenceEvent, withPayload payload: WrappedDictionary) {
 		switch event {
 		case .State:
 			presenceStateCallback?(
@@ -178,6 +179,7 @@ public final class Channel: Hashable, Equatable, CustomStringConvertible {
 
 	- returns: The last function given as a callback for this Event on this Channel if one exists, nil otherwise.
 	*/
+	@discardableResult
 	public func onEvent(_ event: Stone.Event, callback: @escaping ResultCallback) -> ResultCallback? {
 		return eventBindings.updateValue(callback, forKey: event.rawValue)
 	}

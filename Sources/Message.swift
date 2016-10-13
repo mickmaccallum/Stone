@@ -8,7 +8,7 @@
 
 import Foundation
 import Unbox
-
+import Wrap
 /**
 Represents a message to be sent over a Channel. Includes fields for reference, topic, event, and a payload object.
 */
@@ -16,13 +16,13 @@ public struct Message {
 	public let ref: String?
 	public let topic: String
 	public let event: Stone.Event
-	public let payload: [String: AnyObject]
+	public let payload: WrappedDictionary
 
-	public init<RawType: RawRepresentable>(topic: RawType, event: Event, payload: [String: AnyObject] = [:], ref: String? = UUID().uuidString) where RawType.RawValue == String {
+	public init<RawType: RawRepresentable>(topic: RawType, event: Event, payload: WrappedDictionary = [:], ref: String? = UUID().uuidString) where RawType.RawValue == String {
 		self.init(topic: topic.rawValue, event: event, payload: payload, ref: ref)
 	}
 
-	public init(topic: String, event: Stone.Event, payload: [String: AnyObject] = [:], ref: String? = UUID().uuidString) {
+	public init(topic: String, event: Stone.Event, payload: WrappedDictionary = [:], ref: String? = UUID().uuidString) {
 		self.topic		= topic
 		self.event		= event
 		self.payload	= payload

@@ -287,7 +287,7 @@ class ViewController: UIViewController {
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		guard let destVc = segue.destination as? UserListTableViewController , segue.identifier == "" else {
+		guard let _ = segue.destination as? UserListTableViewController , segue.identifier == "" else {
 			super.prepare(for: segue, sender: sender)
 			return
 		}

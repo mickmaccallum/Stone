@@ -334,11 +334,11 @@ public final class Socket {
 		)
 	}
 
-	fileprivate func triggerEvent(_ event: Stone.Event, withRef ref: String? = nil, andPayload payload: [String: AnyObject] = [:], inChannel channel: Stone.Channel) {
+	fileprivate func triggerEvent(_ event: Stone.Event, withRef ref: String? = nil, andPayload payload: WrappedDictionary = [:], inChannel channel: Stone.Channel) {
 		channel.triggerEvent(event, ref: ref, payload: payload)
 	}
 
-	fileprivate func triggerEvent<T: Sequence>(_ event: Stone.Event, withRef ref: String? = nil, andPayload payload: [String: AnyObject] = [:], inChannels channels: T) where T.Iterator.Element == Stone.Channel {
+	fileprivate func triggerEvent<T: Sequence>(_ event: Stone.Event, withRef ref: String? = nil, andPayload payload: WrappedDictionary = [:], inChannels channels: T) where T.Iterator.Element == Stone.Channel {
 		for channel in channels {
 			triggerEvent(event, withRef: ref, andPayload: payload, inChannel: channel)
 		}
