@@ -978,39 +978,36 @@ class UnboxTests: XCTestCase {
     }
     
     func testThrowingForMissingRequiredValue() {
-        let invalidDictionary: UnboxableDictionary = [:]
+        struct Model: Unboxable {
+            let string: String
+            
+            init(unboxer: Unboxer) throws {
+                self.string = try unboxer.unbox(key: "string")
+            }
+        }
         
         do {
-            _ = try unbox(dictionary: invalidDictionary) as UnboxTestMock
+            _ = try unbox(dictionary: [:]) as Model
             XCTFail("Unbox should have thrown for a missing value")
-        } catch UnboxError.missingValue(_) {
-            // Test passed
         } catch {
-            XCTFail("Unbox did not return the correct error type. Error: \(error)")
+            XCTAssertEqual("\(error)", "[UnboxError] An error occured while unboxing path \"string\": The key \"string\" is missing.")
         }
     }
     
     func testThrowingForInvalidRequiredValue() {
-        var invalidDictionary = UnboxTestDictionaryWithAllRequiredKeysWithValidValues(nested: false)
-        
-        for key in invalidDictionary.keys {
-            let invalidValue = NSObject()
-            invalidDictionary[key] = invalidValue
-            break
+        struct Model: Unboxable {
+            let string: String
+            
+            init(unboxer: Unboxer) throws {
+                self.string = try unboxer.unbox(key: "string")
+            }
         }
         
         do {
-            _ = try unbox(dictionary: invalidDictionary) as UnboxTestMock
+            _ = try unbox(dictionary: ["string" : []]) as Model
             XCTFail("Unbox should have thrown for an invalid value")
-        } catch UnboxError.invalidValue(_, _) {
-            // Test passed
         } catch {
-            XCTFail("Unbox did not return the correct error type. Error: \(error)")
-        }
-        
-        defer {
-            let unboxed: UnboxTestMock? = try? unbox(dictionary: invalidDictionary)
-            XCTAssertNil(unboxed, "Unbox did not return nil for an invalid dictionary")
+            XCTAssertEqual("\(error)", "[UnboxError] An error occured while unboxing path \"string\": Invalid value ([]) for key \"string\".")
         }
     }
     
@@ -1019,10 +1016,8 @@ class UnboxTests: XCTestCase {
             do {
                 _ = try unbox(data: data) as UnboxTestMock
                 XCTFail("Unbox should have thrown for invalid data")
-            } catch UnboxError.invalidData {
-                // Test passed
             } catch {
-                XCTFail("Unbox did not return the correct error type: \(error)")
+                XCTAssertEqual("\(error)", "[UnboxError] Invalid data.")
             }
         } else {
             XCTFail("Could not create data from a string")
@@ -1038,11 +1033,9 @@ class UnboxTests: XCTestCase {
         
         do {
             _ = try unbox(data: data) as UnboxTestMock
-            XCTFail()
-        } catch UnboxError.invalidData {
-            // Test passed
+            XCTFail("Unbox should have thrown for invalid data")
         } catch {
-            XCTFail("Unbox did not return the correct error type")
+            XCTAssertEqual("\(error)", "[UnboxError] Invalid data.")
         }
     }
     
@@ -1110,13 +1103,15 @@ class UnboxTests: XCTestCase {
 
 
         let validDictionary = UnboxTestDictionaryWithAllRequiredKeysWithValidValues(nested: false)
-        let model: KeyPathModel? = try? unbox(dictionary: validDictionary)
-        XCTAssertNotNil(model)
-        XCTAssertEqual(15, model?.intValue)
-        if let result = model?.dictionary[UnboxTestMock.requiredArrayKey] as? [String] {
+        
+        do {
+            let model: KeyPathModel = try unbox(dictionary: validDictionary)
+            XCTAssertEqual(15, model.intValue)
+            
+            let result = model.dictionary[UnboxTestMock.requiredArrayKey] as! [String]
             XCTAssertEqual(["unbox", "is", "pretty", "cool", "right?"], result)
-        } else {
-            XCTFail()
+        } catch {
+            XCTFail("\(error)")
         }
     }
     
@@ -1206,10 +1201,8 @@ class UnboxTests: XCTestCase {
             _ = try Unboxer.performCustomUnboxing(dictionary: [:], closure: { _ in
                 return nil
             }) as UnboxTestMock
-        } catch UnboxError.customUnboxingFailed {
-            // Test passed
         } catch {
-            XCTFail("Unexpected error thrown: \(error)")
+            XCTAssertEqual("\(error)", "[UnboxError] Custom unboxing failed.")
         }
     }
     
@@ -1509,6 +1502,48 @@ class UnboxTests: XCTestCase {
         }
     }
     
+    func testThrowingForArrayWithInvalidElementType() {
+        struct Model: Unboxable {
+            let array: [ObjectIdentifier]
+            
+            init(unboxer: Unboxer) throws {
+                self.array = try unboxer.unbox(key: "array")
+            }
+        }
+        
+        let dictionary: UnboxableDictionary = [
+            "array" : ["value"]
+        ]
+        
+        do {
+            _ = try unbox(dictionary: dictionary) as Model
+            XCTFail("Should have thrown")
+        } catch {
+            XCTAssertEqual("\(error)", "[UnboxError] An error occured while unboxing path \"array\": Invalid collection element type: ObjectIdentifier. Must be UnboxCompatible or Unboxable.")
+        }
+    }
+    
+    func testThrowingForArrayWithInvalidElement() {
+        struct Model: Unboxable {
+            let array: [String]
+            
+            init(unboxer: Unboxer) throws {
+                self.array = try unboxer.unbox(key: "array")
+            }
+        }
+        
+        let dictionary: UnboxableDictionary = [
+            "array" : [[:]]
+        ]
+        
+        do {
+            _ = try unbox(dictionary: dictionary) as Model
+            XCTFail("Should have thrown")
+        } catch {
+            XCTAssertEqual("\(error)", "[UnboxError] An error occured while unboxing path \"array\": Invalid array element ([:]) at index 0.")
+        }
+    }
+    
     func testThrowingForDictionaryWithInvalidKeyType() {
         struct Model: Unboxable {
             let dictionary: [ObjectIdentifier : String]
@@ -1519,15 +1554,14 @@ class UnboxTests: XCTestCase {
         }
         
         let dictionary: UnboxableDictionary = [
-            "dictionary" : [:]
+            "dictionary" : ["key" : "value"]
         ]
         
         do {
             _ = try unbox(dictionary: dictionary) as Model
-        } catch UnboxError.invalidDictionaryKeyType(let keyType) {
-            XCTAssertNotNil(keyType as? ObjectIdentifier.Type)
+            XCTFail("Should have thrown")
         } catch {
-            XCTFail("\(error)")
+            XCTAssertEqual("\(error)", "[UnboxError] An error occured while unboxing path \"dictionary\": Invalid dictionary key type: ObjectIdentifier. Must be either String or UnboxableKey.")
         }
     }
     
@@ -1541,15 +1575,14 @@ class UnboxTests: XCTestCase {
         }
         
         let dictionary: UnboxableDictionary = [
-            "dictionary" : [:]
+            "dictionary" : ["key" : "value"]
         ]
         
         do {
             _ = try unbox(dictionary: dictionary) as Model
-        } catch UnboxError.invalidElementType(let elementType) {
-            XCTAssertNotNil(elementType as? ObjectIdentifier.Type)
+            XCTFail("Should have thrown")
         } catch {
-            XCTFail("\(error)")
+            XCTAssertEqual("\(error)", "[UnboxError] An error occured while unboxing path \"dictionary\": Invalid collection element type: ObjectIdentifier. Must be UnboxCompatible or Unboxable.")
         }
     }
     
@@ -1601,6 +1634,7 @@ private func UnboxTestDictionaryWithAllRequiredKeysWithValidValues(nested: Bool)
         UnboxTestMock.requiredEnumKey : 1,
         UnboxTestMock.requiredStringKey :  "hello",
         UnboxTestMock.requiredURLKey : "http://www.google.com",
+        UnboxTestMock.requiredDecimalKey: "13.95",
         UnboxTestMock.requiredArrayKey : ["unbox", "is", "pretty", "cool", "right?"],
         UnboxTestMock.requiredEnumArrayKey : [0, 1],
     ]
@@ -1656,6 +1690,8 @@ private class UnboxTestBaseMock: Unboxable {
     static let optionalStringKey = "optionalString"
     static let requiredURLKey = "requiredURL"
     static let optionalURLKey = "optionalURL"
+    static let requiredDecimalKey = "requiredDecimal"
+    static let optionalDecimalKey = "optionalDecimal"
     static let requiredArrayKey = "requiredArray"
     static let optionalArrayKey = "optionalArray"
     static let requiredEnumArrayKey = "requiredEnumArray"
@@ -1677,6 +1713,8 @@ private class UnboxTestBaseMock: Unboxable {
     let optionalString: String?
     let requiredURL: URL
     let optionalURL: URL?
+    let requiredDecimal: Decimal
+    let optionalDecimal: Decimal?
     let requiredArray: [String]
     let optionalArray: [String]?
     let requiredEnumArray: [UnboxTestEnum]
@@ -1699,6 +1737,8 @@ private class UnboxTestBaseMock: Unboxable {
         self.optionalString = unboxer.unbox(key: UnboxTestBaseMock.optionalStringKey)
         self.requiredURL = try unboxer.unbox(key: UnboxTestBaseMock.requiredURLKey)
         self.optionalURL = unboxer.unbox(key: UnboxTestBaseMock.optionalURLKey)
+        self.requiredDecimal = try unboxer.unbox(key: UnboxTestBaseMock.requiredDecimalKey)
+        self.optionalDecimal = unboxer.unbox(key: UnboxTestBaseMock.optionalDecimalKey)
         self.requiredArray = try unboxer.unbox(key: UnboxTestBaseMock.requiredArrayKey)
         self.optionalArray = unboxer.unbox(key: UnboxTestBaseMock.optionalArrayKey)
         self.requiredEnumArray = try unboxer.unbox(key: UnboxTestBaseMock.requiredEnumArrayKey)
@@ -1742,6 +1782,10 @@ private class UnboxTestBaseMock: Unboxable {
                 verificationOutcome = self.verifyTransformableValue(value: self.requiredURL, againstDictionaryValue: value)
             case UnboxTestBaseMock.optionalURLKey:
                 verificationOutcome = self.verifyTransformableValue(value: self.optionalURL, againstDictionaryValue: value)
+            case UnboxTestBaseMock.requiredDecimalKey:
+                verificationOutcome = self.verifyTransformableValue(value: self.requiredDecimal, againstDictionaryValue: value)
+            case UnboxTestBaseMock.optionalDecimalKey:
+                verificationOutcome = self.verifyTransformableValue(value: self.optionalDecimal, againstDictionaryValue: value)
             case UnboxTestBaseMock.requiredArrayKey:
                 verificationOutcome = self.verifyArrayPropertyValue(value: self.requiredArray, againstDictionaryValue: value)
             case UnboxTestBaseMock.optionalArrayKey:
@@ -1789,13 +1833,7 @@ private class UnboxTestBaseMock: Unboxable {
     func verifyArrayPropertyValue<T: Equatable>(value: [T]?, againstDictionaryValue dictionaryValue: Any?) -> Bool {
         if let propertyValue = value {
             if let dictionaryArrayValue = dictionaryValue as? [T] {
-                for i in 0..<dictionaryArrayValue.count {
-                    if dictionaryArrayValue[i] != propertyValue[i] {
-                        return false
-                    }
-                }
-                
-                return true
+                return dictionaryArrayValue == propertyValue
             }
         }
         

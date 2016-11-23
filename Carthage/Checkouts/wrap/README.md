@@ -48,7 +48,7 @@ struct SpaceShip {
     let weight: Double
     let engine: Engine
     let passengers: [Astronaut]
-    let launchLiveStreamURL: NSURL?
+    let launchLiveStreamURL: URL?
     let lastPilot: Astronaut?
 }
 
@@ -81,7 +81,7 @@ let ship = SpaceShip(
         Astronaut(name: "Mike"),
         Astronaut(name: "Amanda")
     ],
-    launchLiveStreamURL: NSURL(string: "http://livestream.com"),
+    launchLiveStreamURL: URL(string: "http://livestream.com"),
     lastPilot: nil
 )
 ```
@@ -110,7 +110,7 @@ Which will produce the following dictionary:
 }
 ```
 
-As you can see, Wrap automatically encoded the `NSURL` property to its `absoluteString`, and ignored any properties that were `nil` (reducing the size of the produced JSON).
+As you can see, Wrap automatically encoded the `URL` property to its `absoluteString`, and ignored any properties that were `nil` (reducing the size of the produced JSON).
 
 ### Customization
 
@@ -197,12 +197,12 @@ A context can be of `Any` type and is accessible in all `WrapCustomizable` wrapp
 ```swift
 struct Book: WrapCustomizable {
     let title: String
-    
+
     func wrap(context: Any?, dateFormatter: DateFormatter?) -> Any? {
         guard let prefix = context as? String else {
             return nil
         }
-        
+
         return [
             "title" : prefix + self.title
         ]
@@ -215,7 +215,7 @@ struct Book: WrapCustomizable {
 Wrap supports all current Apple platforms with the following minimum versions:
 
 - iOS 8
-- (mac)OS (X) 10.11
+- (mac)OS (X) 10.9
 - watchOS 2
 - tvOS 9
 

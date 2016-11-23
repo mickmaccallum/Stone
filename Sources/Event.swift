@@ -102,7 +102,7 @@ extension Event: UnboxableRawType {
 		return nil
 	}
 
-	public static func transform(unboxedInt: Int) -> Event? {
+	public static func transform(_ unboxedInt: Int) -> Event? {
 		return nil
 	}
 

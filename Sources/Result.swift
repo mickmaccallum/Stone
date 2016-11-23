@@ -23,7 +23,7 @@ public enum Result<T> {
 		do {
 			self = .success(try function())
 		} catch {
-			self = .failure(error as! Error)
+			self = .failure(error )
 		}
 	}
 }
