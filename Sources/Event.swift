@@ -42,22 +42,23 @@ The full list of built in events is as follows.
 */
 public enum Event: RawRepresentable, Hashable, Equatable, CustomStringConvertible {
 	public enum PhoenixEvent: String {
-		case Join		= "phx_join"
-		case Reply		= "phx_reply"
-		case Leave		= "phx_leave"
-		case Close		= "phx_close"
-		case Error		= "phx_error"
-		case Heartbeat	= "heartbeat"
+		case join		= "phx_join"
+		case reply		= "phx_reply"
+		case leave		= "phx_leave"
+		case close		= "phx_close"
+		case error		= "phx_error"
+		case heartbeat	= "heartbeat"
 
 		public enum PresenceEvent: String {
-			case State	= "presence_state"
-			case Diff	= "presence_diff"
+			case state	= "presence_state"
+			case diff	= "presence_diff"
 		}
 	}
 
 	case phoenix(PhoenixEvent)
 	case presence(PhoenixEvent.PresenceEvent)
 	case custom(String)
+	case none
 
 	public var description: String {
 		return rawValue
@@ -75,6 +76,8 @@ public enum Event: RawRepresentable, Hashable, Equatable, CustomStringConvertibl
 			return presence.rawValue
 		case .custom(let str):
 			return str
+		case .none:
+			return ""
 		}
 	}
 
@@ -94,8 +97,8 @@ public enum Event: RawRepresentable, Hashable, Equatable, CustomStringConvertibl
 }
 
 extension Event: UnboxableRawType {
-	public static func unboxFallbackValue() -> Stone.Event {
-		return .custom("")
+	public static func unboxFallbackValue() -> Event {
+		return .none
 	}
 
 	public static func transform(unboxedNumber: NSNumber) -> Event? {
@@ -107,11 +110,11 @@ extension Event: UnboxableRawType {
 	}
 
 	public static func transform(unboxedString: String) -> Event? {
-		return Stone.Event(rawValue: unboxedString)
+		return Event(rawValue: unboxedString)
 	}
 }
 
-extension Stone.Event: WrappableEnum {
+extension Event: WrappableEnum {
 	public func wrap() -> AnyObject? {
 		return rawValue as AnyObject?
 	}

@@ -36,9 +36,9 @@ public final class Socket {
 	/// Called whenever the web socket connection is closed.
 	public var onClose: ((_ code: Int, _ reason: String, _ wasClean: Bool) -> Void)?
 	/// Called for every message that is received over the socket (called a lot).
-	public var onMessage: ((_ result: Stone.Result<Stone.Message>) -> Void)?
+	public var onMessage: ((_ result: Result<IncomingMessage>) -> Void)?
 	/// Called every time a heartbeat message is received
-	public var onHeartbeat: ((_ result: Stone.Result<Stone.Message>) -> Void)?
+	public var onHeartbeat: ((_ result: Result<IncomingMessage>) -> Void)?
 
 	/// The connection state of the underlying socket.
 	public var socketState: SocketState {
@@ -180,7 +180,7 @@ public final class Socket {
 	A single instance of Channel shouldn't be used on multiple Sockets at the same time. The Channel will only be connected
 	to the most recent Socket which it was added to.
 	*/
-	public func addChannel(_ channel: Stone.Channel) {
+	public func addChannel(_ channel: Channel) {
 		guard !channels.contains(channel) else {
 			return
 		}
@@ -196,7 +196,7 @@ public final class Socket {
 	/**
 	Removes the supplied Channel from the receiver, and returns it if it was being tracked. Otherwise, this returns nil.
 	*/
-	public func removeChannel(_ channel: Stone.Channel, completion: ((_ clean: Bool?, _ channel: Stone.Channel?) -> Void)?) {
+	public func removeChannel(_ channel: Channel, completion: ((_ clean: Bool?, _ channel: Channel?) -> Void)?) {
 		guard channels.contains(channel) else {
 			completion?(nil, nil)
 			return
@@ -212,11 +212,11 @@ public final class Socket {
 		}
 	}
 
-	public func channelForTopic<RawType: RawRepresentable>(_ topic: RawType) -> Stone.Channel? where RawType.RawValue == String {
+	public func channelForTopic<RawType: RawRepresentable>(_ topic: RawType) -> Channel? where RawType.RawValue == String {
 		return channelForTopic(topic.rawValue)
 	}
 
-	public func channelForTopic(_ topic: String) -> Stone.Channel? {
+	public func channelForTopic(_ topic: String) -> Channel? {
 		return channels.filter {
 			$0.isMemberOfTopic(topic)
 		}.first
@@ -228,7 +228,7 @@ public final class Socket {
 		heartBeatTimer = Timer.scheduledTimer(
 			timeInterval: timeInterval,
 			target: self,
-			selector: #selector(Stone.Socket.sendHeartBeat),
+			selector: #selector(Socket.sendHeartBeat),
 			userInfo: nil,
 			repeats: true
 		)
@@ -247,17 +247,20 @@ public final class Socket {
 	}
 
 	@objc fileprivate func sendHeartBeat() {
+		let msg = OutboundMessage(
+			topic: "phoenix",
+			event: .phoenix(.heartbeat),
+			payload: "{}",
+			ref: "heartbeat"
+		)
+
 		try! push(
-			Message(
-				topic: "phoenix",
-				event: Event.phoenix(.Heartbeat),
-				ref: "heartbeat"
-			)
+			msg
 		)
 	}
 
 	fileprivate func discardHeartBeatTimer() {
-		if let timer = heartBeatTimer , timer.isValid {
+		if let timer = heartBeatTimer, timer.isValid {
 			timer.invalidate()
 		}
 
@@ -265,7 +268,7 @@ public final class Socket {
 	}
 
 	fileprivate func discardReconnectTimer() {
-		if let timer = reconnectTimer , timer.isValid {
+		if let timer = reconnectTimer, timer.isValid {
 			timer.invalidate()
 		}
 
@@ -276,7 +279,7 @@ public final class Socket {
 	Pushes the given Message over the Socket. This has been exposed publicly in case you need it, but it only facilitates
 	channel communication, so you should probably use Channels and let this be handled for you.
 	*/
-	public func push(_ message: Stone.Message) throws {
+	public func push(_ message: OutboundMessage) throws {
 		let jsonData: Data = try wrap(message)
 
 		queue.addOperation { [weak self] in
@@ -288,7 +291,7 @@ public final class Socket {
 		queue.isSuspended = false
 		discardReconnectTimer()
 
-		if let timeInterval = heartbeatInterval , timeInterval > 0.0 {
+		if let timeInterval = heartbeatInterval, timeInterval > 0.0 {
 			startHeatBeatTimer(timeInterval)
 		}
 
@@ -302,14 +305,13 @@ public final class Socket {
 	}
 
 	fileprivate func webSocketDidReceiveMessage(_ messageStr: String) {
-		guard let messageData = messageStr.data(using: String.Encoding.utf8, allowLossyConversion: false) else {
+		guard let messageData = messageStr.data(using: .utf8, allowLossyConversion: false) else {
 			return
 		}
 
 		do {
-			let message: Stone.Message = try unbox(data: messageData)
-
-			if let ref = message.ref , ref == Event.PhoenixEvent.Heartbeat.rawValue {
+			let message: IncomingMessage = try unbox(data: messageData)
+			if let ref = message.ref, ref == Event.PhoenixEvent.heartbeat.rawValue {
 				onHeartbeat?(Result.success(message))
 			} else {
 				onMessage?(.success(message))
@@ -321,33 +323,36 @@ public final class Socket {
 		}
 	}
 
-	fileprivate func relayMessage(_ message: Stone.Message) {
+	fileprivate func relayMessage(_ message: IncomingMessage) {
 		guard let channel = channelForTopic(message.topic) else {
 			return
 		}
 
-		triggerEvent(
-			message.event,
-			withRef: message.ref,
-			andPayload: message.payload,
-			inChannel: channel
-		)
+		forwardMessage(message, toChannel: channel)
 	}
 
-	fileprivate func triggerEvent(_ event: Stone.Event, withRef ref: String? = nil, andPayload payload: WrappedDictionary = [:], inChannel channel: Stone.Channel) {
-		channel.triggerEvent(event, ref: ref, payload: payload)
+	fileprivate func forwardMessage(_ message: IncomingMessage, toChannel channel: Channel) {
+		channel.receiveMessage(message: message)
 	}
 
-	fileprivate func triggerEvent<T: Sequence>(_ event: Stone.Event, withRef ref: String? = nil, andPayload payload: WrappedDictionary = [:], inChannels channels: T) where T.Iterator.Element == Stone.Channel {
+	fileprivate func triggerEvent(_ event: Event.PhoenixEvent, inChannel channel: Channel) {
+		channel.triggerEvent(event)
+	}
+
+	fileprivate func triggerEvent<T: Sequence>(_ event: Event.PhoenixEvent, inChannels channels: T) where T.Iterator.Element == Channel {
+		if event == .none {
+			return
+		}
+
 		for channel in channels {
-			triggerEvent(event, withRef: ref, andPayload: payload, inChannel: channel)
+			triggerEvent(event, inChannel: channel)
 		}
 	}
 
 	fileprivate func webSocketDidClose(_ code: Int, reason: String, wasClean: Bool) {
 		queue.isSuspended = true
 		
-		triggerEvent(Event.phoenix(.Close), inChannels: channels)
+		triggerEvent(.close, inChannels: channels)
 
 		discardHeartBeatTimer()
 		if shouldReconnectOnError {
@@ -364,7 +369,7 @@ public final class Socket {
 	fileprivate func webSocketDidError(_ error: NSError) {
 		onError?(error)
 
-		triggerEvent(Event.phoenix(.Error), inChannels: channels)
+		triggerEvent(.error, inChannels: channels)
 	}
 }
 

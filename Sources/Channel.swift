@@ -10,30 +10,16 @@ import SwiftWebSocket
 import Unbox
 import Wrap
 
-struct TestType: Unboxable, Hashable {
-	init(unboxer: Unboxer) {
-
-	}
-
-	var hashValue: Int {
-		return 0
-	}
-}
-
-func ==(lhs: TestType, rhs: TestType) -> Bool {
-	return true
-}
-
 /**
 Defines a Channel for communicating with a given topic on your Phoenix server.
 */
 public final class Channel: Hashable, Equatable, CustomStringConvertible {
 	public let topic: String
 
-	public typealias ResultCallback = (_ result: Stone.Result<Stone.Message>) -> Void
-	public typealias EventCallback = (_ message: Stone.Message) -> Void
+	public typealias ResultCallback = (_ result: Result<IncomingMessage>) -> Void
+	public typealias EventCallback = (_ message: IncomingMessage) -> Void
 	/// The state of the connection to this Channel.
-	public internal(set) var state: Stone.ChannelState = .closed
+	public internal(set) var state: ChannelState = .closed
 
 	public var shouldTrackPresence = false
 
@@ -79,82 +65,76 @@ public final class Channel: Hashable, Equatable, CustomStringConvertible {
 		return isMemberOfTopic(otherTopic.rawValue)
 	}
 
-	internal func triggerEvent(_ event: Stone.Event, ref: String? = nil, payload: WrappedDictionary = [:]) {
-		guard state != .closed else {
+	internal func receiveMessage(message: IncomingMessage) {
+		if state == .closed {
 			return
 		}
 
-		let message = Stone.Message(
-			topic: topic,
-			event: event,
-			payload: payload,
-			ref: ref
-		)
-
-		if event == .Reply {
-			guard let ref = ref else {
-				return
-			}
-
-			if let defaultEvent = Event.PhoenixEvent(rawValue: ref) {
-				handleDefaultEvent(defaultEvent, message: message)
-			}
-
-			if let replyCallback = callbackBindings.removeValue(forKey: ref) {
-				replyCallback?(.success(message))
-			}
+		if message.event == .reply {
+			handleReply(message: message)
 		} else {
-			if let eventBinding = eventBindings[event.rawValue] {
+			if let eventBinding = eventBindings[message.event.rawValue] {
 				eventBinding(.success(message))
 			}
 
-			if let presenceEvent = Stone.Event.PhoenixEvent.PresenceEvent(rawValue: event.rawValue) , shouldTrackPresence {
-				handlePresenceEvent(presenceEvent, withPayload: message.payload)
+			guard let presenceEvent = Event.PhoenixEvent.PresenceEvent(rawValue: message.event.rawValue), shouldTrackPresence else {
+				return
 			}
+
+			handlePresenceEvent(presenceEvent, withPayload: message.payload)
 		}
 	}
 
-	fileprivate func handleDefaultEvent(_ event: Event.PhoenixEvent, message: Message) {
+	internal func triggerEvent(_ event: Event.PhoenixEvent) {
+		let message = IncomingMessage(topic: topic, event: Event.phoenix(event))
+		handlePhoenixEvent(event, message: message)
+	}
+
+	fileprivate func handleReply(message: IncomingMessage) {
+		guard let ref = message.ref else {
+			return
+		}
+
+		if let phoenixEvent = Event.PhoenixEvent(rawValue: ref) {
+			handlePhoenixEvent(phoenixEvent, message: message)
+		}
+
+		if let replyCallback = callbackBindings.removeValue(forKey: ref) {
+			replyCallback?(.success(message))
+		}
+	}
+
+	fileprivate func handlePhoenixEvent(_ event: Event.PhoenixEvent, message: IncomingMessage) {
 		switch event {
-		case .Join:
+		case .join:
 			onJoin?(message)
-		case .Reply:
+		case .reply:
 			onReply?(message)
-		case .Leave:
+		case .leave:
 			onLeave?(message)
-		case .Close:
+		case .close:
 			onClose?(message)
-		case .Error:
+		case .error:
 			onError?(message)
 		default:
 			break
 		}
 	}
 
-	fileprivate func handlePresenceEvent(_ event: Stone.Event.PhoenixEvent.PresenceEvent, withPayload payload: WrappedDictionary) {
+	fileprivate func handlePresenceEvent(_ event: Event.PhoenixEvent.PresenceEvent, withPayload payload: Data?) {
 		switch event {
-		case .State:
+		case .state:
 			presenceStateCallback?(
-				Stone.Result.success(
-					payload.map {
-						Stone.PresenceChange(
-							name: $0.0,
-							metas: ($0.1 as? [String: AnyObject]) ?? [String: AnyObject]()
-						)
-					}
+				Result.success(
+					PresenceWrapper(data: payload)
 				)
 			)
-		case .Diff:
-
-			do {
-				presenceDiffCallback?(
-					.success(
-						try unbox(dictionary: payload)
-					)
+		case .diff:
+			presenceDiffCallback?(
+				Result.success(
+					PresenceDiffWrapper(data: payload)
 				)
-			} catch {
-				presenceDiffCallback?(.failure(Stone.StoneError.invalidJSON))
-			}
+			)
 		}
 	}
 
@@ -164,7 +144,7 @@ public final class Channel: Hashable, Equatable, CustomStringConvertible {
 	public var onLeave: EventCallback?
 	public var onClose: EventCallback?
 
-	fileprivate func triggerInternalEvent(_ event: Stone.Event.PhoenixEvent, withMessage message: Stone.Message) {
+	fileprivate func triggerInternalEvent(_ event: Event.PhoenixEvent, withMessage message: IncomingMessage) {
 		switch message.topic {
 		case topic:
 			state = .joined
@@ -180,7 +160,7 @@ public final class Channel: Hashable, Equatable, CustomStringConvertible {
 	- returns: The last function given as a callback for this Event on this Channel if one exists, nil otherwise.
 	*/
 	@discardableResult
-	public func onEvent(_ event: Stone.Event, callback: @escaping ResultCallback) -> ResultCallback? {
+	public func onEvent(_ event: Event, callback: @escaping ResultCallback) -> ResultCallback? {
 		return eventBindings.updateValue(callback, forKey: event.rawValue)
 	}
 
@@ -189,39 +169,25 @@ public final class Channel: Hashable, Equatable, CustomStringConvertible {
 
 	- returns: The function that used to be the callback for this Event if one exists, nil otherwise.
 	*/
-	public func offEvent(_ event: Stone.Event) -> ResultCallback? {
+	public func offEvent(_ event: Event) -> ResultCallback? {
 		return eventBindings.removeValue(forKey: event.rawValue)
 	}
 
-	fileprivate var presenceDiffCallback: ((_ result: Stone.Result<Stone.PresenceDiff>) -> Void)?
+	fileprivate var presenceDiffCallback: ((_ result: Result<PresenceDiffWrapper>) -> Void)?
 
 	/**
 	Registers a callback to be received whenever a presence diff update occurs.
 	*/
-	public func onPresenceDiff(_ callback: @escaping (_ result: Stone.Result<Stone.PresenceDiff>) -> Void) {
+	public func onPresenceDiff(_ callback: @escaping (_ result: Result<PresenceDiffWrapper>) -> Void) {
 		presenceDiffCallback = callback
 	}
 
-	fileprivate var presenceStateCallback: ((_ result: Stone.Result<Array<Stone.PresenceChange>>) -> Void)?
-
-
-//	public func test<T: protocol<Unboxable, Hashable>>(closure: (result: Stone.Presence<T>) -> Void) {
-////		testState = closure
-//		let p = Presence<T>(name: "", metas: [])
-//		closure(result: p)
-//	}
-
-	var presence: Stone.Presence?
-
-	public func presences<T: Unboxable & Hashable>(_ closure: (_ presences: [String: Set<T>]) -> Void) {
-		closure([:])
-
-	}
+	fileprivate var presenceStateCallback: ((_ result: Result<PresenceWrapper>) -> Void)?
 
 	/**
 	Registers a callback to be received whenever a presence state update occurs.
 	*/
-	public func onPresenceState(_ callback: @escaping (_ result: Stone.Result<Array<Stone.PresenceChange>>) -> Void) {
+	public func onPresenceState(_ callback: @escaping (_ result: Result<PresenceWrapper>) -> Void) {
 		presenceStateCallback = callback
 	}
 
@@ -229,9 +195,11 @@ public final class Channel: Hashable, Equatable, CustomStringConvertible {
 	Sends the given Message over the receiving Channel. When the server replies, the contents of the reply will be
 	given in the completion handler.
 	*/
-	public func sendMessage(_ message: Stone.Message, completion: ResultCallback? = nil) {
+	// 	public typealias ResultCallback = (_ result: Result<Message>) -> Void
+
+	public func sendMessage(_ message: OutboundMessage, completion: ResultCallback? = nil) {
 		guard let socket = socket else {
-			completion?(.failure(Stone.StoneError.lostSocket))
+			completion?(.failure(StoneError.lostSocket))
 			return
 		}
 
@@ -240,10 +208,10 @@ public final class Channel: Hashable, Equatable, CustomStringConvertible {
 
 			callbackBindings.updateValue(
 				completion,
-				forKey: message.ref!
+				forKey: message.ref
 			)
 		} catch {
-			completion?(.failure(Stone.StoneError.invalidJSON))
+			completion?(.failure(StoneError.invalidJSON))
 		}
 	}
 
@@ -251,19 +219,19 @@ public final class Channel: Hashable, Equatable, CustomStringConvertible {
 	Sends a join message to the Channel's topic.
 	*/
 	public func join(_ completion: ResultCallback? = nil) {
-		guard state == .closed || state == Stone.ChannelState.errored else {
+		guard state == .closed || state == ChannelState.errored else {
 			return
 		}
 		
 		state = .joining
-		let joinMessage = Stone.Message(
+		let joinMessage = OutboundMessage(
 			topic: topic,
-			event: Stone.Event.phoenix(.Join),
-			payload: [:],
-			ref: Stone.Event.phoenix(.Join).description
+			event: .phoenix(.join),
+			payload: "{}",
+			ref: Event.phoenix(.join).description
 		)
 
-		callbackBindings[joinMessage.ref!] = completion
+		callbackBindings[joinMessage.ref] = completion
 		sendMessage(joinMessage, completion: nil)
 	}
 
@@ -272,22 +240,17 @@ public final class Channel: Hashable, Equatable, CustomStringConvertible {
 	it receives, even if the Channel object happens to still be alive.
 	*/
 	public func leave(_ completion: ((_ success: Bool) -> Void)? = nil) {
-		let leaveMessage = Stone.Message(
+		let leaveMessage = OutboundMessage(
 			topic: topic,
-			event: Stone.Event.phoenix(.Leave)
+			event: .phoenix(.leave),
+			payload: "{}"
 		)
 
 		sendMessage(leaveMessage) { [weak self] result in
 			self?.state = .closed
 			
 			do {
-				let message = try result.value()
-
-				self?.triggerEvent(
-					leaveMessage.event,
-					ref: message.ref,
-					payload: message.payload
-				)
+				self?.handleReply(message: try result.value())
 
 				completion?(true)
 			} catch {
@@ -297,6 +260,6 @@ public final class Channel: Hashable, Equatable, CustomStringConvertible {
 	}
 }
 
-public func == (lhs: Stone.Channel, rhs: Stone.Channel) -> Bool {
+public func == (lhs: Channel, rhs: Channel) -> Bool {
 	return lhs.hashValue == rhs.hashValue
 }

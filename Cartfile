@@ -1,3 +1,3 @@
 github "tidwall/SwiftWebSocket" "swift/3.0"
-github "johnsundell/unbox" ~> 2.0
+github "johnsundell/unbox" ~> 2.3.0
 github "Tethr-Technologies-Inc/Wrap" ~> 2.0.4
