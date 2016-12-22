@@ -47,7 +47,7 @@ class UserListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 		let device = users[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
 
-		cell.textLabel?.text = device.deviceId.uuidString
+		cell.textLabel?.text = device.deviceId
 		cell.detailTextLabel?.text = device.onlineAt.description
 
         return cell

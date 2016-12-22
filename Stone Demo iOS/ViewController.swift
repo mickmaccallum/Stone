@@ -13,7 +13,7 @@ import Unbox
 struct UserDevice: Unboxable, Hashable {
 	let onlineAt: Date
 	let ref: String
-	let deviceId: UUID
+	let deviceId: String
 
 	var hashValue: Int {
 		return deviceId.hashValue
@@ -25,8 +25,7 @@ struct UserDevice: Unboxable, Hashable {
 		let timestamp: TimeInterval = try unboxer.unbox(key: "online_at")
 		onlineAt = Date(timeIntervalSince1970: timestamp)
 
-		let uuidString: String = try unboxer.unbox(key: "device_token")
-		deviceId = UUID(uuidString: uuidString)!
+		deviceId = try unboxer.unbox(key: "device_token")
 	}
 }
 
@@ -39,7 +38,8 @@ struct ChatMessage: Unboxable {
 	let body: String
 
 	init(unboxer: Unboxer) throws {
-		sender = try unboxer.unbox(key: "user_id")
+		print(unboxer.dictionary)
+		sender = try unboxer.unbox(key: "sender")
 		body = try unboxer.unbox(key: "body")
 	}
 }
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
 
 	fileprivate lazy var socket: Socket = {
 		let url = URL(
-			string: "http://192.168.0.28:4000/socket/websocket"
+			string: "http://127.0.0.1:4000/socket/websocket" // or your local IP to test from multiple devices.
 		)!
 
 		return Socket(
@@ -110,65 +110,75 @@ class ViewController: UIViewController {
 
 		channel.onEvent(Event.custom("new:msg")) { [unowned self] result in
 			do {
-				let payload = try result.value().payload
-				self.messages.append(try unbox(dictionary: payload))
+				guard let payload: ChatMessage? = try result.value().unboxPayload() else {
+					return
+				}
+				guard let payload2 = payload else {
+					return
+				}
+				print("++++++++ got new message: \(payload)")
+				self.messages.append(payload2)
 				self.tableView.reloadData()
 			} catch {
+				print("New message errored out")
 				print(error)
 			}
 		}
 
-		channel.onPresenceState { [unowned self] result in
+		channel.onPresenceState { result in
 			do {
-				let presences = try result.value()
-				self.activeUsers.removeAll()
-
-				for presence in presences {
-					do {
-						let metas: [UserDevice] = try unbox(dictionaries: presence.metas["metas"] as! [[String: AnyObject]])
-						self.activeUsers[presence.name] = Set(metas)
-					} catch {
-						print(error)
-					}
-				}
+//				let presences: Set<Presence<String, UserDevice>> = try result.value().unbox()
+				print(try result.value())
 			} catch {
-				print("presence state failed")
+
 			}
 		}
 
-		channel.onPresenceDiff { [unowned self] result in
-			do {
-				let diff = try result.value()
-
-				for presence in diff.joins {
-					do {
-						let metas: [UserDevice] = try unbox(dictionaries: presence.metas["metas"] as! [[String: AnyObject]])
-
-						if let existingPresences = self.activeUsers[presence.name] {
-							self.activeUsers[presence.name] = Set(metas).union(existingPresences)
-						} else {
-							self.activeUsers[presence.name] = Set(metas)
-						}
-					} catch {
-						print(error)
-					}
-				}
-				
-				for presence in diff.leaves {
-					do {
-						let metas: [UserDevice] = try unbox(dictionaries: presence.metas["metas"] as! [[String: AnyObject]])
-
-						if let existingPresences = self.activeUsers[presence.name] {
-							self.activeUsers[presence.name] = existingPresences.subtracting(Set(metas))
-						}
-					} catch {
-						print(error)
-					}
-				}
-			} catch {
-				print("presence diff failed")
-			}
-		}
+//		channel.onPresenceState { [unowned self] result in
+//			do {
+//				let presences = try result.value()
+//				self.activeUsers.removeAll()
+//
+//				for presence in presences {
+//					guard let metas = presence.metas["metas"] as? [[String: AnyObject]] else {
+//						break
+//					}
+//
+//					self.activeUsers[presence.name] = Set(try unbox(dictionaries: metas))
+//				}
+//			} catch {
+//				print("presence state failed")
+//			}
+//		}
+//
+//		channel.onPresenceDiff { [unowned self] result in
+//			do {
+//				let diff = try result.value()
+//
+//				for presence in diff.joins {
+//					guard let metas = presence.metas["metas"] as? [[String: AnyObject]] else {
+//						break
+//					}
+//
+//					let uniqueMetas = Set<UserDevice>(try unbox(dictionaries: metas))
+//					if let existingPresences = self.activeUsers[presence.name] {
+//						self.activeUsers[presence.name] = uniqueMetas.union(existingPresences)
+//					} else {
+//						self.activeUsers[presence.name] = uniqueMetas
+//					}
+//				}
+//				
+//				for presence in diff.leaves {
+//					let metas: [UserDevice] = try unbox(dictionaries: presence.metas["metas"] as! [[String: AnyObject]])
+//
+//					if let existingPresences = self.activeUsers[presence.name] {
+//						self.activeUsers[presence.name] = existingPresences.subtracting(Set(metas))
+//					}
+//				}
+//			} catch {
+//				print("presence diff failed")
+//			}
+//		}
 
 		socket.addChannel(channel)
 
@@ -208,7 +218,7 @@ class ViewController: UIViewController {
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.tableFooterView = UIView()
 
-		NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil, queue: .main) { [unowned self] notification in
+		NotificationCenter.default.addObserver(forName: .UIKeyboardWillChangeFrame, object: nil, queue: .main) { [unowned self] notification in
 			guard self.textField.isFirstResponder else {
 				return
 			}
@@ -249,25 +259,16 @@ class ViewController: UIViewController {
 
 		sendButton.isEnabled = false
 
-//		let message = Stone.Message(
-//			topic: channel.topic,
-//			event: Event.custom("new:msg"),
-//			payload: [
-//				"body": text
-//			]
-//		)
-
-		
-		let message = Message(
+		let message = try! OutboundMessage(
 			topic: channel.topic,
 			event: Event.custom("new:msg"),
-			payload: ["": text as AnyObject],
-			ref: nil
+			payload: "{\"body\":\"\(text)\"}"
 		)
-
+		
 		channel.sendMessage(message) { result in
 			do {
-				_ = try result.value()
+				let result = try result.value()
+				print("Got response: \(result)")
 				self.textField.text = ""
 			} catch {
 				print(error)
@@ -287,7 +288,7 @@ class ViewController: UIViewController {
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		guard let _ = segue.destination as? UserListTableViewController , segue.identifier == "" else {
+		guard let _ = segue.destination as? UserListTableViewController, segue.identifier == "showUsersSegue" else {
 			super.prepare(for: segue, sender: sender)
 			return
 		}

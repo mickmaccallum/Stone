@@ -16,7 +16,6 @@
 		0081A72D1CFBBC6F00F33FB0 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7211CFBBC6F00F33FB0 /* Event.swift */; };
 		0081A72F1CFBBC6F00F33FB0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7231CFBBC6F00F33FB0 /* Extensions.swift */; };
 		0081A7301CFBBC6F00F33FB0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7241CFBBC6F00F33FB0 /* Message.swift */; };
-		0081A7311CFBBC6F00F33FB0 /* PresenceChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7251CFBBC6F00F33FB0 /* PresenceChange.swift */; };
 		0081A7321CFBBC6F00F33FB0 /* PresenceDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7261CFBBC6F00F33FB0 /* PresenceDiff.swift */; };
 		0081A7331CFBBC6F00F33FB0 /* QueryStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7271CFBBC6F00F33FB0 /* QueryStringConvertible.swift */; };
 		0081A7341CFBBC6F00F33FB0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7281CFBBC6F00F33FB0 /* Result.swift */; };
@@ -45,7 +44,6 @@
 		00B5AA281D42516E005819B2 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7211CFBBC6F00F33FB0 /* Event.swift */; };
 		00B5AA2A1D42516E005819B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7231CFBBC6F00F33FB0 /* Extensions.swift */; };
 		00B5AA2B1D42516E005819B2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7241CFBBC6F00F33FB0 /* Message.swift */; };
-		00B5AA2C1D42516E005819B2 /* PresenceChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7251CFBBC6F00F33FB0 /* PresenceChange.swift */; };
 		00B5AA2D1D42516E005819B2 /* PresenceDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7261CFBBC6F00F33FB0 /* PresenceDiff.swift */; };
 		00B5AA2E1D42516E005819B2 /* QueryStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7271CFBBC6F00F33FB0 /* QueryStringConvertible.swift */; };
 		00B5AA2F1D42516E005819B2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7281CFBBC6F00F33FB0 /* Result.swift */; };
@@ -56,7 +54,6 @@
 		00B5AA341D42516E005819B2 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7211CFBBC6F00F33FB0 /* Event.swift */; };
 		00B5AA361D42516E005819B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7231CFBBC6F00F33FB0 /* Extensions.swift */; };
 		00B5AA371D42516E005819B2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7241CFBBC6F00F33FB0 /* Message.swift */; };
-		00B5AA381D42516E005819B2 /* PresenceChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7251CFBBC6F00F33FB0 /* PresenceChange.swift */; };
 		00B5AA391D42516E005819B2 /* PresenceDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7261CFBBC6F00F33FB0 /* PresenceDiff.swift */; };
 		00B5AA3A1D42516E005819B2 /* QueryStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7271CFBBC6F00F33FB0 /* QueryStringConvertible.swift */; };
 		00B5AA3B1D42516E005819B2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0081A7281CFBBC6F00F33FB0 /* Result.swift */; };
@@ -78,7 +75,6 @@
 		0081A7211CFBBC6F00F33FB0 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		0081A7231CFBBC6F00F33FB0 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0081A7241CFBBC6F00F33FB0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		0081A7251CFBBC6F00F33FB0 /* PresenceChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceChange.swift; sourceTree = "<group>"; };
 		0081A7261CFBBC6F00F33FB0 /* PresenceDiff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceDiff.swift; sourceTree = "<group>"; };
 		0081A7271CFBBC6F00F33FB0 /* QueryStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryStringConvertible.swift; sourceTree = "<group>"; };
 		0081A7281CFBBC6F00F33FB0 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -198,7 +194,6 @@
 				0081A7231CFBBC6F00F33FB0 /* Extensions.swift */,
 				0081A7241CFBBC6F00F33FB0 /* Message.swift */,
 				007715B41D5F562300D01A16 /* Presence.swift */,
-				0081A7251CFBBC6F00F33FB0 /* PresenceChange.swift */,
 				0081A7261CFBBC6F00F33FB0 /* PresenceDiff.swift */,
 				0081A7271CFBBC6F00F33FB0 /* QueryStringConvertible.swift */,
 				0081A7281CFBBC6F00F33FB0 /* Result.swift */,
@@ -356,7 +351,7 @@
 					};
 					00D93BFB1D498C5600FC0ECE = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -491,7 +486,6 @@
 				0081A72D1CFBBC6F00F33FB0 /* Event.swift in Sources */,
 				0081A7331CFBBC6F00F33FB0 /* QueryStringConvertible.swift in Sources */,
 				0081A72F1CFBBC6F00F33FB0 /* Extensions.swift in Sources */,
-				0081A7311CFBBC6F00F33FB0 /* PresenceChange.swift in Sources */,
 				0081A72A1CFBBC6F00F33FB0 /* Channel.swift in Sources */,
 				0081A7321CFBBC6F00F33FB0 /* PresenceDiff.swift in Sources */,
 				0081A72C1CFBBC6F00F33FB0 /* Error.swift in Sources */,
@@ -510,7 +504,6 @@
 				00B5AA281D42516E005819B2 /* Event.swift in Sources */,
 				00B5AA2E1D42516E005819B2 /* QueryStringConvertible.swift in Sources */,
 				00B5AA2A1D42516E005819B2 /* Extensions.swift in Sources */,
-				00B5AA2C1D42516E005819B2 /* PresenceChange.swift in Sources */,
 				00B5AA251D42516E005819B2 /* Channel.swift in Sources */,
 				00B5AA2D1D42516E005819B2 /* PresenceDiff.swift in Sources */,
 				00B5AA271D42516E005819B2 /* Error.swift in Sources */,
@@ -529,7 +522,6 @@
 				00B5AA341D42516E005819B2 /* Event.swift in Sources */,
 				00B5AA3A1D42516E005819B2 /* QueryStringConvertible.swift in Sources */,
 				00B5AA361D42516E005819B2 /* Extensions.swift in Sources */,
-				00B5AA381D42516E005819B2 /* PresenceChange.swift in Sources */,
 				00B5AA311D42516E005819B2 /* Channel.swift in Sources */,
 				00B5AA391D42516E005819B2 /* PresenceDiff.swift in Sources */,
 				00B5AA331D42516E005819B2 /* Error.swift in Sources */,
@@ -596,6 +588,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -620,6 +613,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -682,7 +676,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -740,7 +734,7 @@
 				PRODUCT_NAME = Stone;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -804,7 +798,7 @@
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -860,7 +854,7 @@
 				PRODUCT_NAME = Stone;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				VALIDATE_PRODUCT = YES;
@@ -928,7 +922,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -985,7 +979,7 @@
 				PRODUCT_NAME = Stone;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};

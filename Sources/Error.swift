@@ -7,7 +7,7 @@
 //
 
 /**
-Represents various errors that can occur while interacting with Stone.
+Represents various errors that can occur while interacting with 
 
 - LostSocket:
 - InvalidJSON:

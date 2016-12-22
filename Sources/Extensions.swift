@@ -15,7 +15,7 @@ extension String: QueryStringConvertible {
 	}
 }
 
-public extension Dictionary where Key: Stone.QueryStringConvertible, Value: Stone.QueryStringConvertible {
+public extension Dictionary where Key: QueryStringConvertible, Value: QueryStringConvertible {
 	/**
 	Converts the reciever's keys and values into and Array of NSURLQueryItems. If a key or value
 	for a given item in the dictionary can't successfully be converted into a query string 
@@ -44,7 +44,7 @@ extension URL {
 	func urlByAppendingQueryItems(_ queryItems: [URLQueryItem]?) -> URL? {
 		var components = URLComponents(url: self, resolvingAgainstBaseURL: true)
 
-		if var currentItems = components?.queryItems , !currentItems.isEmpty {
+		if var currentItems = components?.queryItems, !currentItems.isEmpty {
 			currentItems.append(contentsOf: queryItems ?? [])
 			components?.queryItems = currentItems
 		} else {
