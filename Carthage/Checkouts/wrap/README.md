@@ -1,8 +1,27 @@
-# Wrap
+<p align="center">
+    <img src="logo.png" width="300" max-width="50%" alt="Wrap" />
+</p>
 
-![Travis](https://img.shields.io/travis/JohnSundell/Wrap/master.svg)
-![CocoaPods](https://img.shields.io/cocoapods/v/Wrap.svg)
-[![Carthage](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+<p align="center">
+    <a href="https://github.com/johnsundell/unbox">Unbox</a>
+    |
+    <b>Wrap</b>
+</p>
+
+<p align="center">
+    <a href="https://travis-ci.org/JohnSundell/Wrap/branches">
+        <img src="https://img.shields.io/travis/JohnSundell/Wrap/master.svg" alt="Travis status" />
+    </a>
+    <a href="https://cocoapods.org/pods/Wrap">
+        <img src="https://img.shields.io/cocoapods/v/Wrap.svg" alt="CocoaPods" />
+    </a>
+    <a href="https://github.com/Carthage/Carthage">
+        <img src="https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat" alt="Carthage" />
+    </a>
+    <a href="https://twitter.com/johnsundell">
+        <img src="https://img.shields.io/badge/contact-@johnsundell-blue.svg?style=flat" alt="Twitter: @johnsundell" />
+    </a>
+</p>
 
 Wrap is an easy to use Swift JSON encoder. Don't spend hours writing JSON encoding code - just wrap it instead!
 

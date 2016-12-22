@@ -1,3 +1,3 @@
 github "tidwall/SwiftWebSocket" "18a5c8264f8edda89c1b368853c146d464fe3c27"
-github "johnsundell/unbox" "2.2.1"
-github "johnsundell/wrap" "2.0.2"
+github "Tethr-Technologies-Inc/Wrap" "2.0.4"
+github "johnsundell/unbox" "2.3.0"
