@@ -1,5 +1,7 @@
 # Stone
 
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 A Swift framework for connecting to [Phoenix](https://www.phoenixframework.org) Channels in your iOS app.
 
 #### Why Build This?
